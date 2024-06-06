@@ -26,11 +26,11 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
       );
     });
 
-    on<_SelectImage>((event, emit) {
-      emit(
-        state.copyWith(image: event.image),
-      );
-    });
+    // on<_SelectImage>((event, emit) {
+    //   emit(
+    //     state.copyWith(image: event.image),
+    //   );
+    // });
 
     on<_Register>(
       (event, emit) async {

@@ -29,16 +29,19 @@ class LoginRepoImpl implements LoginRepository {
       if (response.statusCode == 200 || response.statusCode == 201) {
         final result = LoginModel.fromJson(response.data);
         Map<String, dynamic> user = {
-          "token": response.data['token'],
-          "id": response.data["lab"]["id"].toString(),
+          'token': response.data['token'],
+          'id': response.data["lab"]["id"].toString(),
+          'firstname':response.data["lab"]['firstname'].toString()
         };
 
         GetLocalStorage.saveToken(user);
         String? token = GetLocalStorage.getUserIdAndToken('token');
-        String? id = GetLocalStorage.getUserIdAndToken("id");
+        String? id = GetLocalStorage.getUserIdAndToken('id');
+        String? userName = GetLocalStorage.getUserIdAndToken('firstname');
         log("Token >> ${token.toString()}");
         log("login data ${response.toString()}");
         log("Id >>>> ${id.toString()}");
+        log("username >>>>>>>${userName.toString()}");
         return Right(result);
       } else {
         return Left(ErrorModel());

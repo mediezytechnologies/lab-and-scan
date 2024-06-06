@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iconly/iconly.dart';
 import 'package:mediezy_lab_scan/presentation/core/app_colors.dart';
+import 'package:mediezy_lab_scan/presentation/core/text_style.dart';
 
 class CustomeFormFieldWidget extends StatelessWidget {
   CustomeFormFieldWidget(
@@ -13,7 +14,7 @@ class CustomeFormFieldWidget extends StatelessWidget {
       required this.textInputType,
       required this.textInputAction,
       required this.validator,
-      required this.icon,
+       this.icon,
       this.obscureText = false,
       this.hideText = false,
       this.maxLine = 1,
@@ -27,7 +28,7 @@ class CustomeFormFieldWidget extends StatelessWidget {
   final FormFieldValidator validator;
   bool hideText;
   bool obscureText;
-  final IconData icon;
+   IconData? icon;
   int? maxLine;
   int? maxLength;
   void Function()? onPressed;
@@ -67,7 +68,7 @@ class CustomeFormFieldWidget extends StatelessWidget {
                       ),
               )
             : const SizedBox(),
-        hintStyle: TextStyle(fontSize: 13.sp, color: kSubTextColor),
+        hintStyle: grey13B400,
         hintText: hintText,
         filled: true,
         fillColor: kCardColor,

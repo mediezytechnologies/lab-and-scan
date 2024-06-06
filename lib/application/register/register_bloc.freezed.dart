@@ -18,53 +18,29 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$RegisterEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
-            String labName,
-            String email,
-            String password,
-            String mobileNumber,
-            String address,
-            String location,
-            String? imagePath,
-            int type)
+    required TResult Function(String labName, String email, String password,
+            String mobileNumber, String address, String location, int type)
         register,
     required TResult Function(int selectType) changeType,
     required TResult Function(bool isObsure) obscureChanged,
-    required TResult Function(String? image) selectImage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(
-            String labName,
-            String email,
-            String password,
-            String mobileNumber,
-            String address,
-            String location,
-            String? imagePath,
-            int type)?
+    TResult? Function(String labName, String email, String password,
+            String mobileNumber, String address, String location, int type)?
         register,
     TResult? Function(int selectType)? changeType,
     TResult? Function(bool isObsure)? obscureChanged,
-    TResult? Function(String? image)? selectImage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
-            String labName,
-            String email,
-            String password,
-            String mobileNumber,
-            String address,
-            String location,
-            String? imagePath,
-            int type)?
+    TResult Function(String labName, String email, String password,
+            String mobileNumber, String address, String location, int type)?
         register,
     TResult Function(int selectType)? changeType,
     TResult Function(bool isObsure)? obscureChanged,
-    TResult Function(String? image)? selectImage,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -73,7 +49,6 @@ mixin _$RegisterEvent {
     required TResult Function(_Register value) register,
     required TResult Function(_ChangeType value) changeType,
     required TResult Function(_ObscureChanged value) obscureChanged,
-    required TResult Function(_SelectImage value) selectImage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -81,7 +56,6 @@ mixin _$RegisterEvent {
     TResult? Function(_Register value)? register,
     TResult? Function(_ChangeType value)? changeType,
     TResult? Function(_ObscureChanged value)? obscureChanged,
-    TResult? Function(_SelectImage value)? selectImage,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -89,7 +63,6 @@ mixin _$RegisterEvent {
     TResult Function(_Register value)? register,
     TResult Function(_ChangeType value)? changeType,
     TResult Function(_ObscureChanged value)? obscureChanged,
-    TResult Function(_SelectImage value)? selectImage,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -126,7 +99,6 @@ abstract class _$$RegisterImplCopyWith<$Res> {
       String mobileNumber,
       String address,
       String location,
-      String? imagePath,
       int type});
 }
 
@@ -147,7 +119,6 @@ class __$$RegisterImplCopyWithImpl<$Res>
     Object? mobileNumber = null,
     Object? address = null,
     Object? location = null,
-    Object? imagePath = freezed,
     Object? type = null,
   }) {
     return _then(_$RegisterImpl(
@@ -175,10 +146,6 @@ class __$$RegisterImplCopyWithImpl<$Res>
           ? _value.location
           : location // ignore: cast_nullable_to_non_nullable
               as String,
-      imagePath: freezed == imagePath
-          ? _value.imagePath
-          : imagePath // ignore: cast_nullable_to_non_nullable
-              as String?,
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
@@ -197,7 +164,6 @@ class _$RegisterImpl implements _Register {
       required this.mobileNumber,
       required this.address,
       required this.location,
-      this.imagePath,
       required this.type});
 
   @override
@@ -212,14 +178,13 @@ class _$RegisterImpl implements _Register {
   final String address;
   @override
   final String location;
-  @override
-  final String? imagePath;
+//  String? imagePath,
   @override
   final int type;
 
   @override
   String toString() {
-    return 'RegisterEvent.register(labName: $labName, email: $email, password: $password, mobileNumber: $mobileNumber, address: $address, location: $location, imagePath: $imagePath, type: $type)';
+    return 'RegisterEvent.register(labName: $labName, email: $email, password: $password, mobileNumber: $mobileNumber, address: $address, location: $location, type: $type)';
   }
 
   @override
@@ -236,14 +201,12 @@ class _$RegisterImpl implements _Register {
             (identical(other.address, address) || other.address == address) &&
             (identical(other.location, location) ||
                 other.location == location) &&
-            (identical(other.imagePath, imagePath) ||
-                other.imagePath == imagePath) &&
             (identical(other.type, type) || other.type == type));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, labName, email, password,
-      mobileNumber, address, location, imagePath, type);
+      mobileNumber, address, location, type);
 
   @JsonKey(ignore: true)
   @override
@@ -254,66 +217,42 @@ class _$RegisterImpl implements _Register {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
-            String labName,
-            String email,
-            String password,
-            String mobileNumber,
-            String address,
-            String location,
-            String? imagePath,
-            int type)
+    required TResult Function(String labName, String email, String password,
+            String mobileNumber, String address, String location, int type)
         register,
     required TResult Function(int selectType) changeType,
     required TResult Function(bool isObsure) obscureChanged,
-    required TResult Function(String? image) selectImage,
   }) {
-    return register(labName, email, password, mobileNumber, address, location,
-        imagePath, type);
+    return register(
+        labName, email, password, mobileNumber, address, location, type);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(
-            String labName,
-            String email,
-            String password,
-            String mobileNumber,
-            String address,
-            String location,
-            String? imagePath,
-            int type)?
+    TResult? Function(String labName, String email, String password,
+            String mobileNumber, String address, String location, int type)?
         register,
     TResult? Function(int selectType)? changeType,
     TResult? Function(bool isObsure)? obscureChanged,
-    TResult? Function(String? image)? selectImage,
   }) {
-    return register?.call(labName, email, password, mobileNumber, address,
-        location, imagePath, type);
+    return register?.call(
+        labName, email, password, mobileNumber, address, location, type);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
-            String labName,
-            String email,
-            String password,
-            String mobileNumber,
-            String address,
-            String location,
-            String? imagePath,
-            int type)?
+    TResult Function(String labName, String email, String password,
+            String mobileNumber, String address, String location, int type)?
         register,
     TResult Function(int selectType)? changeType,
     TResult Function(bool isObsure)? obscureChanged,
-    TResult Function(String? image)? selectImage,
     required TResult orElse(),
   }) {
     if (register != null) {
-      return register(labName, email, password, mobileNumber, address, location,
-          imagePath, type);
+      return register(
+          labName, email, password, mobileNumber, address, location, type);
     }
     return orElse();
   }
@@ -324,7 +263,6 @@ class _$RegisterImpl implements _Register {
     required TResult Function(_Register value) register,
     required TResult Function(_ChangeType value) changeType,
     required TResult Function(_ObscureChanged value) obscureChanged,
-    required TResult Function(_SelectImage value) selectImage,
   }) {
     return register(this);
   }
@@ -335,7 +273,6 @@ class _$RegisterImpl implements _Register {
     TResult? Function(_Register value)? register,
     TResult? Function(_ChangeType value)? changeType,
     TResult? Function(_ObscureChanged value)? obscureChanged,
-    TResult? Function(_SelectImage value)? selectImage,
   }) {
     return register?.call(this);
   }
@@ -346,7 +283,6 @@ class _$RegisterImpl implements _Register {
     TResult Function(_Register value)? register,
     TResult Function(_ChangeType value)? changeType,
     TResult Function(_ObscureChanged value)? obscureChanged,
-    TResult Function(_SelectImage value)? selectImage,
     required TResult orElse(),
   }) {
     if (register != null) {
@@ -364,7 +300,6 @@ abstract class _Register implements RegisterEvent {
       required final String mobileNumber,
       required final String address,
       required final String location,
-      final String? imagePath,
       required final int type}) = _$RegisterImpl;
 
   String get labName;
@@ -372,8 +307,7 @@ abstract class _Register implements RegisterEvent {
   String get password;
   String get mobileNumber;
   String get address;
-  String get location;
-  String? get imagePath;
+  String get location; //  String? imagePath,
   int get type;
   @JsonKey(ignore: true)
   _$$RegisterImplCopyWith<_$RegisterImpl> get copyWith =>
@@ -445,19 +379,11 @@ class _$ChangeTypeImpl implements _ChangeType {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
-            String labName,
-            String email,
-            String password,
-            String mobileNumber,
-            String address,
-            String location,
-            String? imagePath,
-            int type)
+    required TResult Function(String labName, String email, String password,
+            String mobileNumber, String address, String location, int type)
         register,
     required TResult Function(int selectType) changeType,
     required TResult Function(bool isObsure) obscureChanged,
-    required TResult Function(String? image) selectImage,
   }) {
     return changeType(selectType);
   }
@@ -465,19 +391,11 @@ class _$ChangeTypeImpl implements _ChangeType {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(
-            String labName,
-            String email,
-            String password,
-            String mobileNumber,
-            String address,
-            String location,
-            String? imagePath,
-            int type)?
+    TResult? Function(String labName, String email, String password,
+            String mobileNumber, String address, String location, int type)?
         register,
     TResult? Function(int selectType)? changeType,
     TResult? Function(bool isObsure)? obscureChanged,
-    TResult? Function(String? image)? selectImage,
   }) {
     return changeType?.call(selectType);
   }
@@ -485,19 +403,11 @@ class _$ChangeTypeImpl implements _ChangeType {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
-            String labName,
-            String email,
-            String password,
-            String mobileNumber,
-            String address,
-            String location,
-            String? imagePath,
-            int type)?
+    TResult Function(String labName, String email, String password,
+            String mobileNumber, String address, String location, int type)?
         register,
     TResult Function(int selectType)? changeType,
     TResult Function(bool isObsure)? obscureChanged,
-    TResult Function(String? image)? selectImage,
     required TResult orElse(),
   }) {
     if (changeType != null) {
@@ -512,7 +422,6 @@ class _$ChangeTypeImpl implements _ChangeType {
     required TResult Function(_Register value) register,
     required TResult Function(_ChangeType value) changeType,
     required TResult Function(_ObscureChanged value) obscureChanged,
-    required TResult Function(_SelectImage value) selectImage,
   }) {
     return changeType(this);
   }
@@ -523,7 +432,6 @@ class _$ChangeTypeImpl implements _ChangeType {
     TResult? Function(_Register value)? register,
     TResult? Function(_ChangeType value)? changeType,
     TResult? Function(_ObscureChanged value)? obscureChanged,
-    TResult? Function(_SelectImage value)? selectImage,
   }) {
     return changeType?.call(this);
   }
@@ -534,7 +442,6 @@ class _$ChangeTypeImpl implements _ChangeType {
     TResult Function(_Register value)? register,
     TResult Function(_ChangeType value)? changeType,
     TResult Function(_ObscureChanged value)? obscureChanged,
-    TResult Function(_SelectImage value)? selectImage,
     required TResult orElse(),
   }) {
     if (changeType != null) {
@@ -619,19 +526,11 @@ class _$ObscureChangedImpl implements _ObscureChanged {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(
-            String labName,
-            String email,
-            String password,
-            String mobileNumber,
-            String address,
-            String location,
-            String? imagePath,
-            int type)
+    required TResult Function(String labName, String email, String password,
+            String mobileNumber, String address, String location, int type)
         register,
     required TResult Function(int selectType) changeType,
     required TResult Function(bool isObsure) obscureChanged,
-    required TResult Function(String? image) selectImage,
   }) {
     return obscureChanged(isObsure);
   }
@@ -639,19 +538,11 @@ class _$ObscureChangedImpl implements _ObscureChanged {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(
-            String labName,
-            String email,
-            String password,
-            String mobileNumber,
-            String address,
-            String location,
-            String? imagePath,
-            int type)?
+    TResult? Function(String labName, String email, String password,
+            String mobileNumber, String address, String location, int type)?
         register,
     TResult? Function(int selectType)? changeType,
     TResult? Function(bool isObsure)? obscureChanged,
-    TResult? Function(String? image)? selectImage,
   }) {
     return obscureChanged?.call(isObsure);
   }
@@ -659,19 +550,11 @@ class _$ObscureChangedImpl implements _ObscureChanged {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
-            String labName,
-            String email,
-            String password,
-            String mobileNumber,
-            String address,
-            String location,
-            String? imagePath,
-            int type)?
+    TResult Function(String labName, String email, String password,
+            String mobileNumber, String address, String location, int type)?
         register,
     TResult Function(int selectType)? changeType,
     TResult Function(bool isObsure)? obscureChanged,
-    TResult Function(String? image)? selectImage,
     required TResult orElse(),
   }) {
     if (obscureChanged != null) {
@@ -686,7 +569,6 @@ class _$ObscureChangedImpl implements _ObscureChanged {
     required TResult Function(_Register value) register,
     required TResult Function(_ChangeType value) changeType,
     required TResult Function(_ObscureChanged value) obscureChanged,
-    required TResult Function(_SelectImage value) selectImage,
   }) {
     return obscureChanged(this);
   }
@@ -697,7 +579,6 @@ class _$ObscureChangedImpl implements _ObscureChanged {
     TResult? Function(_Register value)? register,
     TResult? Function(_ChangeType value)? changeType,
     TResult? Function(_ObscureChanged value)? obscureChanged,
-    TResult? Function(_SelectImage value)? selectImage,
   }) {
     return obscureChanged?.call(this);
   }
@@ -708,7 +589,6 @@ class _$ObscureChangedImpl implements _ObscureChanged {
     TResult Function(_Register value)? register,
     TResult Function(_ChangeType value)? changeType,
     TResult Function(_ObscureChanged value)? obscureChanged,
-    TResult Function(_SelectImage value)? selectImage,
     required TResult orElse(),
   }) {
     if (obscureChanged != null) {
@@ -724,178 +604,6 @@ abstract class _ObscureChanged implements RegisterEvent {
   bool get isObsure;
   @JsonKey(ignore: true)
   _$$ObscureChangedImplCopyWith<_$ObscureChangedImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$SelectImageImplCopyWith<$Res> {
-  factory _$$SelectImageImplCopyWith(
-          _$SelectImageImpl value, $Res Function(_$SelectImageImpl) then) =
-      __$$SelectImageImplCopyWithImpl<$Res>;
-  @useResult
-  $Res call({String? image});
-}
-
-/// @nodoc
-class __$$SelectImageImplCopyWithImpl<$Res>
-    extends _$RegisterEventCopyWithImpl<$Res, _$SelectImageImpl>
-    implements _$$SelectImageImplCopyWith<$Res> {
-  __$$SelectImageImplCopyWithImpl(
-      _$SelectImageImpl _value, $Res Function(_$SelectImageImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? image = freezed,
-  }) {
-    return _then(_$SelectImageImpl(
-      freezed == image
-          ? _value.image
-          : image // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
-  }
-}
-
-/// @nodoc
-
-class _$SelectImageImpl implements _SelectImage {
-  const _$SelectImageImpl(this.image);
-
-  @override
-  final String? image;
-
-  @override
-  String toString() {
-    return 'RegisterEvent.selectImage(image: $image)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$SelectImageImpl &&
-            (identical(other.image, image) || other.image == image));
-  }
-
-  @override
-  int get hashCode => Object.hash(runtimeType, image);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$SelectImageImplCopyWith<_$SelectImageImpl> get copyWith =>
-      __$$SelectImageImplCopyWithImpl<_$SelectImageImpl>(this, _$identity);
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(
-            String labName,
-            String email,
-            String password,
-            String mobileNumber,
-            String address,
-            String location,
-            String? imagePath,
-            int type)
-        register,
-    required TResult Function(int selectType) changeType,
-    required TResult Function(bool isObsure) obscureChanged,
-    required TResult Function(String? image) selectImage,
-  }) {
-    return selectImage(image);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(
-            String labName,
-            String email,
-            String password,
-            String mobileNumber,
-            String address,
-            String location,
-            String? imagePath,
-            int type)?
-        register,
-    TResult? Function(int selectType)? changeType,
-    TResult? Function(bool isObsure)? obscureChanged,
-    TResult? Function(String? image)? selectImage,
-  }) {
-    return selectImage?.call(image);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(
-            String labName,
-            String email,
-            String password,
-            String mobileNumber,
-            String address,
-            String location,
-            String? imagePath,
-            int type)?
-        register,
-    TResult Function(int selectType)? changeType,
-    TResult Function(bool isObsure)? obscureChanged,
-    TResult Function(String? image)? selectImage,
-    required TResult orElse(),
-  }) {
-    if (selectImage != null) {
-      return selectImage(image);
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(_Register value) register,
-    required TResult Function(_ChangeType value) changeType,
-    required TResult Function(_ObscureChanged value) obscureChanged,
-    required TResult Function(_SelectImage value) selectImage,
-  }) {
-    return selectImage(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(_Register value)? register,
-    TResult? Function(_ChangeType value)? changeType,
-    TResult? Function(_ObscureChanged value)? obscureChanged,
-    TResult? Function(_SelectImage value)? selectImage,
-  }) {
-    return selectImage?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(_Register value)? register,
-    TResult Function(_ChangeType value)? changeType,
-    TResult Function(_ObscureChanged value)? obscureChanged,
-    TResult Function(_SelectImage value)? selectImage,
-    required TResult orElse(),
-  }) {
-    if (selectImage != null) {
-      return selectImage(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class _SelectImage implements RegisterEvent {
-  const factory _SelectImage(final String? image) = _$SelectImageImpl;
-
-  String? get image;
-  @JsonKey(ignore: true)
-  _$$SelectImageImplCopyWith<_$SelectImageImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mediezy_lab_scan/presentation/core/app_colors.dart';
+import 'package:mediezy_lab_scan/presentation/core/text_style.dart';
 
 ThemeData appThemeStyle(BuildContext context) {
   return ThemeData(
@@ -15,11 +15,7 @@ ThemeData appThemeStyle(BuildContext context) {
       iconTheme: IconThemeData(color: kCardColor),
       centerTitle: false,
       elevation: 0,
-      titleTextStyle: TextStyle(
-        fontSize: 20.sp,
-        fontWeight: FontWeight.w600,
-        color: kCardColor,
-      ),
+      titleTextStyle: white16B500
     ),
   );
 }

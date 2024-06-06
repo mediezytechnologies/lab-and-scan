@@ -7,7 +7,6 @@ import 'package:injectable/injectable.dart';
 import 'package:mediezy_lab_scan/domain/core/error/error_model.dart';
 import 'package:mediezy_lab_scan/domain/register/model/register_model.dart';
 import 'package:mediezy_lab_scan/domain/register/register_respository.dart';
-import 'package:http_parser/http_parser.dart';
 import 'package:mediezy_lab_scan/infrastructure/core/api_end_points.dart';
 
 @LazySingleton(as: RegisterRepository)

@@ -6,7 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mediezy_lab_scan/application/home/get_user_details/get_user_details_bloc.dart';
 import 'package:mediezy_lab_scan/infrastructure/core/token/token.dart';
 import 'package:mediezy_lab_scan/presentation/core/app_colors.dart';
-import 'package:mediezy_lab_scan/presentation/pages/login/login_page.dart';
+import 'package:mediezy_lab_scan/presentation/pages/auth/login/login_page.dart';
 import 'package:shimmer/shimmer.dart';
 
 class HomePageDrawerWidget extends StatelessWidget {

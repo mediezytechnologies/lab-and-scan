@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mediezy_lab_scan/presentation/core/app_colors.dart';
+import '../core/text_style.dart';
 
 class SubmitButtonWidget extends StatelessWidget {
   const SubmitButtonWidget(
@@ -23,20 +24,14 @@ class SubmitButtonWidget extends StatelessWidget {
           elevation: 0,
           minimumSize: Size(double.infinity, height * .07),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(10.r),
           )),
       onPressed: onTap,
       child: loading
           ? CircularProgressIndicator(
               color: kScaffoldColor,
             )
-          : Text(
-              buttonText,
-              style: TextStyle(
-                  fontSize: 18.sp,
-                  fontWeight: FontWeight.bold,
-                  color: kScaffoldColor),
-            ),
+          : Text(buttonText, style: white14B700),
     );
   }
 }

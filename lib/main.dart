@@ -7,7 +7,9 @@ import 'package:mediezy_lab_scan/application/login/login_bloc.dart';
 import 'package:mediezy_lab_scan/application/register/register_bloc.dart';
 import 'package:mediezy_lab_scan/domain/core/dependency_injection/injectable.dart';
 import 'package:mediezy_lab_scan/presentation/core/app_theme.dart';
-import 'package:mediezy_lab_scan/presentation/pages/splash/splash_page.dart';
+import 'package:mediezy_lab_scan/presentation/pages/auth/splash/splash_page.dart';
+
+import 'application/home/get_up_coming/model/get_up_coming_bloc.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,6 +28,7 @@ class MediezyLabScan extends StatelessWidget {
         BlocProvider(create: (context) => getIt<LoginBloc>()),
         BlocProvider(create: (context) => getIt<RegisterBloc>()),
         BlocProvider(create: (context) => getIt<GetUserDetailsBloc>()),
+        BlocProvider(create: (context) => getIt<GetUpComingBloc>()),
       ],
       child: ScreenUtilInit(
           designSize: const Size(360, 690),

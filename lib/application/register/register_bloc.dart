@@ -46,8 +46,9 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
           password: event.password,
           address: event.address,
           location: event.location,
-          // imagePath: event.imagePath!,
+     
           type: event.type,
+             imagePath: event.imagePath,
         );
 
         final _state = _result.fold(

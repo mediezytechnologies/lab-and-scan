@@ -10,6 +10,7 @@ abstract class RegisterRepository {
       required String password,
       required String address,
       required String location,
-      // String? imagePath,
-      required int type});
+      String? imagePath,
+     required int type}
+      );
 }

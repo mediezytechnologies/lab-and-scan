@@ -25,8 +25,8 @@ mixin _$RegisterEvent {
             String mobileNumber,
             String address,
             String location,
-            String? imagePath,
-            int type)
+            int type,
+            String? imagePath)
         register,
     required TResult Function(int selectType) changeType,
     required TResult Function(bool isObsure) obscureChanged,
@@ -42,8 +42,8 @@ mixin _$RegisterEvent {
             String mobileNumber,
             String address,
             String location,
-            String? imagePath,
-            int type)?
+            int type,
+            String? imagePath)?
         register,
     TResult? Function(int selectType)? changeType,
     TResult? Function(bool isObsure)? obscureChanged,
@@ -59,8 +59,8 @@ mixin _$RegisterEvent {
             String mobileNumber,
             String address,
             String location,
-            String? imagePath,
-            int type)?
+            int type,
+            String? imagePath)?
         register,
     TResult Function(int selectType)? changeType,
     TResult Function(bool isObsure)? obscureChanged,
@@ -126,8 +126,8 @@ abstract class _$$RegisterImplCopyWith<$Res> {
       String mobileNumber,
       String address,
       String location,
-      String? imagePath,
-      int type});
+      int type,
+      String? imagePath});
 }
 
 /// @nodoc
@@ -147,8 +147,8 @@ class __$$RegisterImplCopyWithImpl<$Res>
     Object? mobileNumber = null,
     Object? address = null,
     Object? location = null,
-    Object? imagePath = freezed,
     Object? type = null,
+    Object? imagePath = freezed,
   }) {
     return _then(_$RegisterImpl(
       labName: null == labName
@@ -175,14 +175,14 @@ class __$$RegisterImplCopyWithImpl<$Res>
           ? _value.location
           : location // ignore: cast_nullable_to_non_nullable
               as String,
-      imagePath: freezed == imagePath
-          ? _value.imagePath
-          : imagePath // ignore: cast_nullable_to_non_nullable
-              as String?,
       type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as int,
+      imagePath: freezed == imagePath
+          ? _value.imagePath
+          : imagePath // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -197,8 +197,8 @@ class _$RegisterImpl implements _Register {
       required this.mobileNumber,
       required this.address,
       required this.location,
-      this.imagePath,
-      required this.type});
+      required this.type,
+      this.imagePath});
 
   @override
   final String labName;
@@ -213,13 +213,13 @@ class _$RegisterImpl implements _Register {
   @override
   final String location;
   @override
-  final String? imagePath;
-  @override
   final int type;
+  @override
+  final String? imagePath;
 
   @override
   String toString() {
-    return 'RegisterEvent.register(labName: $labName, email: $email, password: $password, mobileNumber: $mobileNumber, address: $address, location: $location, imagePath: $imagePath, type: $type)';
+    return 'RegisterEvent.register(labName: $labName, email: $email, password: $password, mobileNumber: $mobileNumber, address: $address, location: $location, type: $type, imagePath: $imagePath)';
   }
 
   @override
@@ -236,14 +236,14 @@ class _$RegisterImpl implements _Register {
             (identical(other.address, address) || other.address == address) &&
             (identical(other.location, location) ||
                 other.location == location) &&
+            (identical(other.type, type) || other.type == type) &&
             (identical(other.imagePath, imagePath) ||
-                other.imagePath == imagePath) &&
-            (identical(other.type, type) || other.type == type));
+                other.imagePath == imagePath));
   }
 
   @override
   int get hashCode => Object.hash(runtimeType, labName, email, password,
-      mobileNumber, address, location, imagePath, type);
+      mobileNumber, address, location, type, imagePath);
 
   @JsonKey(ignore: true)
   @override
@@ -261,15 +261,15 @@ class _$RegisterImpl implements _Register {
             String mobileNumber,
             String address,
             String location,
-            String? imagePath,
-            int type)
+            int type,
+            String? imagePath)
         register,
     required TResult Function(int selectType) changeType,
     required TResult Function(bool isObsure) obscureChanged,
     required TResult Function(String? image) selectImage,
   }) {
     return register(labName, email, password, mobileNumber, address, location,
-        imagePath, type);
+        type, imagePath);
   }
 
   @override
@@ -282,15 +282,15 @@ class _$RegisterImpl implements _Register {
             String mobileNumber,
             String address,
             String location,
-            String? imagePath,
-            int type)?
+            int type,
+            String? imagePath)?
         register,
     TResult? Function(int selectType)? changeType,
     TResult? Function(bool isObsure)? obscureChanged,
     TResult? Function(String? image)? selectImage,
   }) {
     return register?.call(labName, email, password, mobileNumber, address,
-        location, imagePath, type);
+        location, type, imagePath);
   }
 
   @override
@@ -303,8 +303,8 @@ class _$RegisterImpl implements _Register {
             String mobileNumber,
             String address,
             String location,
-            String? imagePath,
-            int type)?
+            int type,
+            String? imagePath)?
         register,
     TResult Function(int selectType)? changeType,
     TResult Function(bool isObsure)? obscureChanged,
@@ -313,7 +313,7 @@ class _$RegisterImpl implements _Register {
   }) {
     if (register != null) {
       return register(labName, email, password, mobileNumber, address, location,
-          imagePath, type);
+          type, imagePath);
     }
     return orElse();
   }
@@ -364,8 +364,8 @@ abstract class _Register implements RegisterEvent {
       required final String mobileNumber,
       required final String address,
       required final String location,
-      final String? imagePath,
-      required final int type}) = _$RegisterImpl;
+      required final int type,
+      final String? imagePath}) = _$RegisterImpl;
 
   String get labName;
   String get email;
@@ -373,8 +373,8 @@ abstract class _Register implements RegisterEvent {
   String get mobileNumber;
   String get address;
   String get location;
-  String? get imagePath;
   int get type;
+  String? get imagePath;
   @JsonKey(ignore: true)
   _$$RegisterImplCopyWith<_$RegisterImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -452,8 +452,8 @@ class _$ChangeTypeImpl implements _ChangeType {
             String mobileNumber,
             String address,
             String location,
-            String? imagePath,
-            int type)
+            int type,
+            String? imagePath)
         register,
     required TResult Function(int selectType) changeType,
     required TResult Function(bool isObsure) obscureChanged,
@@ -472,8 +472,8 @@ class _$ChangeTypeImpl implements _ChangeType {
             String mobileNumber,
             String address,
             String location,
-            String? imagePath,
-            int type)?
+            int type,
+            String? imagePath)?
         register,
     TResult? Function(int selectType)? changeType,
     TResult? Function(bool isObsure)? obscureChanged,
@@ -492,8 +492,8 @@ class _$ChangeTypeImpl implements _ChangeType {
             String mobileNumber,
             String address,
             String location,
-            String? imagePath,
-            int type)?
+            int type,
+            String? imagePath)?
         register,
     TResult Function(int selectType)? changeType,
     TResult Function(bool isObsure)? obscureChanged,
@@ -626,8 +626,8 @@ class _$ObscureChangedImpl implements _ObscureChanged {
             String mobileNumber,
             String address,
             String location,
-            String? imagePath,
-            int type)
+            int type,
+            String? imagePath)
         register,
     required TResult Function(int selectType) changeType,
     required TResult Function(bool isObsure) obscureChanged,
@@ -646,8 +646,8 @@ class _$ObscureChangedImpl implements _ObscureChanged {
             String mobileNumber,
             String address,
             String location,
-            String? imagePath,
-            int type)?
+            int type,
+            String? imagePath)?
         register,
     TResult? Function(int selectType)? changeType,
     TResult? Function(bool isObsure)? obscureChanged,
@@ -666,8 +666,8 @@ class _$ObscureChangedImpl implements _ObscureChanged {
             String mobileNumber,
             String address,
             String location,
-            String? imagePath,
-            int type)?
+            int type,
+            String? imagePath)?
         register,
     TResult Function(int selectType)? changeType,
     TResult Function(bool isObsure)? obscureChanged,
@@ -798,8 +798,8 @@ class _$SelectImageImpl implements _SelectImage {
             String mobileNumber,
             String address,
             String location,
-            String? imagePath,
-            int type)
+            int type,
+            String? imagePath)
         register,
     required TResult Function(int selectType) changeType,
     required TResult Function(bool isObsure) obscureChanged,
@@ -818,8 +818,8 @@ class _$SelectImageImpl implements _SelectImage {
             String mobileNumber,
             String address,
             String location,
-            String? imagePath,
-            int type)?
+            int type,
+            String? imagePath)?
         register,
     TResult? Function(int selectType)? changeType,
     TResult? Function(bool isObsure)? obscureChanged,
@@ -838,8 +838,8 @@ class _$SelectImageImpl implements _SelectImage {
             String mobileNumber,
             String address,
             String location,
-            String? imagePath,
-            int type)?
+            int type,
+            String? imagePath)?
         register,
     TResult Function(int selectType)? changeType,
     TResult Function(bool isObsure)? obscureChanged,

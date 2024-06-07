@@ -13,6 +13,8 @@ import 'package:mediezy_lab_scan/presentation/common_widgets/submit_button_widge
 import 'package:mediezy_lab_scan/presentation/pages/home/home_page.dart';
 import 'package:mediezy_lab_scan/presentation/pages/registation/registration_page.dart';
 
+import '../../../application/register/register_bloc.dart';
+
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
@@ -171,6 +173,9 @@ class _LoginPageState extends State<LoginPage> {
                             BlocProvider.of<LoginBloc>(context).add(
                               const LoginEvent.obscureChanged(false),
                             );
+                             BlocProvider.of<RegisterBloc>(context).add(
+                          const RegisterEvent.selectImage(null),
+                        );
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -203,3 +208,4 @@ class _LoginPageState extends State<LoginPage> {
     super.dispose();
   }
 }
+//cfjsgkjsfkjdsfkljsklj

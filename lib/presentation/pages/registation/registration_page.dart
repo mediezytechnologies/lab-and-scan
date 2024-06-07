@@ -40,7 +40,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
     final width = MediaQuery.of(context).size.width;
 
     labNameController.text ="abc";
-    emailController.text="eddesssdc@gmail.com";
+    emailController.text="rdessdsdc@gmail.com";
     passwordController.text="123456";
     mobileNumberController.text="1234567890";
     addressController.text="klfjskdfjksldfjkdsf";

@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -7,12 +6,12 @@ import 'package:mediezy_lab_scan/application/login/login_bloc.dart';
 import 'package:mediezy_lab_scan/domain/core/dependency_injection/injectable.dart';
 import 'package:mediezy_lab_scan/presentation/core/app_colors.dart';
 import 'package:mediezy_lab_scan/presentation/core/general_services.dart';
-import 'package:mediezy_lab_scan/presentation/common_widgets/auth_heading_text.dart';
 import 'package:mediezy_lab_scan/presentation/common_widgets/custome_formfield_widget.dart';
 import 'package:mediezy_lab_scan/presentation/common_widgets/submit_button_widget.dart';
 import 'package:mediezy_lab_scan/presentation/pages/home/home_page.dart';
 import 'package:mediezy_lab_scan/presentation/pages/auth/registation/registration_page.dart';
 
+import '../../../../application/register/register_bloc.dart';
 import '../../../core/text_style.dart';
 
 class LoginPage extends StatefulWidget {
@@ -66,7 +65,7 @@ class _LoginPageState extends State<LoginPage> {
                     SizedBox(height: height * .61),
                     CustomeFormFieldWidget(
                         controller: emailController,
-                        hintText: "Enter email address",
+                        hintText: "Email address",
                         textInputType: TextInputType.emailAddress,
                         textInputAction: TextInputAction.next,
                         obscureText: false,
@@ -88,7 +87,7 @@ class _LoginPageState extends State<LoginPage> {
                           return CustomeFormFieldWidget(
                             hideText: true,
                             controller: passwordController,
-                            hintText: "Enter password",
+                            hintText: "Password",
                             textInputType: TextInputType.text,
                             textInputAction: TextInputAction.done,
                             validator: (value) {
@@ -114,10 +113,7 @@ class _LoginPageState extends State<LoginPage> {
                       alignment: Alignment.centerRight,
                       child: GestureDetector(
                         onTap: () {},
-                        child: const AuthHeadingText(
-                          text: "Forget password",
-                          fontWeight: 12,
-                        ),
+                        child: Text("Forgot password", style: main12B600),
                       ),
                     ),
                     SizedBox(height: height * .04),
@@ -156,32 +152,27 @@ class _LoginPageState extends State<LoginPage> {
                         );
                       },
                     ),
-                    SizedBox(height: height * .012),
+                    SizedBox(height: height * .015),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(
-                          "Don't have an account?",
-                          style: black13B500
-                        ),
+                        Text("Don't have an account?", style: black13B500),
                         SizedBox(width: width * .01),
                         GestureDetector(
                           onTap: () {
-                            BlocProvider.of<LoginBloc>(context).add(
-                              const LoginEvent.obscureChanged(false),
+                            BlocProvider.of<LoginBloc>(context)
+                                .add(const LoginEvent.obscureChanged(false));
+                            BlocProvider.of<RegisterBloc>(context).add(
+                              const RegisterEvent.selectImage(null),
                             );
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) =>
-                                    const RegistrationPage(),
+                                builder: (context) => const RegistrationPage(),
                               ),
                             );
                           },
-                          child: const AuthHeadingText(
-                            text: "Sign up",
-                            fontWeight: 14,
-                          ),
+                          child: Text("Sign up", style: main12B600),
                         ),
                       ],
                     ),

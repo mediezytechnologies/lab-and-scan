@@ -1,18 +1,18 @@
 // ignore_for_file: use_build_context_synchronously
+import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:iconly/iconly.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mediezy_lab_scan/application/register/register_bloc.dart';
 import 'package:mediezy_lab_scan/domain/core/dependency_injection/injectable.dart';
 import 'package:mediezy_lab_scan/presentation/core/app_colors.dart';
 import 'package:mediezy_lab_scan/presentation/core/general_services.dart';
-import 'package:mediezy_lab_scan/presentation/common_widgets/auth_heading_text.dart';
 import 'package:mediezy_lab_scan/presentation/common_widgets/custome_formfield_widget.dart';
 import 'package:mediezy_lab_scan/presentation/common_widgets/submit_button_widget.dart';
-
 import '../../../core/text_style.dart';
 import '../login/login_page.dart';
 import 'widget/radio_button_widget.dart';
@@ -55,23 +55,21 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       alignment: Alignment.center,
                       child: BlocBuilder<RegisterBloc, RegisterState>(
                         builder: (context, state) {
-                          return Container(
-                            height: height * .15,
-                            width: width * .3,
-                            color: Colors.red,
+                          return Padding(
+                            padding: const EdgeInsets.all(8.0),
                             child: ClipRRect(
-                              borderRadius: BorderRadius.circular(30.r),
+                              borderRadius: BorderRadius.circular(100.r),
                               child: state.image != null
                                   ? Image.file(
                                       File(state.image!),
-                                      height: height * .070,
-                                      width: width * .070,
+                                      height: width * .28,
+                                      width: width * .28,
                                       fit: BoxFit.cover,
                                     )
                                   : Image.asset(
                                       "assets/icons/profile pic.png",
-                                      height: height * .070,
-                                      width: width * .070,
+                                      height: width * .28,
+                                      width: width * .28,
                                       color: kMainColor,
                                       fit: BoxFit.cover,
                                     ),
@@ -81,23 +79,22 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       ),
                     ),
                     Positioned(
-                      top: height * .110,
-                      right: width * .190,
+                      top: height * .1,
+                      right: width * .280,
                       child: IconButton(
                         onPressed: () {
                           selectImage();
                         },
                         icon: Icon(
-                          Icons.add_a_photo,
-                          size: 26.sp,
-                          weight: 5,
+                          IconlyLight.camera,
+                          size: 24.sp,
                           color: kMainColor,
                         ),
                       ),
                     ),
                   ],
                 ),
-                SizedBox(height: height * .03),
+                SizedBox(height: height * .02),
                 CustomeFormFieldWidget(
                   hideText: false,
                   controller: labNameController,
@@ -111,7 +108,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       return null;
                     }
                   },
-                  icon: Icons.home_outlined,
+                  icon: IconlyLight.home,
                 ),
                 SizedBox(height: height * .01),
                 CustomeFormFieldWidget(
@@ -164,7 +161,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                             return null;
                           }
                         },
-                        icon: Icons.password,
+                        icon: IconlyLight.password,
                         obscureText: state.obscureText,
                         onPressed: () {
                           BlocProvider.of<RegisterBloc>(context).add(
@@ -296,7 +293,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     );
                   },
                 ),
-                SizedBox(height: height * .01),
+               SizedBox(height: height * .015),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -320,8 +317,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                           ),
                         );
                       },
-                      child:
-                          const AuthHeadingText(text: "Login", fontWeight: 14),
+                      child: Text("Login", style: main12B600),
                     ),
                   ],
                 ),
@@ -343,6 +339,9 @@ class _RegistrationPageState extends State<RegistrationPage> {
     imageTemporary = image.path;
     BlocProvider.of<RegisterBloc>(context)
         .add(RegisterEvent.selectImage(imageTemporary));
+    log("$imageTemporary======= image");
+
+    log("image >>>$imageTemporary");
   }
 
   @override

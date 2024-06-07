@@ -68,7 +68,7 @@ class CustomeFormFieldWidget extends StatelessWidget {
                       ),
               )
             : const SizedBox(),
-        hintStyle: grey13B400,
+        hintStyle: grey12B500,
         hintText: hintText,
         filled: true,
         fillColor: kCardColor,
@@ -77,7 +77,7 @@ class CustomeFormFieldWidget extends StatelessWidget {
           borderSide: BorderSide.none,
         ),
         contentPadding: EdgeInsets.symmetric(
-            horizontal: width * .010, vertical: height * .012),
+            horizontal: width * .010, vertical: height * .011),
       ),
     );
   }

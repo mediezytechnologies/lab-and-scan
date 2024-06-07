@@ -16,13 +16,13 @@ class SubmitButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
+    final size = MediaQuery.of(context).size;
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
           backgroundColor: kMainColor,
           foregroundColor: kTextColor,
           elevation: 0,
-          minimumSize: Size(double.infinity, height * .07),
+          minimumSize: Size(double.infinity, size.height * .06),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.r),
           )),
@@ -31,7 +31,7 @@ class SubmitButtonWidget extends StatelessWidget {
           ? CircularProgressIndicator(
               color: kScaffoldColor,
             )
-          : Text(buttonText, style: white14B700),
+          : Text(buttonText, style: white14B500),
     );
   }
 }

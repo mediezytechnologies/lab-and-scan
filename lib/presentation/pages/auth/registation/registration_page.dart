@@ -13,8 +13,8 @@ import 'package:mediezy_lab_scan/presentation/core/general_services.dart';
 import 'package:mediezy_lab_scan/presentation/common_widgets/auth_heading_text.dart';
 import 'package:mediezy_lab_scan/presentation/common_widgets/custome_formfield_widget.dart';
 import 'package:mediezy_lab_scan/presentation/common_widgets/submit_button_widget.dart';
-import 'package:mediezy_lab_scan/presentation/pages/auth/login/login_page.dart';
-import 'package:mediezy_lab_scan/presentation/pages/auth/registation/widget/radio_button_widget.dart';
+import 'package:mediezy_lab_scan/presentation/pages/login/login_page.dart';
+import 'package:mediezy_lab_scan/presentation/pages/registation/widget/radio_button_widget.dart';
 
 class RegistrationPage extends StatefulWidget {
   const RegistrationPage({super.key});
@@ -32,12 +32,22 @@ class _RegistrationPageState extends State<RegistrationPage> {
   TextEditingController locationController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final ImagePicker imagePicker = ImagePicker();
+  String? imageTemporary ;
 
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
+
+    labNameController.text ="abc";
+    emailController.text="eddesssdc@gmail.com";
+    passwordController.text="123456";
+    mobileNumberController.text="1234567890";
+    addressController.text="klfjskdfjksldfjkdsf";
+    locationController.text="klfjklsdfj";
+
     return Scaffold(
+     
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: width * .02),
@@ -254,6 +264,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   ),
                 ),
                 SizedBox(height: height * .01),
+               
                 BlocConsumer<RegisterBloc, RegisterState>(
                   listener: (context, state) {
                     if (state.isError) {
@@ -275,7 +286,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       onTap: () async {
                         bool isValid = _formKey.currentState!.validate();
                         if (isValid) {
-                          //String image = state.image ?? "";
+                        
                           BlocProvider.of<RegisterBloc>(context).add(
                             RegisterEvent.register(
                               labName: labNameController.text,
@@ -284,12 +295,12 @@ class _RegistrationPageState extends State<RegistrationPage> {
                               mobileNumber: mobileNumberController.text,
                               address: addressController.text,
                               location: locationController.text,
-                              // imagePath:state.image,
+                         imagePath:state.image,
                               type: state.type,
                             ),
                           );
                         }
-                      },
+                        }  ,
                       buttonText: "Register",
                     );
                   },
@@ -308,9 +319,9 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     SizedBox(width: width * .01),
                     GestureDetector(
                       onTap: () {
-                        // BlocProvider.of<RegisterBloc>(context).add(
-                        //   const RegisterEvent.selectImage(null),
-                        // );
+                        BlocProvider.of<RegisterBloc>(context).add(
+                          const RegisterEvent.selectImage(null),
+                        );
                         BlocProvider.of<RegisterBloc>(context).add(
                           const RegisterEvent.changeType(1),
                         );
@@ -344,10 +355,13 @@ class _RegistrationPageState extends State<RegistrationPage> {
       imageQuality: 30,
     );
     if (image == null) return;
-    final imageTemporary = image.path;
+imageTemporary =image.path;
+       BlocProvider.of<RegisterBloc>(context)
+        .add(RegisterEvent.selectImage(imageTemporary));
+      log("$imageTemporary======= image");
+
     log("image >>>$imageTemporary");
-    // BlocProvider.of<RegisterBloc>(context)
-    //     .add(RegisterEvent.selectImage(imageTemporary));
+   
   }
 
   @override
@@ -358,6 +372,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
     mobileNumberController.dispose();
     addressController.dispose();
     locationController.dispose();
+    imageTemporary =null;
     super.dispose();
   }
 }

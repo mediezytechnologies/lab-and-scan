@@ -2,7 +2,8 @@ part of 'register_bloc.dart';
 
 @freezed
 class RegisterState with _$RegisterState {
-  const factory RegisterState({
+  const factory RegisterState(
+    {
     required int type,
     required bool obscureText,
     required bool isLoading,
@@ -11,7 +12,8 @@ class RegisterState with _$RegisterState {
     required bool status,
     String? image,
     RegisterModel? model,
-  }) = _Initial;
+  }
+  ) = _Initial;
 
   factory RegisterState.initial() => const RegisterState(
         type: 1,

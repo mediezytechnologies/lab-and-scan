@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:mediezy_lab_scan/presentation/pages/home/widgets/up_coming_card_widget.dart';
-import '../../../../application/home/get_up_coming/get_up_coming_bloc.dart';
+import 'package:mediezy_lab_scan/application/home/get_completed/get_completed_bloc.dart';
+import 'package:mediezy_lab_scan/presentation/pages/home/widgets/completed_card_widget.dart';
 import '../../../core/app_colors.dart';
-import '../../upcoming_details/upcoming_details_page.dart';
+import '../../completed_details/completed_details_page.dart';
 import 'rich_text_widget.dart';
 
-class UpComingWidget extends StatefulWidget {
-  const UpComingWidget({super.key});
+class CompletedWidget extends StatefulWidget {
+  const CompletedWidget({super.key});
 
   @override
-  State<UpComingWidget> createState() => _UpComingWidgetState();
+  State<CompletedWidget> createState() => _CompletedWidgetState();
 }
 
-class _UpComingWidgetState extends State<UpComingWidget> {
+class _CompletedWidgetState extends State<CompletedWidget> {
   Future<void> _refreshData() async {
-    BlocProvider.of<GetUpComingBloc>(context)
-        .add(const GetUpComingEvent.getUpComing());
+    BlocProvider.of<GetCompletedBloc>(context)
+        .add(const GetCompletedEvent.getCompleted());
   }
 
   @override
@@ -32,7 +32,7 @@ class _UpComingWidgetState extends State<UpComingWidget> {
           constraints: BoxConstraints(
             minHeight: constraints.maxHeight,
           ),
-          child: BlocBuilder<GetUpComingBloc, GetUpComingState>(
+          child: BlocBuilder<GetCompletedBloc, GetCompletedState>(
             builder: (context, state) {
               if (state.isLoading) {
                 return Center(
@@ -46,8 +46,7 @@ class _UpComingWidgetState extends State<UpComingWidget> {
                   child: Text(state.message),
                 );
               }
-
-              return state.getUpComing.isEmpty
+              return state.getCompleted.isEmpty
                   ? Center(
                       child: Image(
                         image: const AssetImage(
@@ -60,75 +59,72 @@ class _UpComingWidgetState extends State<UpComingWidget> {
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         RichTextWidget(
-                          title: "Pending",
-                          pendingCount: state.getUpComing.length,
+                          title: "Completed",
+                          pendingCount: state.getCompleted.length,
                         ),
                         Expanded(
                           child: ListView.builder(
                             padding: EdgeInsets.symmetric(
                                 horizontal: 8.w, vertical: 4.h),
                             shrinkWrap: true,
-                            itemCount: state.getUpComing.length,
+                            itemCount: state.getCompleted.length,
                             itemBuilder: (context, index) {
                               return GestureDetector(
                                 onTap: () {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => UpComingDetailsPage(
-                                        testName: state
-                                            .getUpComing[index].labtest
-                                            .toString(),
-                                        patientName: state
-                                            .getUpComing[index].firstname
+                                      builder: (context) =>
+                                          CompletedDetailsPage(
+                                        patientAge: state
+                                            .getCompleted[index].age
                                             .toString(),
                                         patientImage: state
-                                            .getUpComing[index].userImage
+                                            .getCompleted[index].userImage
                                             .toString(),
                                         patientMobileNo: state
-                                            .getUpComing[index].mobileNo
+                                            .getCompleted[index].mobileNo
                                             .toString(),
-                                        patientAge: state.getUpComing[index].age
-                                            .toString(),
-                                        doctorName: state
-                                            .getUpComing[index].doctorName
+                                        patientName: state
+                                            .getCompleted[index].firstname
                                             .toString(),
                                         clinicName: state
-                                            .getUpComing[index].clinicName
+                                            .getCompleted[index].clinicName
                                             .toString(),
-                                        labId: state.getUpComing[index].labId
+                                        doctorName: state
+                                            .getCompleted[index].doctorName
                                             .toString(),
-                                        doctorId: state
-                                            .getUpComing[index].doctorId
+                                        note: state.getCompleted[index].notes
                                             .toString(),
-                                        clinicId: state
-                                            .getUpComing[index].clinicId
+                                        uploadedDocument: state
+                                            .getCompleted[index].documentUpload
                                             .toString(),
-                                        patientId: state
-                                            .getUpComing[index].patientId
+                                        testName: state
+                                            .getCompleted[index].labtest
                                             .toString(),
                                       ),
                                     ),
                                   );
                                 },
-                                child: Column(
-                                  children: [
-                                    UpComingCardWidget(
-                                      mobileNumber: state
-                                          .getUpComing[index].mobileNo
-                                          .toString(),
-                                      patientAge: state.getUpComing[index].age
-                                          .toString(),
-                                      patientImage: state
-                                          .getUpComing[index].userImage
-                                          .toString(),
-                                      patientName: state
-                                          .getUpComing[index].firstname
-                                          .toString(),
-                                      testName: state.getUpComing[index].labtest
-                                          .toString(),
-                                    ),
-                                  ],
+                                child: CompletedCardWidget(
+                                  mobileNumber: state
+                                      .getCompleted[index].mobileNo
+                                      .toString(),
+                                  patientAge:
+                                      state.getCompleted[index].age.toString(),
+                                  patientImage: state
+                                      .getCompleted[index].userImage
+                                      .toString(),
+                                  patientName: state
+                                      .getCompleted[index].firstname
+                                      .toString(),
+                                  testName: state.getCompleted[index].labtest
+                                      .toString(),
+                                  doctorName: state
+                                      .getCompleted[index].doctorName
+                                      .toString(),
+                                  note: state.getCompleted[index].notes
+                                      .toString(),
                                 ),
                               );
                             },

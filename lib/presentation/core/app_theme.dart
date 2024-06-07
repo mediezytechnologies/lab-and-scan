@@ -6,16 +6,16 @@ import 'package:mediezy_lab_scan/presentation/core/text_style.dart';
 ThemeData appThemeStyle(BuildContext context) {
   return ThemeData(
     scaffoldBackgroundColor: kScaffoldColor,
-    //* appbar
     textTheme: GoogleFonts.robotoTextTheme(
       Theme.of(context).textTheme,
     ),
+
+    //* appbar
     appBarTheme: AppBarTheme(
-      backgroundColor: kMainColor,
-      iconTheme: IconThemeData(color: kCardColor),
-      centerTitle: false,
-      elevation: 0,
-      titleTextStyle: white16B500
-    ),
+        backgroundColor: kMainColor,
+        iconTheme: IconThemeData(color: kCardColor),
+        centerTitle: false,
+        elevation: 0,
+        titleTextStyle: white16B500),
   );
 }

@@ -1,5 +1,4 @@
 // ignore_for_file: use_build_context_synchronously
-import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,8 +12,10 @@ import 'package:mediezy_lab_scan/presentation/core/general_services.dart';
 import 'package:mediezy_lab_scan/presentation/common_widgets/auth_heading_text.dart';
 import 'package:mediezy_lab_scan/presentation/common_widgets/custome_formfield_widget.dart';
 import 'package:mediezy_lab_scan/presentation/common_widgets/submit_button_widget.dart';
-import 'package:mediezy_lab_scan/presentation/pages/login/login_page.dart';
-import 'package:mediezy_lab_scan/presentation/pages/registation/widget/radio_button_widget.dart';
+
+import '../../../core/text_style.dart';
+import '../login/login_page.dart';
+import 'widget/radio_button_widget.dart';
 
 class RegistrationPage extends StatefulWidget {
   const RegistrationPage({super.key});
@@ -32,22 +33,14 @@ class _RegistrationPageState extends State<RegistrationPage> {
   TextEditingController locationController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   final ImagePicker imagePicker = ImagePicker();
-  String? imageTemporary ;
+  String? imageTemporary;
 
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
 
-    labNameController.text ="abc";
-    emailController.text="eddesssdc@gmail.com";
-    passwordController.text="123456";
-    mobileNumberController.text="1234567890";
-    addressController.text="klfjskdfjksldfjkdsf";
-    locationController.text="klfjklsdfj";
-
     return Scaffold(
-     
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: width * .02),
@@ -63,22 +56,22 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       child: BlocBuilder<RegisterBloc, RegisterState>(
                         builder: (context, state) {
                           return Container(
-                            height: height * .170,
-                            width: width * .350,
-                            decoration: const BoxDecoration(),
+                            height: height * .15,
+                            width: width * .3,
+                            color: Colors.red,
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(30.r),
                               child: state.image != null
                                   ? Image.file(
                                       File(state.image!),
-                                      height: height * .080,
-                                      width: width * .080,
+                                      height: height * .070,
+                                      width: width * .070,
                                       fit: BoxFit.cover,
                                     )
                                   : Image.asset(
                                       "assets/icons/profile pic.png",
-                                      height: height * .080,
-                                      width: width * .080,
+                                      height: height * .070,
+                                      width: width * .070,
                                       color: kMainColor,
                                       fit: BoxFit.cover,
                                     ),
@@ -108,7 +101,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 CustomeFormFieldWidget(
                   hideText: false,
                   controller: labNameController,
-                  hintText: "Enter lab or scannig center name",
+                  hintText: "Lab or scannig center name",
                   textInputType: TextInputType.text,
                   textInputAction: TextInputAction.done,
                   validator: (value) {
@@ -123,7 +116,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 SizedBox(height: height * .01),
                 CustomeFormFieldWidget(
                     controller: emailController,
-                    hintText: "Enter email address",
+                    hintText: "Email address",
                     textInputType: TextInputType.emailAddress,
                     textInputAction: TextInputAction.next,
                     obscureText: false,
@@ -140,7 +133,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 SizedBox(height: height * .01),
                 CustomeFormFieldWidget(
                     controller: mobileNumberController,
-                    hintText: "Enter mobile number",
+                    hintText: "Mobile number",
                     textInputType: TextInputType.number,
                     textInputAction: TextInputAction.next,
                     obscureText: false,
@@ -161,7 +154,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       return CustomeFormFieldWidget(
                         hideText: true,
                         controller: passwordController,
-                        hintText: "Enter password",
+                        hintText: "Password",
                         textInputType: TextInputType.text,
                         textInputAction: TextInputAction.next,
                         validator: (value) {
@@ -185,7 +178,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 CustomeFormFieldWidget(
                   hideText: false,
                   controller: addressController,
-                  hintText: "Enter address",
+                  hintText: "Address",
                   textInputType: TextInputType.text,
                   textInputAction: TextInputAction.next,
                   validator: (value) {
@@ -201,7 +194,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 CustomeFormFieldWidget(
                   hideText: false,
                   controller: locationController,
-                  hintText: "Enter location",
+                  hintText: "Location",
                   textInputType: TextInputType.text,
                   textInputAction: TextInputAction.done,
                   validator: (value) {
@@ -264,7 +257,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   ),
                 ),
                 SizedBox(height: height * .01),
-               
                 BlocConsumer<RegisterBloc, RegisterState>(
                   listener: (context, state) {
                     if (state.isError) {
@@ -286,7 +278,6 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       onTap: () async {
                         bool isValid = _formKey.currentState!.validate();
                         if (isValid) {
-                        
                           BlocProvider.of<RegisterBloc>(context).add(
                             RegisterEvent.register(
                               labName: labNameController.text,
@@ -295,12 +286,12 @@ class _RegistrationPageState extends State<RegistrationPage> {
                               mobileNumber: mobileNumberController.text,
                               address: addressController.text,
                               location: locationController.text,
-                         imagePath:state.image,
+                              imagePath: state.image,
                               type: state.type,
                             ),
                           );
                         }
-                        }  ,
+                      },
                       buttonText: "Register",
                     );
                   },
@@ -309,13 +300,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
-                      "Don't have an account?",
-                      style: TextStyle(
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
+                    Text("Don't have an account?", style: black13B500),
                     SizedBox(width: width * .01),
                     GestureDetector(
                       onTap: () {
@@ -355,13 +340,9 @@ class _RegistrationPageState extends State<RegistrationPage> {
       imageQuality: 30,
     );
     if (image == null) return;
-imageTemporary =image.path;
-       BlocProvider.of<RegisterBloc>(context)
+    imageTemporary = image.path;
+    BlocProvider.of<RegisterBloc>(context)
         .add(RegisterEvent.selectImage(imageTemporary));
-      log("$imageTemporary======= image");
-
-    log("image >>>$imageTemporary");
-   
   }
 
   @override
@@ -372,7 +353,7 @@ imageTemporary =image.path;
     mobileNumberController.dispose();
     addressController.dispose();
     locationController.dispose();
-    imageTemporary =null;
+    imageTemporary = null;
     super.dispose();
   }
 }

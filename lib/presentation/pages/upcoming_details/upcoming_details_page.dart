@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iconly/iconly.dart';
-import 'package:mediezy_lab_scan/presentation/core/app_colors.dart';
-import 'package:mediezy_lab_scan/presentation/pages/upcoming_details/widget/user_section_widget.dart';
+import 'package:mediezy_lab_scan/presentation/common_widgets/user_section_widget.dart';
 import '../../common_widgets/custome_formfield_widget.dart';
 import '../../common_widgets/submit_button_widget.dart';
 import '../../core/text_style.dart';
-import 'widget/data_card_widget.dart';
+import '../../common_widgets/data_card_widget.dart';
+import 'widget/upload_card_widget.dart';
 
 class UpComingDetailsPage extends StatefulWidget {
   const UpComingDetailsPage(
@@ -63,29 +62,44 @@ class _UpComingDetailsPageState extends State<UpComingDetailsPage> {
               ),
               SizedBox(height: size.height * .02),
               DataCardWidget(title: "Test names", value: widget.testName),
-              SizedBox(height: size.height * .015),
+              SizedBox(height: size.height * .013),
               DataCardWidget(title: "Doctor name", value: widget.doctorName),
-              SizedBox(height: size.height * .015),
+              SizedBox(height: size.height * .013),
               DataCardWidget(title: "Clinic name", value: widget.clinicName),
-              SizedBox(height: size.height * .015),
+              SizedBox(height: size.height * .013),
+              Text("Upload :", style: grey13B500),
+              SizedBox(height: size.height * .005),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  GestureDetector(
+                    onTap: () {},
+                    child: UploadCardWidget(
+                      width: size.width * .45,
+                      title: "Gallery",
+                      icon: const Icon(IconlyLight.image),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {},
+                    child: UploadCardWidget(
+                      width: size.width * .45,
+                      title: "Camera",
+                      icon: const Icon(IconlyLight.camera),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: size.height * .013),
               GestureDetector(
                 onTap: () {},
-                child: Container(
-                  padding: const EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                    color: kCardColor,
-                    borderRadius: BorderRadius.circular(10.r),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text("Upload Image", style: black14B500),
-                      const Icon(IconlyLight.image)
-                    ],
-                  ),
+                child: const UploadCardWidget(
+                  width: double.infinity,
+                  title: "Pdf",
+                  icon:  Icon(IconlyLight.paper),
                 ),
               ),
-              SizedBox(height: size.height * .015),
+              SizedBox(height: size.height * .013),
               Text("Note :", style: grey13B500),
               SizedBox(height: size.height * .005),
               CustomeFormFieldWidget(
@@ -98,7 +112,7 @@ class _UpComingDetailsPageState extends State<UpComingDetailsPage> {
                   return null;
                 },
               ),
-              SizedBox(height: size.height * .005),
+              SizedBox(height: size.height * .013),
               SubmitButtonWidget(
                   buttonText: "Upload Report", loading: false, onTap: () {}),
               SizedBox(height: size.height * .005),

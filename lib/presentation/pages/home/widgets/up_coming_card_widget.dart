@@ -1,7 +1,7 @@
 import 'package:animation_wrappers/animation_wrappers.dart';
+import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:shimmer/shimmer.dart';
 import '../../../core/app_colors.dart';
 import '../../../core/text_style.dart';
 
@@ -36,47 +36,24 @@ class UpComingCardWidget extends StatelessWidget {
             scaleDuration: const Duration(milliseconds: 400),
             fadeDuration: const Duration(milliseconds: 400),
             child: ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: patientImage == 'null'
-                    ? Image.asset(
-                        "assets/icons/profile pic.png",
-                        height: size.height * .09,
-                        width: size.width * .18,
-                        color: kMainColor,
-                      )
-                    : Image.network(
-                        patientImage,
-                        height: size.height * .09,
-                        width: size.width * .18,
-                        fit: BoxFit.cover,
-                        errorBuilder: (context, error, stackTrace) => Padding(
-                          padding: const EdgeInsets.all(3.0),
-                          child: Image.asset(
-                            "assets/icons/profile pic.png",
-                            height: size.height * .09,
-                            width: size.width * .18,
-                            color: kMainColor,
-                          ),
-                        ),
-                        loadingBuilder: (BuildContext context, Widget child,
-                            ImageChunkEvent? loadingProgress) {
-                          if (loadingProgress == null) {
-                            return child;
-                          }
-                          return Center(
-                            child: Shimmer.fromColors(
-                              baseColor: kShimmerBaseColor,
-                              highlightColor: kShimmerHighlightColor,
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(80.r),
-                                ),
-                              ),
-                            ),
-                          );
-                        },
-                      )),
+              borderRadius: BorderRadius.circular(10),
+              child: patientImage == 'null'
+                  ? Image.asset(
+                      "assets/icons/profile pic.png",
+                      height: size.height * .09,
+                      width: size.width * .18,
+                      color: kMainColor,
+                    )
+                  : FancyShimmerImage(
+                      height: size.height * .09,
+                      width: size.width * .18,
+                      boxFit: BoxFit.fill,
+                      errorWidget: const Image(
+                        image: AssetImage("assets/icons/profile pic.png"),
+                      ),
+                      imageUrl: patientImage,
+                    ),
+            ),
           ),
           SizedBox(
             width: size.width * .015,

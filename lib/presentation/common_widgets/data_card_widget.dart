@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../core/app_colors.dart';
-import '../../../core/text_style.dart';
+import '../core/app_colors.dart';
+import '../core/text_style.dart';
 
 class DataCardWidget extends StatelessWidget {
   const DataCardWidget({super.key, required this.title, required this.value});

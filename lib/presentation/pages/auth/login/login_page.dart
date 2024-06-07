@@ -13,6 +13,8 @@ import 'package:mediezy_lab_scan/presentation/common_widgets/submit_button_widge
 import 'package:mediezy_lab_scan/presentation/pages/home/home_page.dart';
 import 'package:mediezy_lab_scan/presentation/pages/auth/registation/registration_page.dart';
 
+import '../../../core/text_style.dart';
+
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
@@ -160,10 +162,7 @@ class _LoginPageState extends State<LoginPage> {
                       children: [
                         Text(
                           "Don't have an account?",
-                          style: TextStyle(
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w400,
-                          ),
+                          style: black13B500
                         ),
                         SizedBox(width: width * .01),
                         GestureDetector(

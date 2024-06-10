@@ -13,7 +13,7 @@ class CustomeFormFieldWidget extends StatelessWidget {
       required this.hintText,
       required this.textInputType,
       required this.textInputAction,
-      required this.validator,
+      this.validator,
       this.icon,
       this.obscureText = false,
       this.hideText = false,
@@ -25,7 +25,7 @@ class CustomeFormFieldWidget extends StatelessWidget {
   final String hintText;
   final TextInputType textInputType;
   final TextInputAction textInputAction;
-  final FormFieldValidator validator;
+  FormFieldValidator? validator;
   bool hideText;
   bool obscureText;
   IconData? icon;

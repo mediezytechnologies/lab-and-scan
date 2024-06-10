@@ -27,15 +27,15 @@ class _LoginPageState extends State<LoginPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
+    final size = MediaQuery.of(context).size;
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Stack(
           children: [
             Container(
               width: MediaQuery.of(context).size.width,
-              height: height * .65,
+              height: size.height * .65,
               color: kMainColor,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -62,7 +62,7 @@ class _LoginPageState extends State<LoginPage> {
                 key: _formKey,
                 child: Column(
                   children: [
-                    SizedBox(height: height * .61),
+                    SizedBox(height: size.height * .61),
                     CustomeFormFieldWidget(
                         controller: emailController,
                         hintText: "Email address",
@@ -79,7 +79,7 @@ class _LoginPageState extends State<LoginPage> {
                           }
                         },
                         icon: Icons.email_outlined),
-                    SizedBox(height: height * .01),
+                    SizedBox(height: size.height * .01),
                     BlocProvider(
                       create: (context) => getIt<LoginBloc>(),
                       child: BlocBuilder<LoginBloc, LoginState>(
@@ -108,7 +108,7 @@ class _LoginPageState extends State<LoginPage> {
                         },
                       ),
                     ),
-                    SizedBox(height: height * .010),
+                    SizedBox(height: size.height * .010),
                     Align(
                       alignment: Alignment.centerRight,
                       child: GestureDetector(
@@ -116,7 +116,7 @@ class _LoginPageState extends State<LoginPage> {
                         child: Text("Forgot password", style: main12B600),
                       ),
                     ),
-                    SizedBox(height: height * .04),
+                    SizedBox(height: size.height * .04),
                     BlocConsumer<LoginBloc, LoginState>(
                       listener: (context, state) {
                         if (state.isError) {
@@ -152,12 +152,12 @@ class _LoginPageState extends State<LoginPage> {
                         );
                       },
                     ),
-                    SizedBox(height: height * .015),
+                    SizedBox(height: size.height * .015),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text("Don't have an account?", style: black13B500),
-                        SizedBox(width: width * .01),
+                        SizedBox(width: size.width * .01),
                         GestureDetector(
                           onTap: () {
                             BlocProvider.of<LoginBloc>(context)

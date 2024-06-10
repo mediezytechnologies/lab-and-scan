@@ -37,18 +37,16 @@ class _RegistrationPageState extends State<RegistrationPage> {
 
   @override
   Widget build(BuildContext context) {
-    final height = MediaQuery.of(context).size.height;
-    final width = MediaQuery.of(context).size.width;
-
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: width * .02),
+          padding: EdgeInsets.symmetric(horizontal: size.width * .02),
           child: Form(
             key: _formKey,
             child: Column(
               children: [
-                SizedBox(height: height * .07),
+                SizedBox(height: size.height * .07),
                 Stack(
                   children: [
                     Align(
@@ -62,14 +60,14 @@ class _RegistrationPageState extends State<RegistrationPage> {
                               child: state.image != null
                                   ? Image.file(
                                       File(state.image!),
-                                      height: width * .28,
-                                      width: width * .28,
+                                      height: size.width * .28,
+                                      width: size.width * .28,
                                       fit: BoxFit.cover,
                                     )
                                   : Image.asset(
                                       "assets/icons/profile pic.png",
-                                      height: width * .28,
-                                      width: width * .28,
+                                      height: size.width * .28,
+                                      width: size.width * .28,
                                       color: kMainColor,
                                       fit: BoxFit.cover,
                                     ),
@@ -79,8 +77,8 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       ),
                     ),
                     Positioned(
-                      top: height * .1,
-                      right: width * .280,
+                      top: size.height * .1,
+                      right: size.width * .280,
                       child: IconButton(
                         onPressed: () {
                           selectImage();
@@ -94,7 +92,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     ),
                   ],
                 ),
-                SizedBox(height: height * .02),
+                SizedBox(height: size.height * .02),
                 CustomeFormFieldWidget(
                   hideText: false,
                   controller: labNameController,
@@ -110,7 +108,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   },
                   icon: IconlyLight.home,
                 ),
-                SizedBox(height: height * .01),
+                SizedBox(height: size.height * .01),
                 CustomeFormFieldWidget(
                     controller: emailController,
                     hintText: "Email address",
@@ -127,7 +125,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       }
                     },
                     icon: Icons.email_outlined),
-                SizedBox(height: height * .01),
+                SizedBox(height: size.height * .01),
                 CustomeFormFieldWidget(
                     controller: mobileNumberController,
                     hintText: "Mobile number",
@@ -143,7 +141,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       }
                     },
                     icon: Iconsax.mobile),
-                SizedBox(height: height * .01),
+                SizedBox(height: size.height * .01),
                 BlocProvider(
                   create: (context) => getIt<RegisterBloc>(),
                   child: BlocBuilder<RegisterBloc, RegisterState>(
@@ -171,7 +169,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     },
                   ),
                 ),
-                SizedBox(height: height * .01),
+                SizedBox(height: size.height * .01),
                 CustomeFormFieldWidget(
                   hideText: false,
                   controller: addressController,
@@ -187,7 +185,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   },
                   icon: Iconsax.map,
                 ),
-                SizedBox(height: height * .01),
+                SizedBox(height: size.height * .01),
                 CustomeFormFieldWidget(
                   hideText: false,
                   controller: locationController,
@@ -203,7 +201,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                   },
                   icon: Iconsax.location,
                 ),
-                SizedBox(height: height * .01),
+                SizedBox(height: size.height * .01),
                 BlocProvider(
                   create: (context) => getIt<RegisterBloc>(),
                   child: BlocBuilder<RegisterBloc, RegisterState>(
@@ -253,7 +251,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     },
                   ),
                 ),
-                SizedBox(height: height * .01),
+                SizedBox(height: size.height * .01),
                 BlocConsumer<RegisterBloc, RegisterState>(
                   listener: (context, state) {
                     if (state.isError) {
@@ -293,12 +291,12 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     );
                   },
                 ),
-               SizedBox(height: height * .015),
+                SizedBox(height: size.height * .015),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text("Don't have an account?", style: black13B500),
-                    SizedBox(width: width * .01),
+                    SizedBox(width: size.width * .01),
                     GestureDetector(
                       onTap: () {
                         BlocProvider.of<RegisterBloc>(context).add(
@@ -321,7 +319,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     ),
                   ],
                 ),
-                SizedBox(height: height * .01),
+                SizedBox(height: size.height * .01),
               ],
             ),
           ),

@@ -10,8 +10,8 @@ import 'package:mediezy_lab_scan/presentation/core/app_colors.dart';
 import 'package:mediezy_lab_scan/presentation/core/general_services.dart';
 import 'package:mediezy_lab_scan/presentation/pages/auth/login/login_page.dart';
 import 'package:mediezy_lab_scan/presentation/pages/home/widgets/profile_card_widget.dart';
-
 import '../../../core/text_style.dart';
+import '../../edit_profile/edit_profie_page.dart';
 
 class HomePageDrawerWidget extends StatelessWidget {
   const HomePageDrawerWidget({
@@ -85,8 +85,32 @@ class HomePageDrawerWidget extends StatelessWidget {
               return Container();
             },
           ),
-          ProfileCardWidget(
-              text: 'Edit profile', icon: CupertinoIcons.pen, onTap: () {}),
+          BlocBuilder<GetUserDetailsBloc, GetUserDetailsState>(
+            builder: (context, state) {
+              if (state.status) {
+                return ProfileCardWidget(
+                  text: 'Edit profile',
+                  icon: CupertinoIcons.pen,
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => EditProfilePage(
+                          address: state.userdetails.first.address.toString(),
+                          image: state.userdetails.first.labImage.toString(),
+                          location: state.userdetails.first.location.toString(),
+                          mobileNumber:
+                              state.userdetails.first.mobileNo.toString(),
+                          name: state.userdetails.first.firstname.toString(),
+                        ),
+                      ),
+                    );
+                  },
+                );
+              }
+              return Container();
+            },
+          ),
           ProfileCardWidget(
               text: 'Terms & conditions',
               icon: CupertinoIcons.news,

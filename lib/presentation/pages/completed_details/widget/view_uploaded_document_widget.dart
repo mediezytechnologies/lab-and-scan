@@ -18,11 +18,15 @@ class ViewUploadedDocumentWidget extends StatelessWidget {
         centerTitle: true,
       ),
       body: Center(
-        child: Padding(
+        child: Padding( 
           padding: const EdgeInsets.all(8.0),
           child: isPdf
               ? SfPdfViewer.network(
-                  'https://test.mediezy.com/labdocuments/1718095056_dummy.pdf',
+        
+             
+                
+                pageLayoutMode: PdfPageLayoutMode.continuous,
+                  uploadedDocument,
                 )
               : ClipRRect(
                   borderRadius: BorderRadius.circular(10.r),

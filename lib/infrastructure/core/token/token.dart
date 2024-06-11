@@ -5,13 +5,9 @@ class GetLocalStorage {
 
   //* save user token and id
   static saveToken(Map<String, dynamic> user) {
-    storage.write('token', user['token']);
+    storage.write("token", user['token']);
     storage.write('id', user['id']);
-    storage.write('firstname', user['firstname']);
   }
-
-
-  
 
   //* get user token and id
   static String? getUserIdAndToken(String key) {
@@ -20,9 +16,8 @@ class GetLocalStorage {
   }
 
   //* remove user token and id
-  static removeUserTokenAndUid() {
+ static removeUserTokenAndUid() {
     storage.remove('id');
     storage.remove("token");
-    storage.remove('firstname');
   }
 }

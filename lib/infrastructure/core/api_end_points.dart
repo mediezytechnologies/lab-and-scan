@@ -4,8 +4,4 @@ class ApiEndPoints {
   static const login = "$loginBaseUrl/auth/login";
   static const register = "$baseUrl/LabRegister";
   static const getUserDetails = "$baseUrl/getLabUserdetails/";
-  static const getUpComing = "$baseUrl/getUpComingLabdetails/";
-  static const getCompleted = "$baseUrl/getCompletedLabdetails/";
-  static const updateUser = "$baseUrl/updateLabUserDetails";
-  static const uploadDocument = "$baseUrl/LabDocumentUpload";
 }

@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iconly/iconly.dart';
 import 'package:mediezy_lab_scan/presentation/core/app_colors.dart';
-import 'package:mediezy_lab_scan/presentation/core/text_style.dart';
 
 class CustomeFormFieldWidget extends StatelessWidget {
   CustomeFormFieldWidget(
@@ -13,8 +12,8 @@ class CustomeFormFieldWidget extends StatelessWidget {
       required this.hintText,
       required this.textInputType,
       required this.textInputAction,
-      this.validator,
-      this.icon,
+      required this.validator,
+      required this.icon,
       this.obscureText = false,
       this.hideText = false,
       this.maxLine = 1,
@@ -25,10 +24,10 @@ class CustomeFormFieldWidget extends StatelessWidget {
   final String hintText;
   final TextInputType textInputType;
   final TextInputAction textInputAction;
-  FormFieldValidator? validator;
+  final FormFieldValidator validator;
   bool hideText;
   bool obscureText;
-  IconData? icon;
+  final IconData icon;
   int? maxLine;
   int? maxLength;
   void Function()? onPressed;
@@ -38,7 +37,7 @@ class CustomeFormFieldWidget extends StatelessWidget {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     return TextFormField(
-      style: black12B500,
+      style: TextStyle(fontSize: 13.sp),
       maxLines: maxLine,
       maxLength: maxLength,
       cursorColor: kMainColor,
@@ -52,12 +51,12 @@ class CustomeFormFieldWidget extends StatelessWidget {
         prefixIcon: Icon(
           icon,
           color: kMainColor,
-          size: 20.sp,
+          size: 22.sp,
         ),
         suffixIcon: hideText
-            ? GestureDetector(
-                onTap: onPressed,
-                child: obscureText
+            ? IconButton(
+                onPressed: onPressed,
+                icon: obscureText
                     ? Icon(
                         IconlyLight.hide,
                         color: kMainColor,
@@ -68,7 +67,7 @@ class CustomeFormFieldWidget extends StatelessWidget {
                       ),
               )
             : const SizedBox(),
-        hintStyle: grey12B500,
+        hintStyle: TextStyle(fontSize: 13.sp, color: kSubTextColor),
         hintText: hintText,
         filled: true,
         fillColor: kCardColor,
@@ -77,7 +76,7 @@ class CustomeFormFieldWidget extends StatelessWidget {
           borderSide: BorderSide.none,
         ),
         contentPadding: EdgeInsets.symmetric(
-            horizontal: width * .010, vertical: height * .011),
+            horizontal: width * .010, vertical: height * .012),
       ),
     );
   }

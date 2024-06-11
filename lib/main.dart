@@ -2,13 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_storage/get_storage.dart';
-<<<<<<< Updated upstream
 import 'package:mediezy_lab_scan/application/home/get_user_details/get_user_details_bloc.dart';
 import 'package:mediezy_lab_scan/application/login/login_bloc.dart';
 import 'package:mediezy_lab_scan/application/register/register_bloc.dart';
-=======
 import 'package:mediezy_lab_scan/demo_pdf.dart';
->>>>>>> Stashed changes
 import 'package:mediezy_lab_scan/domain/core/dependency_injection/injectable.dart';
 import 'package:mediezy_lab_scan/presentation/core/app_theme.dart';
 import 'package:mediezy_lab_scan/presentation/pages/splash/splash_page.dart';

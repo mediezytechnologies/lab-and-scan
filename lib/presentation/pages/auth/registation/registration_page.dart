@@ -7,7 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iconly/iconly.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:mediezy_lab_scan/application/register/register_bloc.dart';
+import 'package:mediezy_lab_scan/application/auth/register/register_bloc.dart';
 import 'package:mediezy_lab_scan/domain/core/dependency_injection/injectable.dart';
 import 'package:mediezy_lab_scan/presentation/core/app_colors.dart';
 import 'package:mediezy_lab_scan/presentation/core/general_services.dart';

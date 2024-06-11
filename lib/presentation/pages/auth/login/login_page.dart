@@ -2,7 +2,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:mediezy_lab_scan/application/login/login_bloc.dart';
+import 'package:mediezy_lab_scan/application/auth/login/login_bloc.dart';
 import 'package:mediezy_lab_scan/domain/core/dependency_injection/injectable.dart';
 import 'package:mediezy_lab_scan/presentation/core/app_colors.dart';
 import 'package:mediezy_lab_scan/presentation/core/general_services.dart';
@@ -11,7 +11,7 @@ import 'package:mediezy_lab_scan/presentation/common_widgets/submit_button_widge
 import 'package:mediezy_lab_scan/presentation/pages/home/home_page.dart';
 import 'package:mediezy_lab_scan/presentation/pages/auth/registation/registration_page.dart';
 
-import '../../../../application/register/register_bloc.dart';
+import '../../../../application/auth/register/register_bloc.dart';
 import '../../../core/text_style.dart';
 
 class LoginPage extends StatefulWidget {

@@ -10,11 +10,10 @@ class RegisterEvent with _$RegisterEvent {
     required String address,
     required String location,
     required int type,
- String? imagePath,
-    
+    String? imagePath,
   }) = _Register;
 
   const factory RegisterEvent.changeType(int selectType) = _ChangeType;
   const factory RegisterEvent.obscureChanged(bool isObsure) = _ObscureChanged;
- const factory RegisterEvent.selectImage(String? image) = _SelectImage;
+  const factory RegisterEvent.selectImage(String? image) = _SelectImage;
 }

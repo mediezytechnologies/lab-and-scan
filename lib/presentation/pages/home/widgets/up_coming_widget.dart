@@ -26,121 +26,121 @@
 //     return RefreshIndicator(
 //       color: kMainColor,
 //       onRefresh: _refreshData,
-//       child: LayoutBuilder(
-//           builder: (BuildContext context, BoxConstraints constraints) {
-//         return SingleChildScrollView(
-//           physics: const AlwaysScrollableScrollPhysics(),
-//           child: ConstrainedBox(
-//             constraints: BoxConstraints(
-//               minHeight: constraints.maxHeight,
-//             ),
-//             child: BlocBuilder<GetUpComingBloc, GetUpComingState>(
-//               builder: (context, state) {
-//                 if (state.isLoading) {
-//                   return Center(
-//                     child: CircularProgressIndicator(
-//                       color: kMainColor,
+//       child: BlocBuilder<GetUpComingBloc, GetUpComingState>(
+//         builder: (context, state) {
+//           if (state.isLoading) {
+//             return Center(
+//               child: CircularProgressIndicator(
+//                 color: kMainColor,
+//               ),
+//             );
+//           }
+//           if (state.isError) {
+//             return Center(
+//               child: Text(state.message),
+//             );
+//           }
+//           return state.getUpComing.isEmpty
+//               ? SingleChildScrollView(
+//                   physics: const AlwaysScrollableScrollPhysics(),
+//                   child: ConstrainedBox(
+//                     constraints: BoxConstraints(
+//                       minHeight: size.height,
 //                     ),
-//                   );
-//                 }
-//                 if (state.isError) {
-//                   return Center(
-//                     child: Text(state.message),
-//                   );
-//                 }
-//                 return state.getUpComing.isEmpty
-//                     ? Center(
-//                         child: Image(
+//                     child: Column(
+//                       mainAxisAlignment: MainAxisAlignment.center,
+//                       children: [
+//                         Image(
 //                           image: const AssetImage(
 //                               "assets/images/no_appopintments.png"),
 //                           height: size.height * .3,
 //                           width: size.width * .7,
 //                         ),
-//                       )
-//                     : Column(
-//                         crossAxisAlignment: CrossAxisAlignment.end,
-//                         children: [
-//                           RichTextWidget(
-//                             title: "Pending",
-//                             pendingCount: state.getUpComing.length,
-//                           ),
-//                           ListView.builder(
-//                             padding: EdgeInsets.symmetric(
-//                                 horizontal: 8.w, vertical: 4.h),
-//                             shrinkWrap: true,
-//                             physics: const NeverScrollableScrollPhysics(),
-//                             itemCount: state.getUpComing.length,
-//                             itemBuilder: (context, index) {
-//                               return GestureDetector(
-//                                 onTap: () {
-//                                   Navigator.push(
-//                                     context,
-//                                     MaterialPageRoute(
-//                                       builder: (context) => UpComingDetailsPage(
-//                                         testName: state
-//                                             .getUpComing[index].labtest
-//                                             .toString(),
-//                                         patientName: state
-//                                             .getUpComing[index].firstname
-//                                             .toString(),
-//                                         patientImage: state
-//                                             .getUpComing[index].userImage
-//                                             .toString(),
-//                                         patientMobileNo: state
-//                                             .getUpComing[index].mobileNo
-//                                             .toString(),
-//                                         patientAge: state.getUpComing[index].age
-//                                             .toString(),
-//                                         doctorName: state
-//                                             .getUpComing[index].doctorName
-//                                             .toString(),
-//                                         clinicName: state
-//                                             .getUpComing[index].clinicName
-//                                             .toString(),
-//                                         labId: state.getUpComing[index].labId
-//                                             .toString(),
-//                                         doctorId: state
-//                                             .getUpComing[index].doctorId
-//                                             .toString(),
-//                                         clinicId: state
-//                                             .getUpComing[index].clinicId
-//                                             .toString(),
-//                                         patientId: state
-//                                             .getUpComing[index].patientId
-//                                             .toString(),
-//                                       ),
-//                                     ),
-//                                   );
-//                                 },
-//                                 child: Column(
-//                                   children: [
-//                                     UpComingCardWidget(
-//                                       mobileNumber: state
-//                                           .getUpComing[index].mobileNo
-//                                           .toString(),
-//                                       patientAge: state.getUpComing[index].age
-//                                           .toString(),
-//                                       patientImage: state
-//                                           .getUpComing[index].userImage
-//                                           .toString(),
-//                                       patientName: state
-//                                           .getUpComing[index].firstname
-//                                           .toString(),
-//                                       testName: state.getUpComing[index].labtest
-//                                           .toString(),
-//                                     ),
-//                                   ],
+//                       ],
+//                     ),
+//                   ),
+//                 )
+//               : Column(
+//                   crossAxisAlignment: CrossAxisAlignment.start,
+//                   children: [
+//                     Align(
+//                       alignment: Alignment.topRight,
+//                       child: RichTextWidget(
+//                         title: "Pending",
+//                         pendingCount: state.getUpComing.length,
+//                       ),
+//                     ),
+//                     Expanded(
+//                       child: ListView.builder(
+//                         padding: EdgeInsets.symmetric(
+//                             horizontal: 8.w, vertical: 4.h),
+//                         itemCount: state.getUpComing.length,
+//                         itemBuilder: (context, index) {
+//                           return GestureDetector(
+//                             onTap: () {
+//                               Navigator.push(
+//                                 context,
+//                                 MaterialPageRoute(
+//                                   builder: (context) => UpComingDetailsPage(
+//                                     testName: state.getUpComing[index].labtest
+//                                         .toString(),
+//                                     patientName: state
+//                                         .getUpComing[index].firstname
+//                                         .toString(),
+//                                     patientImage: state
+//                                         .getUpComing[index].userImage
+//                                         .toString(),
+//                                     patientMobileNo: state
+//                                         .getUpComing[index].mobileNo
+//                                         .toString(),
+//                                     patientAge:
+//                                         state.getUpComing[index].age.toString(),
+//                                     doctorName: state
+//                                         .getUpComing[index].doctorName
+//                                         .toString(),
+//                                     clinicName: state
+//                                         .getUpComing[index].clinicName
+//                                         .toString(),
+//                                     labId: state.getUpComing[index].labId
+//                                         .toString(),
+//                                     doctorId: state.getUpComing[index].doctorId
+//                                         .toString(),
+//                                     clinicId: state.getUpComing[index].clinicId
+//                                         .toString(),
+//                                     patientId: state
+//                                         .getUpComing[index].patientId
+//                                         .toString(),
+//                                   ),
 //                                 ),
 //                               );
 //                             },
-//                           ),
-//                         ],
-//                       );
-//               },
-//             ),
-//           ),
-//         );
-//       }),
+//                             child: Column(
+//                               children: [
+//                                 UpComingCardWidget(
+//                                   mobileNumber: state
+//                                       .getUpComing[index].mobileNo
+//                                       .toString(),
+//                                   patientAge:
+//                                       state.getUpComing[index].age.toString(),
+//                                   patientImage: state
+//                                       .getUpComing[index].userImage
+//                                       .toString(),
+//                                   patientName: state
+//                                       .getUpComing[index].firstname
+//                                       .toString(),
+//                                   testName: state.getUpComing[index].labtest
+//                                       .toString(),
+//                                 ),
+//                               ],
+//                             ),
+//                           );
+//                         },
+//                       ),
+//                     ),
+//                   ],
+//                 );
+//         },
+//       ),
 //     );
 //   }
 // }
@@ -188,29 +188,26 @@ class _UpComingWidgetState extends State<UpComingWidget> {
             );
           }
           return state.getUpComing.isEmpty
-              ? SingleChildScrollView(
-                  physics: const AlwaysScrollableScrollPhysics(),
-                  child: ConstrainedBox(
-                    constraints: BoxConstraints(
-                      minHeight: size.height,
-                    ),
-                    child: SizedBox(
-                      width: double.infinity,
-                      child: Column(
-                        children: [
-                          SizedBox(
-                            height: size.height * .25,
-                          ),
-                          Image(
-                            image: const AssetImage(
-                                "assets/images/no_appopintments.png"),
-                            height: size.height * .3,
-                            width: size.width * .7,
-                          ),
-                        ],
+              ? Stack(
+                  children: [
+                    SingleChildScrollView(
+                      physics: const AlwaysScrollableScrollPhysics(),
+                      child: ConstrainedBox(
+                        constraints: BoxConstraints(
+                          minHeight: size.height,
+                        ),
+                        child: Container(),
                       ),
                     ),
-                  ),
+                    Center(
+                      child: Image(
+                        image: const AssetImage(
+                            "assets/images/no_appopintments.png"),
+                        height: size.height * .3,
+                        width: size.width * .7,
+                      ),
+                    ),
+                  ],
                 )
               : Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -234,6 +231,9 @@ class _UpComingWidgetState extends State<UpComingWidget> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => UpComingDetailsPage(
+                                    appointmentId: state
+                                        .getUpComing[index].appointmentId
+                                        .toString(),
                                     testName: state.getUpComing[index].labtest
                                         .toString(),
                                     patientName: state

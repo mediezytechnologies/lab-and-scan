@@ -10,6 +10,9 @@ class GetLocalStorage {
     storage.write('firstname', user['firstname']);
   }
 
+
+  
+
   //* get user token and id
   static String? getUserIdAndToken(String key) {
     String? user = storage.read<String?>(key);

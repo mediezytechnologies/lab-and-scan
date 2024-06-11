@@ -20,7 +20,7 @@ class HomePageDrawerWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final width = MediaQuery.of(context).size.width;
+    final size = MediaQuery.of(context).size;
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
@@ -47,20 +47,22 @@ class HomePageDrawerWidget extends StatelessWidget {
                         scaleDuration: const Duration(milliseconds: 400),
                         fadeDuration: const Duration(milliseconds: 400),
                         child: SizedBox(
-                          height: width * .23,
-                          width: width * .23,
+                          height: size.width * .23,
+                          width: size.width * .23,
                           child: FadedScaleAnimation(
                             scaleDuration: const Duration(milliseconds: 400),
                             fadeDuration: const Duration(milliseconds: 400),
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(50.r),
-                              child: (state.userdetails.first.labImage == null
+                              child: (state.userdetails.first.labImage == 'null'
                                   ? Image.asset(
                                       "assets/icons/profile pic.png",
                                       color: kMainColor,
+                                      height: size.height * .09,
+                                      width: size.width * .18,
                                     )
                                   : FancyShimmerImage(
-                                      boxFit: BoxFit.fill,
+                                      boxFit: BoxFit.cover,
                                       errorWidget: const Image(
                                         image: AssetImage(
                                             "assets/icons/profile pic.png"),
@@ -92,6 +94,7 @@ class HomePageDrawerWidget extends StatelessWidget {
                   text: 'Edit profile',
                   icon: CupertinoIcons.pen,
                   onTap: () {
+                     
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -105,6 +108,7 @@ class HomePageDrawerWidget extends StatelessWidget {
                         ),
                       ),
                     );
+                    
                   },
                 );
               }

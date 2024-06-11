@@ -4,8 +4,8 @@ import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:mediezy_lab_scan/domain/core/error/error_model.dart';
-import 'package:mediezy_lab_scan/domain/register/model/register_model.dart';
-import 'package:mediezy_lab_scan/domain/register/register_respository.dart';
+import 'package:mediezy_lab_scan/domain/auth/register/model/register_model.dart';
+import 'package:mediezy_lab_scan/domain/auth/register/register_respository.dart';
 part 'register_event.dart';
 part 'register_state.dart';
 part 'register_bloc.freezed.dart';
@@ -46,9 +46,8 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
           password: event.password,
           address: event.address,
           location: event.location,
-     
           type: event.type,
-             imagePath: event.imagePath,
+          imagePath: event.imagePath,
         );
 
         final _state = _result.fold(

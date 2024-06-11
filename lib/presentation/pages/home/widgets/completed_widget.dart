@@ -41,29 +41,26 @@ class _CompletedWidgetState extends State<CompletedWidget> {
             );
           }
           return state.getCompleted.isEmpty
-              ? SingleChildScrollView(
-                  physics: const AlwaysScrollableScrollPhysics(),
-                  child: ConstrainedBox(
-                    constraints: BoxConstraints(
-                      minHeight: size.height,
-                    ),
-                    child: SizedBox(
-                      width: double.infinity,
-                      child: Column(
-                        children: [
-                          SizedBox(
-                            height: size.height * .25,
-                          ),
-                          Image(
-                            image: const AssetImage(
-                                "assets/images/no_appopintments.png"),
-                            height: size.height * .3,
-                            width: size.width * .7,
-                          ),
-                        ],
+              ? Stack(
+                  children: [
+                    SingleChildScrollView(
+                      physics: const AlwaysScrollableScrollPhysics(),
+                      child: ConstrainedBox(
+                        constraints: BoxConstraints(
+                          minHeight: size.height,
+                        ),
+                        child: Container(),
                       ),
                     ),
-                  ),
+                    Center(
+                      child: Image(
+                        image: const AssetImage(
+                            "assets/images/no_appopintments.png"),
+                        height: size.height * .3,
+                        width: size.width * .7,
+                      ),
+                    ),
+                  ],
                 )
               : Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

@@ -1,13 +1,21 @@
+// ignore_for_file: use_build_context_synchronously
+
+import 'dart:developer';
+import 'dart:io';
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:iconly/iconly.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:mediezy_lab_scan/application/home/user_update/user_update_bloc.dart';
 import 'package:mediezy_lab_scan/presentation/common_widgets/custome_formfield_widget.dart';
 import 'package:mediezy_lab_scan/presentation/common_widgets/submit_button_widget.dart';
-
+import 'package:mediezy_lab_scan/presentation/pages/home/home_page.dart';
 import '../../core/app_colors.dart';
+import '../../core/general_services.dart';
 
 class EditProfilePage extends StatefulWidget {
   const EditProfilePage(
@@ -53,6 +61,15 @@ class _EditProfilePageState extends State<EditProfilePage> {
       appBar: AppBar(
         title: const Text("Edit profile"),
         centerTitle: true,
+        leading: GestureDetector(
+          onTap: () {
+            Navigator.pop(context);
+            BlocProvider.of<UserUpdateBloc>(context).add(
+              const UserUpdateEvent.userUpdateImageEvent(null),
+            );
+          },
+          child: const Icon(Icons.arrow_back),
+        ),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -66,37 +83,40 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   children: [
                     Align(
                       alignment: Alignment.center,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: ClipRRect(
-                            borderRadius: BorderRadius.circular(100.r),
-                            child:
-                                // state.image != null
-                                //     ? Image.file(
-                                //         File(state.image!),
-                                //         height: size.width * .28,
-                                //         width: size.width * .28,
-                                //         fit: BoxFit.cover,
-                                //       )
-                                //     :
-                                widget.image == 'null'
-                                    ? Image.asset(
-                                        "assets/icons/profile pic.png",
-                                        height: size.width * .28,
-                                        width: size.width * .28,
-                                        color: kMainColor,
-                                        fit: BoxFit.cover,
-                                      )
-                                    : FancyShimmerImage(
-                                        height: size.width * .28,
-                                        width: size.width * .28,
-                                        boxFit: BoxFit.fill,
-                                        errorWidget: const Image(
-                                          image: AssetImage(
-                                              "assets/icons/profile pic.png"),
+                      child: BlocBuilder<UserUpdateBloc, UserUpdateState>(
+                        builder: (context, state) {
+                          return Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(100.r),
+                              child: state.image != null
+                                  ? Image.file(
+                                      File(state.image!),
+                                      height: size.width * .28,
+                                      width: size.width * .28,
+                                      fit: BoxFit.cover,
+                                    )
+                                  : widget.image == 'null'
+                                      ? Image.asset(
+                                          "assets/icons/profile pic.png",
+                                          height: size.width * .28,
+                                          width: size.width * .28,
+                                          color: kMainColor,
+                                          fit: BoxFit.cover,
+                                        )
+                                      : FancyShimmerImage(
+                                          height: size.width * .28,
+                                          width: size.width * .28,
+                                          boxFit: BoxFit.cover,
+                                          errorWidget: const Image(
+                                            image: AssetImage(
+                                                "assets/icons/profile pic.png"),
+                                          ),
+                                          imageUrl: widget.image,
                                         ),
-                                        imageUrl: widget.image,
-                                      )),
+                            ),
+                          );
+                        },
                       ),
                     ),
                     Positioned(
@@ -104,7 +124,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       right: size.width * .280,
                       child: IconButton(
                         onPressed: () {
-                          //selectImage();
+                          selectImage();
                         },
                         icon: Icon(
                           IconlyLight.camera,
@@ -180,13 +200,70 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   icon: Iconsax.location,
                 ),
                 SizedBox(height: size.height * .05),
-                SubmitButtonWidget(
-                    onTap: () {}, loading: false, buttonText: "Update")
+                BlocConsumer<UserUpdateBloc, UserUpdateState>(
+                  listener: (context, state) {
+                    if (state.isError) {
+                      GeneralServices.instance.showToastMessage(state.message);
+                    }
+                    if (state.status) {
+                      log("message    ${state.status}");
+                      GeneralServices.instance.showToastMessage(state.message);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const HomePage(),
+                        ),
+                      );
+                    }
+                  },
+                  builder: (context, state) {
+                    return SubmitButtonWidget(
+                        onTap: () {
+                          final storage = GetStorage();
+                          BlocProvider.of<UserUpdateBloc>(context).add(
+                            UserUpdateEvent.update(
+                              nameController.text,
+                              mobileNumberController.text,
+                              addressController.text,
+                              locationController.text,
+                              state.image,
+                            ),
+                          );
+                          storage.write('firstname', nameController.text);
+                        },
+                        loading: state.isLoading,
+                        buttonText: "Update");
+                  },
+                )
               ],
             ),
           ),
         ),
       ),
     );
+  }
+
+  Future selectImage() async {
+    var image = await imagePicker.pickImage(
+      source: ImageSource.gallery,
+      imageQuality: 30,
+    );
+    if (image == null) return;
+    imageTemporary = image.path;
+    BlocProvider.of<UserUpdateBloc>(context)
+        .add(UserUpdateEvent.userUpdateImageEvent(imageTemporary));
+    log("$imageTemporary======= image");
+
+    log("image >>>$imageTemporary");
+  }
+
+  @override
+  void dispose() {
+    nameController.dispose();
+    mobileNumberController.dispose();
+    addressController.dispose();
+    locationController.dispose();
+    imageTemporary = null;
+    super.dispose();
   }
 }

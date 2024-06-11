@@ -59,6 +59,7 @@ dependencies:
   animation_wrappers: ^3.0.0
   fancy_shimmer_image: ^2.0.3
   file_picker: ^8.0.4
+  syncfusion_flutter_pdfviewer: ^26.1.35
   flutter_pdfview: ^1.3.2
 
 dev_dependencies:

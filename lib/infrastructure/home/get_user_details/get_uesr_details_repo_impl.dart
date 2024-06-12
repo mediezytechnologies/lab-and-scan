@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
@@ -16,18 +15,16 @@ class GetUserRepoImpl implements GetUserDetailsRepository {
   Future<Either<ErrorModel, List<Testdetail>>> getUserDetails() async {
     String? id = GetLocalStorage.getUserIdAndToken("id");
     String? token = GetLocalStorage.getUserIdAndToken('token');
-    log("lab id >>>>$id");
-    log("lab id >>>>  ${ApiEndPoints.getUserDetails}" "$id");
     try {
       var response = await Dio(BaseOptions(
         headers: {'Authorization': 'Bearer $token'},
+        contentType: 'application/json',
       )).get(
         "${ApiEndPoints.getUserDetails}$id",
       );
       if (response.statusCode == 200 || response.statusCode == 201) {
         final result = GetUserDetailsModel.fromJson(response.data);
-        log("api calling $result");
-        log("api calling ${response.data}");
+
         return right(result.testdetails!);
       } else {
         return Left(
@@ -35,10 +32,7 @@ class GetUserRepoImpl implements GetUserDetailsRepository {
         );
       }
     } on DioException catch (e) {
-      log(e.message!);
-      log(e.error.toString());
       final err = ErrorModel.fromJson(e.response!.data);
-      log("err: $err");
       return Left(err);
     }
   }

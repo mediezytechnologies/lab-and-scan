@@ -6,17 +6,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mediezy_lab_scan/application/home/get_user_details/get_user_details_bloc.dart';
 import 'package:mediezy_lab_scan/infrastructure/core/token/token.dart';
 import 'package:mediezy_lab_scan/presentation/core/app_colors.dart';
-<<<<<<< Updated upstream
-import 'package:mediezy_lab_scan/presentation/pages/login/login_page.dart';
 import 'package:shimmer/shimmer.dart';
-=======
-import 'package:mediezy_lab_scan/presentation/core/general_services.dart';
-import 'package:mediezy_lab_scan/presentation/pages/auth/login/login_page.dart';
-import 'package:mediezy_lab_scan/presentation/pages/home/widgets/profile_card_widget.dart';
-import '../../../common_widgets/custom_routing.dart';
-import '../../../core/text_style.dart';
-import '../../edit_profile/edit_profie_page.dart';
->>>>>>> Stashed changes
+
+import '../../auth/login/login_page.dart';
 
 class HomePageDrawerWidget extends StatelessWidget {
   const HomePageDrawerWidget({
@@ -122,7 +114,6 @@ class HomePageDrawerWidget extends StatelessWidget {
               return Container();
             },
           ),
-<<<<<<< Updated upstream
           ListTile(
             title: const Text('Edit Profile'),
             trailing: const Icon(CupertinoIcons.pen),
@@ -165,62 +156,6 @@ class HomePageDrawerWidget extends StatelessWidget {
                   (route) => false);
             },
           ),
-=======
-          BlocBuilder<GetUserDetailsBloc, GetUserDetailsState>(
-            builder: (context, state) {
-              if (state.status) {
-                return ProfileCardWidget(
-                  text: 'Edit profile',
-                  icon: CupertinoIcons.pen,
-                  onTap: () {
-                     
-                    Navigator.push(
-                      context,
-                    CustomPageRoute(
-                                    route: EditProfilePage(
-                          address: state.userdetails.first.address.toString(),
-                          image: state.userdetails.first.labImage.toString(),
-                          location: state.userdetails.first.location.toString(),
-                          mobileNumber:
-                              state.userdetails.first.mobileNo.toString(),
-                          name: state.userdetails.first.firstname.toString(),
-                        ),
-                      ),
-                    );
-                    
-                  },
-                );
-              }
-              return Container();
-            },
-          ),
-          ProfileCardWidget(
-              text: 'Terms & conditions',
-              icon: CupertinoIcons.news,
-              onTap: () {}),
-          ProfileCardWidget(
-              text: 'Privacy policy',
-              icon: CupertinoIcons.doc_plaintext,
-              onTap: () {}),
-          ProfileCardWidget(
-              text: 'About us', icon: CupertinoIcons.info, onTap: () {}),
-          ProfileCardWidget(
-              text: 'Contact us', icon: CupertinoIcons.mail, onTap: () {}),
-          ProfileCardWidget(
-              text: 'Log out',
-              icon: CupertinoIcons.power,
-              onTap: () {
-                GeneralServices.instance
-                    .appCloseDialogue(context, "Are you sure to log out?", () {
-                  GetLocalStorage.removeUserTokenAndUid();
-                  Navigator.of(context).pushAndRemoveUntil(
-                       CustomPageRoute(
-                                    route: const LoginPage(),
-                      ),
-                      (route) => false);
-                });
-              }),
->>>>>>> Stashed changes
         ],
       ),
     );

@@ -5,6 +5,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:mediezy_lab_scan/domain/core/dependency_injection/injectable.dart';
 import 'package:mediezy_lab_scan/presentation/core/app_theme.dart';
 import 'presentation/core/app_bloc_providers.dart';
+import 'presentation/pages/auth/splash/splash_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -29,7 +30,7 @@ class MediezyLabScan extends StatelessWidget {
               title: 'Mediezy Lab and Scan',
               theme: appThemeStyle(context),
               debugShowCheckedModeBanner: false,
-              home: SplashPage(),
+              home: const SplashPage(),
             );
           }),
     );

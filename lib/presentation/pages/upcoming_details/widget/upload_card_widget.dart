@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../core/app_colors.dart';
 import '../../../core/text_style.dart';
@@ -32,7 +33,7 @@ class UploadCardWidget extends StatelessWidget {
           SizedBox(
             width: size.width * .02,
           ),
-          icon
+          icon,
         ],
       ),
     );

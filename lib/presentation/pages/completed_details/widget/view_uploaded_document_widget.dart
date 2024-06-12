@@ -1,22 +1,17 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:async';
 import 'dart:developer';
-
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:mediezy_lab_scan/presentation/core/app_colors.dart';
-import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
-
-import 'package:mediezy_lab_scan/demo.dart';
 
 class ViewUploadedDocumentWidget extends StatelessWidget {
   ViewUploadedDocumentWidget({
-    Key? key,
+    super.key,
     required this.uploadedDocument,
     this.path,
-  }) : super(key: key);
+  });
 
   final String uploadedDocument;
   final String? path;
@@ -32,10 +27,9 @@ class ViewUploadedDocumentWidget extends StatelessWidget {
         centerTitle: true,
       ),
       body: Center(
-        child: Padding( 
+        child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Container(
-           
             child: isPdf
                 ? PDFView(
                     filePath: path,

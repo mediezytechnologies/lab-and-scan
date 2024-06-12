@@ -23,7 +23,7 @@ class DatePickerDemoClass extends StatefulWidget {
   final String locale;
   const DatePickerDemoClass(
     this.startDate, {
-    Key? key,
+    super.key,
     this.width = 60,
     this.height = 80,
     this.controller,
@@ -60,7 +60,7 @@ class _DatePickerDemoClassState extends State<DatePickerDemoClass> {
 // }
 
   DateTime? _currentDate;
-  ScrollController _controller = ScrollController();
+  final ScrollController _controller = ScrollController();
   late final TextStyle selectedDateStyle;
   late final TextStyle selectedMonthStyle;
   late final TextStyle selectedDayStyle;
@@ -109,8 +109,6 @@ class _DatePickerDemoClassState extends State<DatePickerDemoClass> {
           DateFormat("MMM", widget.locale).format(date).toUpperCase();
       displayedYear =
           DateFormat("yyyy", widget.locale).format(date).toUpperCase();
-
-      
     });
   }
 
@@ -149,10 +147,11 @@ class _DatePickerDemoClassState extends State<DatePickerDemoClass> {
               scrollDirection: Axis.horizontal,
               controller: _controller,
               itemBuilder: (context, index) {
-                DateTime date0 = widget.startDate.subtract(Duration(days: index)); // Subtract days instead of 
+                DateTime date0 = widget.startDate.subtract(
+                    Duration(days: index)); // Subtract days instead of
                 currentDate = widget.startDate.add(Duration(days: index));
                 DateTime date = DateTime(date0.year, date0.month, date0.day);
-               
+
                 bool isDeactivated = false;
 
                 if (widget.inactiveDates != null) {
@@ -172,7 +171,6 @@ class _DatePickerDemoClassState extends State<DatePickerDemoClass> {
                     }
                   }
                 }
-               
 
                 bool isSelected = _currentDate != null
                     ? _compareDate(date, _currentDate!)
@@ -199,7 +197,6 @@ class _DatePickerDemoClassState extends State<DatePickerDemoClass> {
                   selectionColor:
                       isSelected ? widget.selectionColor : Colors.transparent,
                   onDateSelected: (selectedDate) {
-                
                     if (isDeactivated) return;
                     if (widget.onDateChange != null) {
                       widget.onDateChange!(selectedDate);

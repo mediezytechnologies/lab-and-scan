@@ -5,9 +5,12 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iconly/iconly.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mediezy_lab_scan/presentation/common_widgets/user_section_widget.dart';
+import 'package:mediezy_lab_scan/presentation/core/app_colors.dart';
+import 'package:mediezy_lab_scan/presentation/pages/upcoming_details/widget/view_document_show_widget.dart';
 import '../../../application/home/upload_document/upload_document_bloc.dart';
 import '../../common_widgets/custome_formfield_widget.dart';
 import '../../common_widgets/submit_button_widget.dart';
@@ -137,12 +140,53 @@ class _UpComingDetailsPageState extends State<UpComingDetailsPage> {
                   return state.selectedDocument != null
                       ? Column(
                           children: [
-                            GestureDetector(
-                              onTap: () {},
-                              child: const UploadCardWidget(
-                                width: double.infinity,
-                                title: "View uploaded document",
-                                icon: Icon(IconlyLight.show),
+                            Container(
+                              width: double.infinity,
+                              padding: const EdgeInsets.all(8),
+                              decoration: BoxDecoration(
+                                color: kCardColor,
+                                borderRadius: BorderRadius.circular(10.r),
+                              ),
+                              child: Row(
+                                children: [
+                                  SizedBox(
+                                    width: size.width * .16,
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              ViewDocumentShowWidget(
+                                            uploadedDocument: state
+                                                .selectedDocument
+                                                .toString(),
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text("View uploaded document",
+                                            style: black14B500),
+                                        SizedBox(
+                                          width: size.width * .02,
+                                        ),
+                                        const Icon(IconlyLight.show),
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: size.width * .14,
+                                  ),
+                                  GestureDetector(
+                                      onTap: () {},
+                                      child: const Icon(
+                                          IconlyLight.close_square)),
+                                ],
                               ),
                             ),
                             SizedBox(height: size.height * .013),

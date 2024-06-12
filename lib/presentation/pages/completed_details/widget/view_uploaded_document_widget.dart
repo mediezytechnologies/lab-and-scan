@@ -17,8 +17,9 @@ class ViewUploadedDocumentWidget extends StatelessWidget {
         centerTitle: true,
       ),
       body: Center(
-        child: Padding(
+        child: Padding( 
           padding: const EdgeInsets.all(8.0),
+<<<<<<< HEAD
           child: 
           // isPdf
           //     ? SfPdfViewer.network(
@@ -26,6 +27,17 @@ class ViewUploadedDocumentWidget extends StatelessWidget {
           //       )
           //     :
                ClipRRect(
+=======
+          child: isPdf
+              ? SfPdfViewer.network(
+        
+             
+                
+                pageLayoutMode: PdfPageLayoutMode.continuous,
+                  uploadedDocument,
+                )
+              : ClipRRect(
+>>>>>>> 15f30a7d15d152d1d8047d2b4fa3ba8647e3fa3b
                   borderRadius: BorderRadius.circular(10.r),
                   child: FancyShimmerImage(
                     height: size.height * 0.7,

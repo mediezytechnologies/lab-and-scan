@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:mediezy_lab_scan/domain/core/dependency_injection/injectable.dart';
 import 'package:mediezy_lab_scan/presentation/core/app_theme.dart';
-import 'package:mediezy_lab_scan/presentation/pages/auth/splash/splash_page.dart';
 import 'presentation/core/app_bloc_providers.dart';
 
 void main() async {
@@ -30,7 +29,7 @@ class MediezyLabScan extends StatelessWidget {
               title: 'Mediezy Lab and Scan',
               theme: appThemeStyle(context),
               debugShowCheckedModeBanner: false,
-              home: const SplashPage(),
+              home: SplashPage(),
             );
           }),
     );

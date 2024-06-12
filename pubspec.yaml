@@ -59,8 +59,14 @@ dependencies:
   animation_wrappers: ^3.0.0
   fancy_shimmer_image: ^2.0.3
   file_picker: ^8.0.4
+<<<<<<< HEAD
   easy_date_timeline: ^1.1.3
 
+=======
+  syncfusion_flutter_pdfviewer: ^26.1.35
+  flutter_pdfview: ^1.3.2
+  pdfrx: ^1.0.67
+>>>>>>> 15f30a7d15d152d1d8047d2b4fa3ba8647e3fa3b
 
 dev_dependencies:
   flutter_test:

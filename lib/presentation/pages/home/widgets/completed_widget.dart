@@ -83,8 +83,8 @@ class _CompletedWidgetState extends State<CompletedWidget> {
                             onTap: () {
                               Navigator.push(
                                 context,
-                                MaterialPageRoute(
-                                  builder: (context) => CompletedDetailsPage(
+                                 CustomPageRoute(
+                                    route:CompletedDetailsPage(
                                     patientAge: state.getCompleted[index].age
                                         .toString(),
                                     patientImage: state

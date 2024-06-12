@@ -14,6 +14,7 @@ import 'package:mediezy_lab_scan/application/home/user_update/user_update_bloc.d
 import 'package:mediezy_lab_scan/presentation/common_widgets/custome_formfield_widget.dart';
 import 'package:mediezy_lab_scan/presentation/common_widgets/submit_button_widget.dart';
 import 'package:mediezy_lab_scan/presentation/pages/home/home_page.dart';
+import '../../common_widgets/custom_routing.dart';
 import '../../core/app_colors.dart';
 import '../../core/general_services.dart';
 
@@ -210,8 +211,8 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       GeneralServices.instance.showToastMessage(state.message);
                       Navigator.push(
                         context,
-                        MaterialPageRoute(
-                          builder: (context) => const HomePage(),
+                        CustomPageRoute(
+                                    route: const HomePage(),
                         ),
                       );
                     }

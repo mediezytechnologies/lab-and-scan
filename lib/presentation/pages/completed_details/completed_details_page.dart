@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+import '../../common_widgets/custom_routing.dart';
 import '../../common_widgets/data_card_widget.dart';
 import '../../common_widgets/user_section_widget.dart';
 import 'widget/view_document_widget.dart';
 import 'widget/view_uploaded_document_widget.dart';
+import 'dart:developer';
+import 'dart:async';
+import 'dart:io';
+import 'package:flutter/foundation.dart';
+import 'package:path_provider/path_provider.dart';
 
 class CompletedDetailsPage extends StatefulWidget {
   const CompletedDetailsPage(
@@ -32,6 +38,18 @@ class CompletedDetailsPage extends StatefulWidget {
 }
 
 class _CompletedDetailsPageState extends State<CompletedDetailsPage> {
+  String remotePDFpath = "";
+
+  @override
+  void initState() {
+    super.initState();
+
+    createFileOfPdfUrl().then((f) {
+      remotePDFpath = f.path;
+      log("remotePDFpath $remotePDFpath");
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -76,9 +94,10 @@ class _CompletedDetailsPageState extends State<CompletedDetailsPage> {
                           onTap: () {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(
-                                builder: (context) =>
+                               CustomPageRoute(
+                                    route:
                                     ViewUploadedDocumentWidget(
+                                  path: remotePDFpath,
                                   uploadedDocument: widget.uploadedDocument,
                                 ),
                               ),
@@ -94,5 +113,26 @@ class _CompletedDetailsPageState extends State<CompletedDetailsPage> {
         ),
       ),
     );
+  }
+
+  Future<File> createFileOfPdfUrl() async {
+    Completer<File> completer = Completer();
+
+    try {
+      final url = widget.uploadedDocument;
+      final filename = url.substring(url.lastIndexOf("/") + 1);
+      var request = await HttpClient().getUrl(Uri.parse(url));
+      var response = await request.close();
+      var bytes = await consolidateHttpClientResponseBytes(response);
+      var dir = await getApplicationDocumentsDirectory();
+      File file = File("${dir.path}/$filename");
+
+      await file.writeAsBytes(bytes, flush: true);
+      completer.complete(file);
+    } catch (e) {
+      throw Exception('Error parsing asset file!');
+    }
+
+    return completer.future;
   }
 }

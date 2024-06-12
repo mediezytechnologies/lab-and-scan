@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mediezy_lab_scan/presentation/core/app_colors.dart';
-import '../core/text_style.dart';
 
 class SubmitButtonWidget extends StatelessWidget {
   const SubmitButtonWidget(
@@ -16,22 +15,28 @@ class SubmitButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
+    final height = MediaQuery.of(context).size.height;
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
           backgroundColor: kMainColor,
           foregroundColor: kTextColor,
           elevation: 0,
-          minimumSize: Size(double.infinity, size.height * .06),
+          minimumSize: Size(double.infinity, height * .07),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10.r),
+            borderRadius: BorderRadius.circular(10),
           )),
       onPressed: onTap,
       child: loading
           ? CircularProgressIndicator(
               color: kScaffoldColor,
             )
-          : Text(buttonText, style: white14B500),
+          : Text(
+              buttonText,
+              style: TextStyle(
+                  fontSize: 18.sp,
+                  fontWeight: FontWeight.bold,
+                  color: kScaffoldColor),
+            ),
     );
   }
 }

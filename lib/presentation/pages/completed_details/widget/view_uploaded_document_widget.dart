@@ -32,7 +32,7 @@ class ViewUploadedDocumentWidget extends StatelessWidget {
         centerTitle: true,
       ),
       body: Center(
-        child: Padding(
+        child: Padding( 
           padding: const EdgeInsets.all(8.0),
           child: Container(
            

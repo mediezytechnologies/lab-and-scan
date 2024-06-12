@@ -37,7 +37,11 @@ class MediezyLabScan extends StatelessWidget {
               title: 'Mediezy Lab and Scan',
               theme: appThemeStyle(context),
               debugShowCheckedModeBanner: false,
+<<<<<<< Updated upstream
               home:  HomePage(),
+=======
+              home: const SplashPage(),
+>>>>>>> Stashed changes
             );
           }),
     );

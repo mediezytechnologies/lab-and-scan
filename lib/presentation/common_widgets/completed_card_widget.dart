@@ -2,8 +2,8 @@ import 'package:animation_wrappers/animation_wrappers.dart';
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../core/app_colors.dart';
-import '../../../core/text_style.dart';
+import '../core/app_colors.dart';
+import '../core/text_style.dart';
 
 class CompletedCardWidget extends StatelessWidget {
   const CompletedCardWidget(

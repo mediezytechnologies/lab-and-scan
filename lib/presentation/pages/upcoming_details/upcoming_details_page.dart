@@ -61,6 +61,18 @@ class _UpComingDetailsPageState extends State<UpComingDetailsPage> {
       appBar: AppBar(
         title: const Text("Upcoming details"),
         centerTitle: true,
+        leading: GestureDetector(
+          onTap: () {
+            Navigator.pop(context);
+            BlocProvider.of<UploadDocumentBloc>(context)
+                .add(const UploadDocumentEvent.selectImageFromGallery(null));
+            BlocProvider.of<UploadDocumentBloc>(context)
+                .add(const UploadDocumentEvent.selectImageFromCamera(null));
+            BlocProvider.of<UploadDocumentBloc>(context)
+                .add(const UploadDocumentEvent.selectPdfFiles(null));
+          },
+          child: const Icon(Icons.arrow_back),
+        ),
       ),
       body: Container(
         padding: const EdgeInsets.all(8),
@@ -120,6 +132,25 @@ class _UpComingDetailsPageState extends State<UpComingDetailsPage> {
                 ),
               ),
               SizedBox(height: size.height * .013),
+              BlocBuilder<UploadDocumentBloc, UploadDocumentState>(
+                builder: (context, state) {
+                  return state.selectedDocument != null
+                      ? Column(
+                          children: [
+                            GestureDetector(
+                              onTap: () {},
+                              child: const UploadCardWidget(
+                                width: double.infinity,
+                                title: "View uploaded document",
+                                icon: Icon(IconlyLight.show),
+                              ),
+                            ),
+                            SizedBox(height: size.height * .013),
+                          ],
+                        )
+                      : const SizedBox();
+                },
+              ),
               Text("Note :", style: grey13B500),
               SizedBox(height: size.height * .005),
               CustomeFormFieldWidget(
@@ -152,7 +183,7 @@ class _UpComingDetailsPageState extends State<UpComingDetailsPage> {
                   return SubmitButtonWidget(
                     buttonText: "Upload report",
                     loading: state.isLoading,
-                    onTap: () {
+                    onTap: () async {
                       BlocProvider.of<UploadDocumentBloc>(context).add(
                         UploadDocumentEvent.upload(
                             appointmentId: widget.appointmentId,
@@ -162,6 +193,7 @@ class _UpComingDetailsPageState extends State<UpComingDetailsPage> {
                             imagePath: state.selectedDocument,
                             note: noteController.text),
                       );
+                      await resetUploadedDocumetToNull();
                     },
                   );
                 },
@@ -211,6 +243,15 @@ class _UpComingDetailsPageState extends State<UpComingDetailsPage> {
           .add(UploadDocumentEvent.selectPdfFiles(imageTemporary));
       log("PDF file >>>$imageTemporary");
     } else {}
+  }
+
+  Future<void> resetUploadedDocumetToNull() async {
+    BlocProvider.of<UploadDocumentBloc>(context)
+        .add(const UploadDocumentEvent.selectImageFromGallery(null));
+    BlocProvider.of<UploadDocumentBloc>(context)
+        .add(const UploadDocumentEvent.selectImageFromCamera(null));
+    BlocProvider.of<UploadDocumentBloc>(context)
+        .add(const UploadDocumentEvent.selectPdfFiles(null));
   }
 
   @override

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:mediezy_lab_scan/application/home/get_completed/get_completed_bloc.dart';
-import 'package:mediezy_lab_scan/presentation/pages/home/widgets/completed_card_widget.dart';
+import 'package:mediezy_lab_scan/presentation/common_widgets/completed_card_widget.dart';
 import '../../../core/app_colors.dart';
 import '../../completed_details/completed_details_page.dart';
 import 'rich_text_widget.dart';

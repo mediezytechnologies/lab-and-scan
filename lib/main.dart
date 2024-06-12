@@ -21,7 +21,7 @@ class MediezyLabScan extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: AppBlocProviders.allBlocProviders,
-      child: ScreenUtilInit(  
+      child: ScreenUtilInit(
           designSize: const Size(360, 690),
           minTextAdapt: true,
           splitScreenMode: true,

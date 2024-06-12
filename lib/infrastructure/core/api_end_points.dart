@@ -8,4 +8,6 @@ class ApiEndPoints {
   static const getCompleted = "$baseUrl/getCompletedLabdetails/";
   static const updateUser = "$baseUrl/updateLabUserDetails";
   static const uploadDocument = "$baseUrl/LabDocumentUpload";
+  static const getPreviousCompleted = "$baseUrl/getPreviousCompletedLabHistory";
+  static const incompletePrevious = "$baseUrl/getPreviousUnCompletedLabHistory";
 }

@@ -11,6 +11,8 @@ import 'package:mediezy_lab_scan/presentation/core/general_services.dart';
 import 'package:mediezy_lab_scan/presentation/pages/auth/login/login_page.dart';
 import 'package:mediezy_lab_scan/presentation/pages/home/widgets/profile_card_widget.dart';
 import '../../../core/text_style.dart';
+import '../../Incompleted_previous/incompleted_previous_page.dart';
+import '../../completed_previous/completed_previous_page.dart';
 import '../../edit_profile/edit_profie_page.dart';
 
 class HomePageDrawerWidget extends StatelessWidget {
@@ -94,7 +96,6 @@ class HomePageDrawerWidget extends StatelessWidget {
                   text: 'Edit profile',
                   icon: CupertinoIcons.pen,
                   onTap: () {
-                     
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -108,13 +109,34 @@ class HomePageDrawerWidget extends StatelessWidget {
                         ),
                       ),
                     );
-                    
                   },
                 );
               }
               return Container();
             },
           ),
+          ProfileCardWidget(
+              text: 'Completed appointemts',
+              icon: CupertinoIcons.book_fill,
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const CompletedPreviousPage(),
+                  ),
+                );
+              }),
+          ProfileCardWidget(
+              text: 'Incompleted appointemts',
+              icon: CupertinoIcons.book,
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const IncompletedPreviousPage(),
+                  ),
+                );
+              }),
           ProfileCardWidget(
               text: 'Terms & conditions',
               icon: CupertinoIcons.news,

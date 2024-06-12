@@ -8,14 +8,14 @@ part of 'up_coming_labdetail.dart';
 
 UpComingLabdetail _$UpComingLabdetailFromJson(Map<String, dynamic> json) =>
     UpComingLabdetail(
-      appointmentId: json['appointment_id'] as int?,
-      labId: json['lab_id'] as int?,
+      appointmentId: (json['appointment_id'] as num?)?.toInt(),
+      labId: (json['lab_id'] as num?)?.toInt(),
       labtest: json['labtest'] as String?,
-      clinicId: json['clinic_id'] as int?,
+      clinicId: (json['clinic_id'] as num?)?.toInt(),
       clinicName: json['clinic_name'] as String?,
-      doctorId: json['doctor_id'] as int?,
+      doctorId: (json['doctor_id'] as num?)?.toInt(),
       doctorName: json['doctor_name'] as String?,
-      patientId: json['patient_id'] as int?,
+      patientId: (json['patient_id'] as num?)?.toInt(),
       firstname: json['firstname'] as String?,
       mobileNo: json['mobileNo'] as String?,
       userImage: json['user_image'] as String?,

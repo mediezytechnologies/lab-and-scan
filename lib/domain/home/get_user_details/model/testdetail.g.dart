@@ -12,7 +12,7 @@ Testdetail _$TestdetailFromJson(Map<String, dynamic> json) => Testdetail(
       location: json['location'] as String?,
       address: json['address'] as String?,
       labImage: json['lab_image'] as String?,
-      type: json['Type'] as int?,
+      type: (json['Type'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$TestdetailToJson(Testdetail instance) =>

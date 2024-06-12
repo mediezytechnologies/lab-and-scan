@@ -7,7 +7,7 @@ part of 'lab.dart';
 // **************************************************************************
 
 Lab _$LabFromJson(Map<String, dynamic> json) => Lab(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       firstname: json['firstname'] as String?,
       mobileNo: json['mobileNo'],
       email: json['email'] as String?,

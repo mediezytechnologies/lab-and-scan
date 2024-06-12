@@ -11,7 +11,7 @@ Lab _$LabFromJson(Map<String, dynamic> json) => Lab(
       mobileNo: json['mobileNo'] as String?,
       location: json['location'] as String?,
       email: json['email'] as String?,
-      userId: json['UserId'] as int?,
+      userId: (json['UserId'] as num?)?.toInt(),
       address: json['address'] as String?,
       type: json['Type'] as String?,
       labImage: json['lab_image'] as String?,
@@ -21,7 +21,7 @@ Lab _$LabFromJson(Map<String, dynamic> json) => Lab(
       createdAt: json['created_at'] == null
           ? null
           : DateTime.parse(json['created_at'] as String),
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$LabToJson(Lab instance) => <String, dynamic>{

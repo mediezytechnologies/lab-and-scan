@@ -46,7 +46,10 @@ class UploadDocumentBloc
           patientId: event.patientId,
           appointmentId: event.appointmentId,
           imagePath: event.imagePath,
-          note: event.note);
+          note: event.note,
+          isCompleteStatus: event.isCompletedStatus,
+          testId: event.testId
+          );
 
       final _state = _result.fold(
         (ErrorModel error) {

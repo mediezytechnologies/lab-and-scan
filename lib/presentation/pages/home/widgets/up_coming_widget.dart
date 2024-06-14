@@ -82,44 +82,43 @@ class _UpComingWidgetState extends State<UpComingWidget> {
                           return GestureDetector(
                             onTap: () {
                               Navigator.push(
-                                  context,
-                                  CustomPageRoute(
-                                    route: UpComingDetailsPage(
-                                      appointmentId: state
-                                          .getUpComing[index].appointmentId
-                                          .toString(),
-                                      testName: state.getUpComing[index].labtest
-                                          .toString(),
-                                      patientName: state
-                                          .getUpComing[index].firstname
-                                          .toString(),
-                                      patientImage: state
-                                          .getUpComing[index].userImage
-                                          .toString(),
-                                      patientMobileNo: state
-                                          .getUpComing[index].mobileNo
-                                          .toString(),
-                                      patientAge: state.getUpComing[index].age
-                                          .toString(),
-                                      doctorName: state
-                                          .getUpComing[index].doctorName
-                                          .toString(),
-                                      clinicName: state
-                                          .getUpComing[index].clinicName
-                                          .toString(),
-                                      labId: state.getUpComing[index].labId
-                                          .toString(),
-                                      doctorId: state
-                                          .getUpComing[index].doctorId
-                                          .toString(),
-                                      clinicId: state
-                                          .getUpComing[index].clinicId
-                                          .toString(),
-                                      patientId: state
-                                          .getUpComing[index].patientId
-                                          .toString(),
-                                    ),
-                                  ));
+                                context,
+                                CustomPageRoute(
+                                  route: UpComingDetailsPage(
+                                    appointmentId: state
+                                        .getUpComing[index].appointmentId
+                                        .toString(),
+                                    testName: state.getUpComing[index].labtests!
+                                        .toList(),
+                                    patientName: state
+                                        .getUpComing[index].firstname
+                                        .toString(),
+                                    patientImage: state
+                                        .getUpComing[index].userImage
+                                        .toString(),
+                                    patientMobileNo: state
+                                        .getUpComing[index].mobileNo
+                                        .toString(),
+                                    patientAge:
+                                        state.getUpComing[index].age.toString(),
+                                    doctorName: state
+                                        .getUpComing[index].doctorName
+                                        .toString(),
+                                    clinicName: state
+                                        .getUpComing[index].clinicName
+                                        .toString(),
+                                    labId: state.getUpComing[index].labId
+                                        .toString(),
+                                    doctorId: state.getUpComing[index].doctorId
+                                        .toString(),
+                                    clinicId: state.getUpComing[index].clinicId
+                                        .toString(),
+                                    patientId: state
+                                        .getUpComing[index].patientId
+                                        .toString(),
+                                  ),
+                                ),
+                              );
                             },
                             child: Column(
                               children: [
@@ -135,8 +134,8 @@ class _UpComingWidgetState extends State<UpComingWidget> {
                                   patientName: state
                                       .getUpComing[index].firstname
                                       .toString(),
-                                  testName: state.getUpComing[index].labtest
-                                      .toString(),
+                                  testNames: state.getUpComing[index].labtests!
+                                      .toList(),
                                 ),
                               ],
                             ),

@@ -78,7 +78,7 @@ class _LoginPageState extends State<LoginPage> {
                             return null;
                           }
                         },
-                        icon: Icons.email_outlined),
+                        preIcon: Icons.email_outlined),
                     SizedBox(height: size.height * .01),
                     BlocProvider(
                       create: (context) => getIt<LoginBloc>(),
@@ -97,7 +97,7 @@ class _LoginPageState extends State<LoginPage> {
                                 return null;
                               }
                             },
-                            icon: Icons.password,
+                            preIcon: Icons.password,
                             obscureText: state.obscureText,
                             onPressed: () {
                               BlocProvider.of<LoginBloc>(context).add(

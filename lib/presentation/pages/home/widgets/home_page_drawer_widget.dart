@@ -193,48 +193,6 @@ class HomePageDrawerWidget extends StatelessWidget {
                       (route) => false);
                 });
               }),
-          ListTile(
-            title: const Text('Edit Profile'),
-            trailing: const Icon(CupertinoIcons.pen),
-            onTap: () {},
-          ),
-          ListTile(
-            title: const Text('Feedback'),
-            trailing: const Icon(CupertinoIcons.chat_bubble),
-            onTap: () {},
-          ),
-          ListTile(
-            title: const Text('Terms & conditions'),
-            trailing: const Icon(CupertinoIcons.news),
-            onTap: () {},
-          ),
-          ListTile(
-            title: const Text('Privacy policy'),
-            trailing: const Icon(CupertinoIcons.doc_plaintext),
-            onTap: () {},
-          ),
-          ListTile(
-            title: const Text('About Us'),
-            trailing: const Icon(CupertinoIcons.info),
-            onTap: () {},
-          ),
-          ListTile(
-            title: const Text('Contact Us'),
-            trailing: const Icon(CupertinoIcons.mail),
-            onTap: () {},
-          ),
-          ListTile(
-            title: const Text('Log out'),
-            trailing: const Icon(CupertinoIcons.power),
-            onTap: () async {
-              GetLocalStorage.removeUserTokenAndUid();
-              Navigator.of(context).pushAndRemoveUntil(
-                  MaterialPageRoute(
-                    builder: (context) => const LoginPage(),
-                  ),
-                  (route) => false);
-            },
-          ),
         ],
       ),
     );

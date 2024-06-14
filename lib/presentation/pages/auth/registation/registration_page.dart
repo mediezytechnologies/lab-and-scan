@@ -106,7 +106,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       return null;
                     }
                   },
-                  icon: IconlyLight.home,
+                  preIcon: IconlyLight.home,
                 ),
                 SizedBox(height: size.height * .01),
                 CustomeFormFieldWidget(
@@ -124,7 +124,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                         return null;
                       }
                     },
-                    icon: Icons.email_outlined),
+                    preIcon: Icons.email_outlined),
                 SizedBox(height: size.height * .01),
                 CustomeFormFieldWidget(
                     controller: mobileNumberController,
@@ -140,7 +140,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                         return null;
                       }
                     },
-                    icon: Iconsax.mobile),
+                    preIcon: Iconsax.mobile),
                 SizedBox(height: size.height * .01),
                 BlocProvider(
                   create: (context) => getIt<RegisterBloc>(),
@@ -159,7 +159,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                             return null;
                           }
                         },
-                        icon: IconlyLight.password,
+                        preIcon: IconlyLight.password,
                         obscureText: state.obscureText,
                         onPressed: () {
                           BlocProvider.of<RegisterBloc>(context).add(
@@ -183,7 +183,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       return null;
                     }
                   },
-                  icon: Iconsax.map,
+                  preIcon: Iconsax.map,
                 ),
                 SizedBox(height: size.height * .01),
                 CustomeFormFieldWidget(
@@ -199,7 +199,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       return null;
                     }
                   },
-                  icon: Iconsax.location,
+                  preIcon: Iconsax.location,
                 ),
                 SizedBox(height: size.height * .01),
                 BlocProvider(

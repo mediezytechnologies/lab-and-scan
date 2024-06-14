@@ -111,9 +111,10 @@ class _IncompletedPreviousPageState extends State<IncompletedPreviousPage> {
                                         .getPreviousInompleted[index]
                                         .appointmentId
                                         .toString(),
-                                    testName: state
-                                        .getPreviousInompleted[index].labtest
-                                        .toString(),
+                                    // testName: state
+                                    //     .getPreviousInompleted[index].labtest
+                                    //     .toString(),
+                                    testName:const [],
                                     patientName: state
                                         .getPreviousInompleted[index].firstname
                                         .toString(),
@@ -163,9 +164,10 @@ class _IncompletedPreviousPageState extends State<IncompletedPreviousPage> {
                                   patientName: state
                                       .getPreviousInompleted[index].firstname
                                       .toString(),
-                                  testName: state
-                                      .getPreviousInompleted[index].labtest
-                                      .toString(),
+                                  // testNames: state
+                                  //     .getPreviousInompleted[index].labtest
+                                  //     .toString(),
+                                  testNames:const [],
                                 ),
                               ],
                             ),

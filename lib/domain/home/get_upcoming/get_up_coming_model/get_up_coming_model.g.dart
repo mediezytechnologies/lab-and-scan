@@ -1,22 +1,23 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'get_up_coming.dart';
+part of 'get_up_coming_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-GetUpComing _$GetUpComingFromJson(Map<String, dynamic> json) => GetUpComing(
+GetUpComingModel _$GetUpComingModelFromJson(Map<String, dynamic> json) =>
+    GetUpComingModel(
       status: json['status'] as bool?,
       message: json['message'] as String?,
-      upComingLabdetails: (json['UpComingLabdetails'] as List<dynamic>?)
-          ?.map((e) => UpComingLabdetail.fromJson(e as Map<String, dynamic>))
+      upComingLabDetails: (json['upComingLabDetails'] as List<dynamic>?)
+          ?.map((e) => UpComingLabDetail.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
-Map<String, dynamic> _$GetUpComingToJson(GetUpComing instance) =>
+Map<String, dynamic> _$GetUpComingModelToJson(GetUpComingModel instance) =>
     <String, dynamic>{
       'status': instance.status,
       'message': instance.message,
-      'UpComingLabdetails': instance.upComingLabdetails,
+      'upComingLabDetails': instance.upComingLabDetails,
     };

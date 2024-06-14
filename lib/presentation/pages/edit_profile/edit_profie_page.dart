@@ -143,7 +143,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   hintText: "Lab or scannig center name",
                   textInputType: TextInputType.text,
                   textInputAction: TextInputAction.done,
-                  icon: IconlyLight.home,
+                  preIcon: IconlyLight.home,
                   validator: (value) {
                     if (value!.isEmpty) {
                       return "Please enter lab name";
@@ -167,7 +167,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                         return null;
                       }
                     },
-                    icon: Iconsax.mobile),
+                    preIcon: Iconsax.mobile),
                 SizedBox(height: size.height * .01),
                 CustomeFormFieldWidget(
                   hideText: false,
@@ -182,7 +182,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       return null;
                     }
                   },
-                  icon: Iconsax.map,
+                  preIcon: Iconsax.map,
                 ),
                 SizedBox(height: size.height * .01),
                 CustomeFormFieldWidget(
@@ -198,7 +198,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       return null;
                     }
                   },
-                  icon: Iconsax.location,
+                  preIcon: Iconsax.location,
                 ),
                 SizedBox(height: size.height * .05),
                 BlocConsumer<UserUpdateBloc, UserUpdateState>(

@@ -2,6 +2,7 @@ import 'package:animation_wrappers/animation_wrappers.dart';
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../domain/home/get_upcoming/get_up_coming_model/labtest.dart';
 import '../core/app_colors.dart';
 import '../core/text_style.dart';
 
@@ -10,13 +11,13 @@ class UpComingCardWidget extends StatelessWidget {
       {super.key,
       required this.patientImage,
       required this.patientName,
-      required this.testName,
+      required this.testNames,
       required this.mobileNumber,
       required this.patientAge});
 
   final String patientImage;
   final String patientName;
-  final String testName;
+  final List<Labtest> testNames;
   final String mobileNumber;
   final String patientAge;
 
@@ -47,7 +48,7 @@ class UpComingCardWidget extends StatelessWidget {
                   : FancyShimmerImage(
                       height: size.height * .09,
                       width: size.width * .18,
-                      boxFit: BoxFit.fill,
+                      boxFit: BoxFit.cover,
                       errorWidget: const Image(
                         image: AssetImage("assets/icons/profile pic.png"),
                       ),
@@ -69,12 +70,11 @@ class UpComingCardWidget extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                width: size.width * .7,
-                child: Text(
-                  testName,
-                  style: grey13B500,
-                ),
-              ),
+                  width: size.width * .7,
+                  child: Text(
+                    "${testNames.first.labtestName}...",
+                    style: grey12B500,
+                  )),
               Row(
                 children: [
                   Row(
@@ -105,7 +105,7 @@ class UpComingCardWidget extends StatelessWidget {
                     ],
                   ),
                 ],
-              )
+              ),
             ],
           ),
         ],

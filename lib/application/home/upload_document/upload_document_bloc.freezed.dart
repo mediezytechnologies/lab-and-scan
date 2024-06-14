@@ -23,6 +23,8 @@ mixin _$UploadDocumentEvent {
             String clinicId,
             String patientId,
             String appointmentId,
+            int testId,
+            int isCompletedStatus,
             String? note,
             String? imagePath)
         upload,
@@ -33,8 +35,15 @@ mixin _$UploadDocumentEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String doctorId, String clinicId, String patientId,
-            String appointmentId, String? note, String? imagePath)?
+    TResult? Function(
+            String doctorId,
+            String clinicId,
+            String patientId,
+            String appointmentId,
+            int testId,
+            int isCompletedStatus,
+            String? note,
+            String? imagePath)?
         upload,
     TResult? Function(String? imageFromGallery)? selectImageFromGallery,
     TResult? Function(String? imageFromCamera)? selectImageFromCamera,
@@ -43,8 +52,15 @@ mixin _$UploadDocumentEvent {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String doctorId, String clinicId, String patientId,
-            String appointmentId, String? note, String? imagePath)?
+    TResult Function(
+            String doctorId,
+            String clinicId,
+            String patientId,
+            String appointmentId,
+            int testId,
+            int isCompletedStatus,
+            String? note,
+            String? imagePath)?
         upload,
     TResult Function(String? imageFromGallery)? selectImageFromGallery,
     TResult Function(String? imageFromCamera)? selectImageFromCamera,
@@ -110,6 +126,8 @@ abstract class _$$UploadImplCopyWith<$Res> {
       String clinicId,
       String patientId,
       String appointmentId,
+      int testId,
+      int isCompletedStatus,
       String? note,
       String? imagePath});
 }
@@ -129,6 +147,8 @@ class __$$UploadImplCopyWithImpl<$Res>
     Object? clinicId = null,
     Object? patientId = null,
     Object? appointmentId = null,
+    Object? testId = null,
+    Object? isCompletedStatus = null,
     Object? note = freezed,
     Object? imagePath = freezed,
   }) {
@@ -149,6 +169,14 @@ class __$$UploadImplCopyWithImpl<$Res>
           ? _value.appointmentId
           : appointmentId // ignore: cast_nullable_to_non_nullable
               as String,
+      testId: null == testId
+          ? _value.testId
+          : testId // ignore: cast_nullable_to_non_nullable
+              as int,
+      isCompletedStatus: null == isCompletedStatus
+          ? _value.isCompletedStatus
+          : isCompletedStatus // ignore: cast_nullable_to_non_nullable
+              as int,
       note: freezed == note
           ? _value.note
           : note // ignore: cast_nullable_to_non_nullable
@@ -169,6 +197,8 @@ class _$UploadImpl implements _Upload {
       required this.clinicId,
       required this.patientId,
       required this.appointmentId,
+      required this.testId,
+      required this.isCompletedStatus,
       this.note,
       this.imagePath});
 
@@ -181,13 +211,17 @@ class _$UploadImpl implements _Upload {
   @override
   final String appointmentId;
   @override
+  final int testId;
+  @override
+  final int isCompletedStatus;
+  @override
   final String? note;
   @override
   final String? imagePath;
 
   @override
   String toString() {
-    return 'UploadDocumentEvent.upload(doctorId: $doctorId, clinicId: $clinicId, patientId: $patientId, appointmentId: $appointmentId, note: $note, imagePath: $imagePath)';
+    return 'UploadDocumentEvent.upload(doctorId: $doctorId, clinicId: $clinicId, patientId: $patientId, appointmentId: $appointmentId, testId: $testId, isCompletedStatus: $isCompletedStatus, note: $note, imagePath: $imagePath)';
   }
 
   @override
@@ -203,6 +237,9 @@ class _$UploadImpl implements _Upload {
                 other.patientId == patientId) &&
             (identical(other.appointmentId, appointmentId) ||
                 other.appointmentId == appointmentId) &&
+            (identical(other.testId, testId) || other.testId == testId) &&
+            (identical(other.isCompletedStatus, isCompletedStatus) ||
+                other.isCompletedStatus == isCompletedStatus) &&
             (identical(other.note, note) || other.note == note) &&
             (identical(other.imagePath, imagePath) ||
                 other.imagePath == imagePath));
@@ -210,7 +247,7 @@ class _$UploadImpl implements _Upload {
 
   @override
   int get hashCode => Object.hash(runtimeType, doctorId, clinicId, patientId,
-      appointmentId, note, imagePath);
+      appointmentId, testId, isCompletedStatus, note, imagePath);
 
   @JsonKey(ignore: true)
   @override
@@ -226,6 +263,8 @@ class _$UploadImpl implements _Upload {
             String clinicId,
             String patientId,
             String appointmentId,
+            int testId,
+            int isCompletedStatus,
             String? note,
             String? imagePath)
         upload,
@@ -233,29 +272,43 @@ class _$UploadImpl implements _Upload {
     required TResult Function(String? imageFromCamera) selectImageFromCamera,
     required TResult Function(String? pdfFromFiles) selectPdfFiles,
   }) {
-    return upload(
-        doctorId, clinicId, patientId, appointmentId, note, imagePath);
+    return upload(doctorId, clinicId, patientId, appointmentId, testId,
+        isCompletedStatus, note, imagePath);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String doctorId, String clinicId, String patientId,
-            String appointmentId, String? note, String? imagePath)?
+    TResult? Function(
+            String doctorId,
+            String clinicId,
+            String patientId,
+            String appointmentId,
+            int testId,
+            int isCompletedStatus,
+            String? note,
+            String? imagePath)?
         upload,
     TResult? Function(String? imageFromGallery)? selectImageFromGallery,
     TResult? Function(String? imageFromCamera)? selectImageFromCamera,
     TResult? Function(String? pdfFromFiles)? selectPdfFiles,
   }) {
-    return upload?.call(
-        doctorId, clinicId, patientId, appointmentId, note, imagePath);
+    return upload?.call(doctorId, clinicId, patientId, appointmentId, testId,
+        isCompletedStatus, note, imagePath);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String doctorId, String clinicId, String patientId,
-            String appointmentId, String? note, String? imagePath)?
+    TResult Function(
+            String doctorId,
+            String clinicId,
+            String patientId,
+            String appointmentId,
+            int testId,
+            int isCompletedStatus,
+            String? note,
+            String? imagePath)?
         upload,
     TResult Function(String? imageFromGallery)? selectImageFromGallery,
     TResult Function(String? imageFromCamera)? selectImageFromCamera,
@@ -263,8 +316,8 @@ class _$UploadImpl implements _Upload {
     required TResult orElse(),
   }) {
     if (upload != null) {
-      return upload(
-          doctorId, clinicId, patientId, appointmentId, note, imagePath);
+      return upload(doctorId, clinicId, patientId, appointmentId, testId,
+          isCompletedStatus, note, imagePath);
     }
     return orElse();
   }
@@ -315,6 +368,8 @@ abstract class _Upload implements UploadDocumentEvent {
       required final String clinicId,
       required final String patientId,
       required final String appointmentId,
+      required final int testId,
+      required final int isCompletedStatus,
       final String? note,
       final String? imagePath}) = _$UploadImpl;
 
@@ -322,6 +377,8 @@ abstract class _Upload implements UploadDocumentEvent {
   String get clinicId;
   String get patientId;
   String get appointmentId;
+  int get testId;
+  int get isCompletedStatus;
   String? get note;
   String? get imagePath;
   @JsonKey(ignore: true)
@@ -403,6 +460,8 @@ class _$SelectImageFromGalleryImpl implements _SelectImageFromGallery {
             String clinicId,
             String patientId,
             String appointmentId,
+            int testId,
+            int isCompletedStatus,
             String? note,
             String? imagePath)
         upload,
@@ -416,8 +475,15 @@ class _$SelectImageFromGalleryImpl implements _SelectImageFromGallery {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String doctorId, String clinicId, String patientId,
-            String appointmentId, String? note, String? imagePath)?
+    TResult? Function(
+            String doctorId,
+            String clinicId,
+            String patientId,
+            String appointmentId,
+            int testId,
+            int isCompletedStatus,
+            String? note,
+            String? imagePath)?
         upload,
     TResult? Function(String? imageFromGallery)? selectImageFromGallery,
     TResult? Function(String? imageFromCamera)? selectImageFromCamera,
@@ -429,8 +495,15 @@ class _$SelectImageFromGalleryImpl implements _SelectImageFromGallery {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String doctorId, String clinicId, String patientId,
-            String appointmentId, String? note, String? imagePath)?
+    TResult Function(
+            String doctorId,
+            String clinicId,
+            String patientId,
+            String appointmentId,
+            int testId,
+            int isCompletedStatus,
+            String? note,
+            String? imagePath)?
         upload,
     TResult Function(String? imageFromGallery)? selectImageFromGallery,
     TResult Function(String? imageFromCamera)? selectImageFromCamera,
@@ -565,6 +638,8 @@ class _$SelectImageFromCameraImpl implements _SelectImageFromCamera {
             String clinicId,
             String patientId,
             String appointmentId,
+            int testId,
+            int isCompletedStatus,
             String? note,
             String? imagePath)
         upload,
@@ -578,8 +653,15 @@ class _$SelectImageFromCameraImpl implements _SelectImageFromCamera {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String doctorId, String clinicId, String patientId,
-            String appointmentId, String? note, String? imagePath)?
+    TResult? Function(
+            String doctorId,
+            String clinicId,
+            String patientId,
+            String appointmentId,
+            int testId,
+            int isCompletedStatus,
+            String? note,
+            String? imagePath)?
         upload,
     TResult? Function(String? imageFromGallery)? selectImageFromGallery,
     TResult? Function(String? imageFromCamera)? selectImageFromCamera,
@@ -591,8 +673,15 @@ class _$SelectImageFromCameraImpl implements _SelectImageFromCamera {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String doctorId, String clinicId, String patientId,
-            String appointmentId, String? note, String? imagePath)?
+    TResult Function(
+            String doctorId,
+            String clinicId,
+            String patientId,
+            String appointmentId,
+            int testId,
+            int isCompletedStatus,
+            String? note,
+            String? imagePath)?
         upload,
     TResult Function(String? imageFromGallery)? selectImageFromGallery,
     TResult Function(String? imageFromCamera)? selectImageFromCamera,
@@ -726,6 +815,8 @@ class _$SelectPdfFilesImpl implements _SelectPdfFiles {
             String clinicId,
             String patientId,
             String appointmentId,
+            int testId,
+            int isCompletedStatus,
             String? note,
             String? imagePath)
         upload,
@@ -739,8 +830,15 @@ class _$SelectPdfFilesImpl implements _SelectPdfFiles {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String doctorId, String clinicId, String patientId,
-            String appointmentId, String? note, String? imagePath)?
+    TResult? Function(
+            String doctorId,
+            String clinicId,
+            String patientId,
+            String appointmentId,
+            int testId,
+            int isCompletedStatus,
+            String? note,
+            String? imagePath)?
         upload,
     TResult? Function(String? imageFromGallery)? selectImageFromGallery,
     TResult? Function(String? imageFromCamera)? selectImageFromCamera,
@@ -752,8 +850,15 @@ class _$SelectPdfFilesImpl implements _SelectPdfFiles {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String doctorId, String clinicId, String patientId,
-            String appointmentId, String? note, String? imagePath)?
+    TResult Function(
+            String doctorId,
+            String clinicId,
+            String patientId,
+            String appointmentId,
+            int testId,
+            int isCompletedStatus,
+            String? note,
+            String? imagePath)?
         upload,
     TResult Function(String? imageFromGallery)? selectImageFromGallery,
     TResult Function(String? imageFromCamera)? selectImageFromCamera,

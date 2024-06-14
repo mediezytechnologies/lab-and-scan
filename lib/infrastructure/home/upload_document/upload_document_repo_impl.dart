@@ -18,19 +18,12 @@ class UploadDocumentRepoImpl implements UploadDocumentRepository {
       required String doctorId,
       required String clinicId,
       required String patientId,
-      required String appointmentId}) async {
+      required String appointmentId,
+      required int testId,
+      required int isCompleteStatus}) async {
     String? id = GetLocalStorage.getUserIdAndToken("id");
     String? token = GetLocalStorage.getUserIdAndToken('token');
     try {
-      //MultipartFile? multipartFile;
-      // if (imagePath != null) {
-      //   multipartFile = await MultipartFile.fromFile(
-      //     imagePath,
-      //     filename: imagePath,
-      //     contentType: MediaType('image', 'jpg'),
-      //   );
-      // }
-
       MultipartFile? multipartFile;
       if (imagePath != null) {
         final fileExtension = imagePath.split('.').last;
@@ -47,8 +40,10 @@ class UploadDocumentRepoImpl implements UploadDocumentRepository {
         'doctor_id': doctorId,
         'clinic_id': clinicId,
         'patient_id': patientId,
-        'appointments_id': appointmentId,
+        'appointment_id': appointmentId,
         'notes': note,
+        'labtest_id': testId,
+        'status': isCompleteStatus,
         if (multipartFile != null) 'document_upload': multipartFile,
       });
       for (var field in formData.fields) {

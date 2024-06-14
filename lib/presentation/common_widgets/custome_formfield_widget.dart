@@ -14,12 +14,14 @@ class CustomeFormFieldWidget extends StatelessWidget {
       required this.textInputType,
       required this.textInputAction,
       this.validator,
-      this.icon,
+      this.preIcon,
       this.obscureText = false,
       this.hideText = false,
       this.maxLine = 1,
       this.maxLength,
-      this.onPressed});
+      this.onPressed,
+      this.autoFocus= false
+      });
 
   final TextEditingController controller;
   final String hintText;
@@ -28,9 +30,10 @@ class CustomeFormFieldWidget extends StatelessWidget {
   FormFieldValidator? validator;
   bool hideText;
   bool obscureText;
-  IconData? icon;
+  IconData? preIcon;
   int? maxLine;
   int? maxLength;
+  bool autoFocus;
   void Function()? onPressed;
 
   @override
@@ -38,6 +41,7 @@ class CustomeFormFieldWidget extends StatelessWidget {
     final height = MediaQuery.of(context).size.height;
     final width = MediaQuery.of(context).size.width;
     return TextFormField(
+      autofocus: autoFocus,
       style: black12B500,
       maxLines: maxLine,
       maxLength: maxLength,
@@ -49,11 +53,13 @@ class CustomeFormFieldWidget extends StatelessWidget {
       obscureText: obscureText,
       decoration: InputDecoration(
         counterText: "",
-        prefixIcon: Icon(
-          icon,
-          color: kMainColor,
-          size: 20.sp,
-        ),
+        prefixIcon:preIcon != null
+            ? Icon(
+                preIcon,
+                color: kMainColor,
+                size: 20.sp,
+              )
+            : null,
         suffixIcon: hideText
             ? GestureDetector(
                 onTap: onPressed,
@@ -73,11 +79,11 @@ class CustomeFormFieldWidget extends StatelessWidget {
         filled: true,
         fillColor: kCardColor,
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(4.r),
+          borderRadius: BorderRadius.circular(10.r),
           borderSide: BorderSide.none,
         ),
         contentPadding: EdgeInsets.symmetric(
-            horizontal: width * .010, vertical: height * .011),
+            horizontal: width * .02, vertical: height * .011),
       ),
     );
   }

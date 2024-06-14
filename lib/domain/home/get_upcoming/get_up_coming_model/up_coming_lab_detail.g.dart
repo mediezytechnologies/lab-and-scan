@@ -1,16 +1,15 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'up_coming_labdetail.dart';
+part of 'up_coming_lab_detail.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-UpComingLabdetail _$UpComingLabdetailFromJson(Map<String, dynamic> json) =>
-    UpComingLabdetail(
+UpComingLabDetail _$UpComingLabDetailFromJson(Map<String, dynamic> json) =>
+    UpComingLabDetail(
       appointmentId: (json['appointment_id'] as num?)?.toInt(),
       labId: (json['lab_id'] as num?)?.toInt(),
-      labtest: json['labtest'] as String?,
       clinicId: (json['clinic_id'] as num?)?.toInt(),
       clinicName: json['clinic_name'] as String?,
       doctorId: (json['doctor_id'] as num?)?.toInt(),
@@ -20,13 +19,15 @@ UpComingLabdetail _$UpComingLabdetailFromJson(Map<String, dynamic> json) =>
       mobileNo: json['mobileNo'] as String?,
       userImage: json['user_image'] as String?,
       age: json['age'] as String?,
+      labtests: (json['labtests'] as List<dynamic>?)
+          ?.map((e) => Labtest.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
-Map<String, dynamic> _$UpComingLabdetailToJson(UpComingLabdetail instance) =>
+Map<String, dynamic> _$UpComingLabDetailToJson(UpComingLabDetail instance) =>
     <String, dynamic>{
       'appointment_id': instance.appointmentId,
       'lab_id': instance.labId,
-      'labtest': instance.labtest,
       'clinic_id': instance.clinicId,
       'clinic_name': instance.clinicName,
       'doctor_id': instance.doctorId,
@@ -36,4 +37,5 @@ Map<String, dynamic> _$UpComingLabdetailToJson(UpComingLabdetail instance) =>
       'mobileNo': instance.mobileNo,
       'user_image': instance.userImage,
       'age': instance.age,
+      'labtests': instance.labtests,
     };

@@ -7,6 +7,8 @@ class UploadDocumentEvent with _$UploadDocumentEvent {
     required String clinicId,
     required String patientId,
     required String appointmentId,
+    required int testId,
+    required int isCompletedStatus,
     String? note,
     String? imagePath,
   }) = _Upload;

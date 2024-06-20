@@ -12,15 +12,15 @@ import '../../core/token/token.dart';
 @LazySingleton(as: UploadDocumentRepository)
 class UploadDocumentRepoImpl implements UploadDocumentRepository {
   @override
-  Future<Either<ErrorModel, UploadDocumentModel>> updateUserRepo(
-      {String? imagePath,
-      String? note,
-      required String doctorId,
-      required String clinicId,
-      required String patientId,
-      required String appointmentId,
-      required int testId,
-      required int isCompleteStatus}) async {
+  Future<Either<ErrorModel, UploadDocumentModel>> updateUserRepo({
+    String? imagePath,
+    String? note,
+    required String doctorId,
+    required String clinicId,
+    required String patientId,
+    required String appointmentId,
+    required List<int> testIds,
+  }) async {
     String? id = GetLocalStorage.getUserIdAndToken("id");
     String? token = GetLocalStorage.getUserIdAndToken('token');
     try {
@@ -42,8 +42,7 @@ class UploadDocumentRepoImpl implements UploadDocumentRepository {
         'patient_id': patientId,
         'appointment_id': appointmentId,
         'notes': note,
-        'labtest_id': testId,
-        'status': isCompleteStatus,
+        'labtest_id[]': testIds,
         if (multipartFile != null) 'document_upload': multipartFile,
       });
       for (var field in formData.fields) {

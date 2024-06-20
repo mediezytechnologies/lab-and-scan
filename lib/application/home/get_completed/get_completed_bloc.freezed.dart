@@ -170,7 +170,7 @@ mixin _$GetCompletedState {
   bool get isError => throw _privateConstructorUsedError;
   String get message => throw _privateConstructorUsedError;
   bool get status => throw _privateConstructorUsedError;
-  List<CompletedLabdetail> get getCompleted =>
+  List<CompletedLabDetail> get getCompleted =>
       throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -189,7 +189,7 @@ abstract class $GetCompletedStateCopyWith<$Res> {
       bool isError,
       String message,
       bool status,
-      List<CompletedLabdetail> getCompleted});
+      List<CompletedLabDetail> getCompleted});
 }
 
 /// @nodoc
@@ -231,7 +231,7 @@ class _$GetCompletedStateCopyWithImpl<$Res, $Val extends GetCompletedState>
       getCompleted: null == getCompleted
           ? _value.getCompleted
           : getCompleted // ignore: cast_nullable_to_non_nullable
-              as List<CompletedLabdetail>,
+              as List<CompletedLabDetail>,
     ) as $Val);
   }
 }
@@ -249,7 +249,7 @@ abstract class _$$InitialImplCopyWith<$Res>
       bool isError,
       String message,
       bool status,
-      List<CompletedLabdetail> getCompleted});
+      List<CompletedLabDetail> getCompleted});
 }
 
 /// @nodoc
@@ -289,7 +289,7 @@ class __$$InitialImplCopyWithImpl<$Res>
       getCompleted: null == getCompleted
           ? _value._getCompleted
           : getCompleted // ignore: cast_nullable_to_non_nullable
-              as List<CompletedLabdetail>,
+              as List<CompletedLabDetail>,
     ));
   }
 }
@@ -302,7 +302,7 @@ class _$InitialImpl implements _Initial {
       required this.isError,
       required this.message,
       required this.status,
-      required final List<CompletedLabdetail> getCompleted})
+      required final List<CompletedLabDetail> getCompleted})
       : _getCompleted = getCompleted;
 
   @override
@@ -313,9 +313,9 @@ class _$InitialImpl implements _Initial {
   final String message;
   @override
   final bool status;
-  final List<CompletedLabdetail> _getCompleted;
+  final List<CompletedLabDetail> _getCompleted;
   @override
-  List<CompletedLabdetail> get getCompleted {
+  List<CompletedLabDetail> get getCompleted {
     if (_getCompleted is EqualUnmodifiableListView) return _getCompleted;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_getCompleted);
@@ -357,7 +357,7 @@ abstract class _Initial implements GetCompletedState {
       required final bool isError,
       required final String message,
       required final bool status,
-      required final List<CompletedLabdetail> getCompleted}) = _$InitialImpl;
+      required final List<CompletedLabDetail> getCompleted}) = _$InitialImpl;
 
   @override
   bool get isLoading;
@@ -368,7 +368,7 @@ abstract class _Initial implements GetCompletedState {
   @override
   bool get status;
   @override
-  List<CompletedLabdetail> get getCompleted;
+  List<CompletedLabDetail> get getCompleted;
   @override
   @JsonKey(ignore: true)
   _$$InitialImplCopyWith<_$InitialImpl> get copyWith =>

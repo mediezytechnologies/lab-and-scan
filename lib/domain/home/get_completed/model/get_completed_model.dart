@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
-import 'completed_labdetail.dart';
+import 'completed_lab_detail.dart';
 
 part 'get_completed_model.g.dart';
 
@@ -8,10 +8,9 @@ part 'get_completed_model.g.dart';
 class GetCompletedModel {
 	bool? status;
 	String? message;
-	@JsonKey(name: 'CompletedLabdetails') 
-	List<CompletedLabdetail>? completedLabdetails;
+	List<CompletedLabDetail>? completedLabDetails;
 
-	GetCompletedModel({this.status, this.message, this.completedLabdetails});
+	GetCompletedModel({this.status, this.message, this.completedLabDetails});
 
 	factory GetCompletedModel.fromJson(Map<String, dynamic> json) {
 		return _$GetCompletedModelFromJson(json);

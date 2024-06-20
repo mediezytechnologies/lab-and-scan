@@ -1,27 +1,27 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'incompleted_previous_model.dart';
+part of 'in_completed_previous_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-IncompletedPreviousModel _$IncompletedPreviousModelFromJson(
+InCompletedPreviousModel _$InCompletedPreviousModelFromJson(
         Map<String, dynamic> json) =>
-    IncompletedPreviousModel(
+    InCompletedPreviousModel(
       status: json['status'] as bool?,
       message: json['message'] as String?,
-      previousUnCompletedLabDetails: (json['PreviousUnCompletedLabDetails']
+      previousUnCompletedLabDetails: (json['previousUnCompletedLabDetails']
               as List<dynamic>?)
           ?.map((e) =>
               PreviousUnCompletedLabDetail.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
-Map<String, dynamic> _$IncompletedPreviousModelToJson(
-        IncompletedPreviousModel instance) =>
+Map<String, dynamic> _$InCompletedPreviousModelToJson(
+        InCompletedPreviousModel instance) =>
     <String, dynamic>{
       'status': instance.status,
       'message': instance.message,
-      'PreviousUnCompletedLabDetails': instance.previousUnCompletedLabDetails,
+      'previousUnCompletedLabDetails': instance.previousUnCompletedLabDetails,
     };

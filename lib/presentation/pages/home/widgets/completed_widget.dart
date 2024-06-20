@@ -84,8 +84,10 @@ class _CompletedWidgetState extends State<CompletedWidget> {
                             onTap: () {
                               Navigator.push(
                                 context,
-                                 CustomPageRoute(
-                                    route:CompletedDetailsPage(
+                                CustomPageRoute(
+                                  route: CompletedDetailsPage(
+                                    tests: state.getCompleted[index].documents!
+                                        .toList(),
                                     patientAge: state.getCompleted[index].age
                                         .toString(),
                                     patientImage: state
@@ -103,13 +105,6 @@ class _CompletedWidgetState extends State<CompletedWidget> {
                                     doctorName: state
                                         .getCompleted[index].doctorName
                                         .toString(),
-                                    note: state.getCompleted[index].notes
-                                        .toString(),
-                                    uploadedDocument: state
-                                        .getCompleted[index].documentUpload
-                                        .toString(),
-                                    testName: state.getCompleted[index].labtest
-                                        .toString(),
                                   ),
                                 ),
                               );
@@ -123,11 +118,10 @@ class _CompletedWidgetState extends State<CompletedWidget> {
                                   .toString(),
                               patientName: state.getCompleted[index].firstname
                                   .toString(),
-                              testName:
-                                  state.getCompleted[index].labtest.toString(),
                               doctorName: state.getCompleted[index].doctorName
                                   .toString(),
-                              note: state.getCompleted[index].notes.toString(),
+                              tests:
+                                  state.getCompleted[index].documents!.toList(),
                             ),
                           );
                         },

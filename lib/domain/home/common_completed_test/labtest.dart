@@ -8,10 +8,8 @@ class Labtest {
 	int? labtestId;
 	@JsonKey(name: 'labtest_name') 
 	String? labtestName;
-	@JsonKey(name: 'is_completed') 
-	int? isCompleted;
 
-	Labtest({this.labtestId, this.labtestName, this.isCompleted});
+	Labtest({this.labtestId, this.labtestName});
 
 	factory Labtest.fromJson(Map<String, dynamic> json) {
 		return _$LabtestFromJson(json);

@@ -7,7 +7,7 @@ class GetCompletedState with _$GetCompletedState {
     required bool isError,
     required String message,
     required bool status,
-    required List<CompletedLabdetail> getCompleted,
+    required List<CompletedLabDetail> getCompleted,
   }) = _Initial;
 
   factory GetCompletedState.initial() => const GetCompletedState(

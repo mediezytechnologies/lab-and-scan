@@ -21,12 +21,14 @@ class TabBarWidget extends StatelessWidget {
       child: TabBar(
         controller: tabController,
         physics: const ClampingScrollPhysics(),
-        padding: EdgeInsets.only(
-            top: 10.h, left: 10.w, right: 10.w, bottom: 10.h),
+        padding:
+            EdgeInsets.only(top: 10.h, left: 10.w, right: 10.w, bottom: 10.h),
         unselectedLabelColor: kTextColor,
         unselectedLabelStyle: black12B500,
         labelStyle: white13B500,
         indicatorSize: TabBarIndicatorSize.tab,
+        indicatorWeight: 0,
+        dividerColor: Colors.transparent,
         indicator: BoxDecoration(
             borderRadius: BorderRadius.circular(10.r), color: kMainColor),
         tabs: [

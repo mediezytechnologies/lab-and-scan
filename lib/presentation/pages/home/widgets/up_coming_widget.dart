@@ -123,6 +123,7 @@ class _UpComingWidgetState extends State<UpComingWidget> {
                             child: Column(
                               children: [
                                 UpComingCardWidget(
+                                  pensingShow: false,
                                   mobileNumber: state
                                       .getUpComing[index].mobileNo
                                       .toString(),

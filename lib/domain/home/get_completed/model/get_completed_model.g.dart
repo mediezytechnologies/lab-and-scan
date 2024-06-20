@@ -10,8 +10,8 @@ GetCompletedModel _$GetCompletedModelFromJson(Map<String, dynamic> json) =>
     GetCompletedModel(
       status: json['status'] as bool?,
       message: json['message'] as String?,
-      completedLabdetails: (json['CompletedLabdetails'] as List<dynamic>?)
-          ?.map((e) => CompletedLabdetail.fromJson(e as Map<String, dynamic>))
+      completedLabDetails: (json['completedLabDetails'] as List<dynamic>?)
+          ?.map((e) => CompletedLabDetail.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
@@ -19,5 +19,5 @@ Map<String, dynamic> _$GetCompletedModelToJson(GetCompletedModel instance) =>
     <String, dynamic>{
       'status': instance.status,
       'message': instance.message,
-      'CompletedLabdetails': instance.completedLabdetails,
+      'completedLabDetails': instance.completedLabDetails,
     };

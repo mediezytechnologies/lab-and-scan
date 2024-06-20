@@ -1,4 +1,5 @@
 import 'package:animation_wrappers/animations/faded_scale_animation.dart';
+import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,9 +11,8 @@ import 'package:mediezy_lab_scan/presentation/core/general_services.dart';
 import 'package:mediezy_lab_scan/presentation/pages/auth/login/login_page.dart';
 import '../../Incompleted_previous/incompleted_previous_page.dart';
 import '../../completed_previous/completed_previous_page.dart';
+import '../../contact_us/contact_us_page.dart';
 import '../../edit_profile/edit_profie_page.dart';
-import 'package:shimmer/shimmer.dart';
-
 import 'profie_card_widdet.dart';
 
 class HomePageDrawerWidget extends StatelessWidget {
@@ -55,48 +55,21 @@ class HomePageDrawerWidget extends StatelessWidget {
                             scaleDuration: const Duration(milliseconds: 400),
                             fadeDuration: const Duration(milliseconds: 400),
                             child: ClipRRect(
-                              borderRadius: BorderRadius.circular(50),
-                              child: (state.userdetails.first.labImage == null
+                              borderRadius: BorderRadius.circular(50.r),
+                              child: state.userdetails.first.labImage == null
                                   ? Image.asset(
                                       "assets/icons/profile pic.png",
                                       color: kMainColor,
                                     )
-                                  : Image.network(
-                                      state.userdetails.first.labImage
-                                          .toString(),
-                                      filterQuality: FilterQuality.low,
-                                      fit: BoxFit.cover,
-                                      errorBuilder:
-                                          (context, error, stackTrace) =>
-                                              Padding(
-                                        padding: const EdgeInsets.all(3.0),
-                                        child: Image.asset(
-                                          "assets/icons/profile pic.png",
-                                          color: kMainColor,
-                                        ),
+                                  : FancyShimmerImage(
+                                      boxFit: BoxFit.cover,
+                                      errorWidget: const Image(
+                                        image: AssetImage(
+                                            "assets/icons/profile pic.png"),
                                       ),
-                                      loadingBuilder: (BuildContext context,
-                                          Widget child,
-                                          ImageChunkEvent? loadingProgress) {
-                                        if (loadingProgress == null) {
-                                          return child;
-                                        }
-                                        return Center(
-                                          child: Shimmer.fromColors(
-                                            baseColor: kShimmerBaseColor,
-                                            highlightColor:
-                                                kShimmerHighlightColor,
-                                            child: Container(
-                                              decoration: BoxDecoration(
-                                                color: Colors.white,
-                                                borderRadius:
-                                                    BorderRadius.circular(80.r),
-                                              ),
-                                            ),
-                                          ),
-                                        );
-                                      },
-                                    )),
+                                      imageUrl: state.userdetails.first.labImage
+                                          .toString(),
+                                    ),
                             ),
                           ),
                         ),
@@ -178,7 +151,16 @@ class HomePageDrawerWidget extends StatelessWidget {
           ProfileCardWidget(
               text: 'About us', icon: CupertinoIcons.info, onTap: () {}),
           ProfileCardWidget(
-              text: 'Contact us', icon: CupertinoIcons.mail, onTap: () {}),
+              text: 'Contact us',
+              icon: CupertinoIcons.mail,
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const ContactUsPage(),
+                  ),
+                );
+              }),
           ProfileCardWidget(
               text: 'Log out',
               icon: CupertinoIcons.power,

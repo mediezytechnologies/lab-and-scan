@@ -4,8 +4,8 @@ import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:mediezy_lab_scan/domain/core/error/error_model.dart';
 import 'package:mediezy_lab_scan/domain/home/incompleted_previous/incompleted_previous_repository.dart';
-import '../../../domain/home/incompleted_previous/model/incompleted_previous_model.dart';
-import '../../../domain/home/incompleted_previous/model/previous_un_completed_lab_detail.dart';
+import '../../../domain/home/incompleted_previous/model/in_completed_previous_model/in_completed_previous_model.dart';
+import '../../../domain/home/incompleted_previous/model/in_completed_previous_model/previous_un_completed_lab_detail.dart';
 import '../../core/api_end_points.dart';
 import '../../core/token/token.dart';
 
@@ -29,7 +29,7 @@ class IncompletedPreviousRepoImpl implements IncompletedPreviousRepository {
       );
 
       if (response.statusCode == 200 || response.statusCode == 201) {
-        final result = IncompletedPreviousModel.fromJson(response.data);
+        final result = InCompletedPreviousModel.fromJson(response.data);
 
         return Right(result.previousUnCompletedLabDetails!);
       } else {

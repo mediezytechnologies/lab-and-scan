@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:iconly/iconly.dart';
 import 'package:mediezy_lab_scan/application/auth/login/login_bloc.dart';
 import 'package:mediezy_lab_scan/domain/core/dependency_injection/injectable.dart';
 import 'package:mediezy_lab_scan/presentation/core/app_colors.dart';
@@ -78,7 +79,7 @@ class _LoginPageState extends State<LoginPage> {
                             return null;
                           }
                         },
-                        preIcon: Icons.email_outlined),
+                        preIcon: IconlyLight.message),
                     SizedBox(height: size.height * .01),
                     BlocProvider(
                       create: (context) => getIt<LoginBloc>(),

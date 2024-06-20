@@ -10,7 +10,6 @@ abstract class UploadDocumentRepository {
     required String clinicId,
     required String patientId,
     required String appointmentId,
-    required int testId,
-    required int isCompleteStatus,
+    required List<int> testIds,
   });
 }

@@ -3,8 +3,8 @@ import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:mediezy_lab_scan/domain/core/error/error_model.dart';
 import 'package:mediezy_lab_scan/domain/home/get_upcoming/get_upcoming_repository.dart';
-import '../../../domain/home/get_upcoming/get_up_coming_model/get_up_coming_model.dart';
-import '../../../domain/home/get_upcoming/get_up_coming_model/up_coming_lab_detail.dart';
+import '../../../domain/home/get_upcoming/model/get_up_coming_model.dart';
+import '../../../domain/home/get_upcoming/model/up_coming_lab_detail.dart';
 import '../../core/api_end_points.dart';
 import '../../core/token/token.dart';
 

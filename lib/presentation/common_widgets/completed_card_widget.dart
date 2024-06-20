@@ -2,27 +2,27 @@ import 'package:animation_wrappers/animation_wrappers.dart';
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../domain/home/common_completed_test/document.dart';
 import '../core/app_colors.dart';
 import '../core/text_style.dart';
 
 class CompletedCardWidget extends StatelessWidget {
-  const CompletedCardWidget(
-      {super.key,
-      required this.patientImage,
-      required this.patientName,
-      required this.testName,
-      required this.mobileNumber,
-      required this.patientAge,
-      required this.doctorName,
-      required this.note});
+  const CompletedCardWidget({
+    super.key,
+    required this.patientImage,
+    required this.patientName,
+    required this.mobileNumber,
+    required this.patientAge,
+    required this.doctorName,
+    required this.tests,
+  });
 
   final String patientImage;
   final String patientName;
-  final String testName;
   final String mobileNumber;
   final String patientAge;
   final String doctorName;
-  final String note;
+  final List<Document> tests;
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +79,11 @@ class CompletedCardWidget extends StatelessWidget {
                   SizedBox(
                     width: size.width * .7,
                     child: Text(
-                      testName,
+                      tests[0].labtests!.length == 2
+                          ? "${tests[0].labtests![0].labtestName.toString()} & ${tests[0].labtests!.last.labtestName.toString()}"
+                          : (tests[0].labtests!.length > 2)
+                              ? "${tests[0].labtests![0].labtestName.toString()} & ${tests[0].labtests!.last.labtestName.toString()}..."
+                              : tests[0].labtests![0].labtestName.toString(),
                       style: grey13B500,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
@@ -120,7 +124,7 @@ class CompletedCardWidget extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: size.height * .002),
+          SizedBox(height: size.height * .0015),
           Row(
             children: [
               Text(
@@ -138,11 +142,11 @@ class CompletedCardWidget extends StatelessWidget {
               ),
             ],
           ),
-          note == 'null'
+          tests[0].notes == null
               ? const SizedBox()
               : Column(
                   children: [
-                    SizedBox(height: size.height * .002),
+                    SizedBox(height: size.height * .0015),
                     Row(
                       children: [
                         Text(
@@ -152,7 +156,7 @@ class CompletedCardWidget extends StatelessWidget {
                         SizedBox(
                           width: size.width * .7,
                           child: Text(
-                            note,
+                            tests[0].notes.toString(),
                             style: black13B500,
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
@@ -167,4 +171,3 @@ class CompletedCardWidget extends StatelessWidget {
     );
   }
 }
-//fsdf

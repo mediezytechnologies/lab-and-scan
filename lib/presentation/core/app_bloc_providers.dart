@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../application/home/contact_us/contact_us_bloc.dart';
 import '../../application/home/get_completed/get_completed_bloc.dart';
 import '../../application/home/get_previous_completed/get_previous_completed_bloc.dart';
 import '../../application/home/get_up_coming/get_up_coming_bloc.dart';
@@ -21,5 +22,6 @@ class AppBlocProviders {
         BlocProvider(create: (context) => getIt<UploadDocumentBloc>()),
         BlocProvider(create: (context) => getIt<GetPreviousCompletedBloc>()),
         BlocProvider(create: (context) => getIt<IncompletedPreviousBloc>()),
+        BlocProvider(create: (context) => getIt<ContactUsBloc>()),
       ];
 }

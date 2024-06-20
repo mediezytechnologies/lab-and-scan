@@ -23,14 +23,16 @@ mixin _$UploadDocumentEvent {
             String clinicId,
             String patientId,
             String appointmentId,
-            int testId,
-            int isCompletedStatus,
+            List<int> testIds,
             String? note,
             String? imagePath)
         upload,
     required TResult Function(String? imageFromGallery) selectImageFromGallery,
     required TResult Function(String? imageFromCamera) selectImageFromCamera,
     required TResult Function(String? pdfFromFiles) selectPdfFiles,
+    required TResult Function(int index, int id) addToSelectTestIds,
+    required TResult Function(int index, int id) removeFromSelectTestIds,
+    required TResult Function() resetSelectedTestData,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -40,14 +42,16 @@ mixin _$UploadDocumentEvent {
             String clinicId,
             String patientId,
             String appointmentId,
-            int testId,
-            int isCompletedStatus,
+            List<int> testIds,
             String? note,
             String? imagePath)?
         upload,
     TResult? Function(String? imageFromGallery)? selectImageFromGallery,
     TResult? Function(String? imageFromCamera)? selectImageFromCamera,
     TResult? Function(String? pdfFromFiles)? selectPdfFiles,
+    TResult? Function(int index, int id)? addToSelectTestIds,
+    TResult? Function(int index, int id)? removeFromSelectTestIds,
+    TResult? Function()? resetSelectedTestData,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -57,14 +61,16 @@ mixin _$UploadDocumentEvent {
             String clinicId,
             String patientId,
             String appointmentId,
-            int testId,
-            int isCompletedStatus,
+            List<int> testIds,
             String? note,
             String? imagePath)?
         upload,
     TResult Function(String? imageFromGallery)? selectImageFromGallery,
     TResult Function(String? imageFromCamera)? selectImageFromCamera,
     TResult Function(String? pdfFromFiles)? selectPdfFiles,
+    TResult Function(int index, int id)? addToSelectTestIds,
+    TResult Function(int index, int id)? removeFromSelectTestIds,
+    TResult Function()? resetSelectedTestData,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -76,6 +82,11 @@ mixin _$UploadDocumentEvent {
     required TResult Function(_SelectImageFromCamera value)
         selectImageFromCamera,
     required TResult Function(_SelectPdfFiles value) selectPdfFiles,
+    required TResult Function(_AddToSelectTestIds value) addToSelectTestIds,
+    required TResult Function(_RemoveFromSelectTestIds value)
+        removeFromSelectTestIds,
+    required TResult Function(_ResetSelectedTestData value)
+        resetSelectedTestData,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -84,6 +95,9 @@ mixin _$UploadDocumentEvent {
     TResult? Function(_SelectImageFromGallery value)? selectImageFromGallery,
     TResult? Function(_SelectImageFromCamera value)? selectImageFromCamera,
     TResult? Function(_SelectPdfFiles value)? selectPdfFiles,
+    TResult? Function(_AddToSelectTestIds value)? addToSelectTestIds,
+    TResult? Function(_RemoveFromSelectTestIds value)? removeFromSelectTestIds,
+    TResult? Function(_ResetSelectedTestData value)? resetSelectedTestData,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -92,6 +106,9 @@ mixin _$UploadDocumentEvent {
     TResult Function(_SelectImageFromGallery value)? selectImageFromGallery,
     TResult Function(_SelectImageFromCamera value)? selectImageFromCamera,
     TResult Function(_SelectPdfFiles value)? selectPdfFiles,
+    TResult Function(_AddToSelectTestIds value)? addToSelectTestIds,
+    TResult Function(_RemoveFromSelectTestIds value)? removeFromSelectTestIds,
+    TResult Function(_ResetSelectedTestData value)? resetSelectedTestData,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -126,8 +143,7 @@ abstract class _$$UploadImplCopyWith<$Res> {
       String clinicId,
       String patientId,
       String appointmentId,
-      int testId,
-      int isCompletedStatus,
+      List<int> testIds,
       String? note,
       String? imagePath});
 }
@@ -147,8 +163,7 @@ class __$$UploadImplCopyWithImpl<$Res>
     Object? clinicId = null,
     Object? patientId = null,
     Object? appointmentId = null,
-    Object? testId = null,
-    Object? isCompletedStatus = null,
+    Object? testIds = null,
     Object? note = freezed,
     Object? imagePath = freezed,
   }) {
@@ -169,14 +184,10 @@ class __$$UploadImplCopyWithImpl<$Res>
           ? _value.appointmentId
           : appointmentId // ignore: cast_nullable_to_non_nullable
               as String,
-      testId: null == testId
-          ? _value.testId
-          : testId // ignore: cast_nullable_to_non_nullable
-              as int,
-      isCompletedStatus: null == isCompletedStatus
-          ? _value.isCompletedStatus
-          : isCompletedStatus // ignore: cast_nullable_to_non_nullable
-              as int,
+      testIds: null == testIds
+          ? _value._testIds
+          : testIds // ignore: cast_nullable_to_non_nullable
+              as List<int>,
       note: freezed == note
           ? _value.note
           : note // ignore: cast_nullable_to_non_nullable
@@ -197,10 +208,10 @@ class _$UploadImpl implements _Upload {
       required this.clinicId,
       required this.patientId,
       required this.appointmentId,
-      required this.testId,
-      required this.isCompletedStatus,
+      required final List<int> testIds,
       this.note,
-      this.imagePath});
+      this.imagePath})
+      : _testIds = testIds;
 
   @override
   final String doctorId;
@@ -210,10 +221,14 @@ class _$UploadImpl implements _Upload {
   final String patientId;
   @override
   final String appointmentId;
+  final List<int> _testIds;
   @override
-  final int testId;
-  @override
-  final int isCompletedStatus;
+  List<int> get testIds {
+    if (_testIds is EqualUnmodifiableListView) return _testIds;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_testIds);
+  }
+
   @override
   final String? note;
   @override
@@ -221,7 +236,7 @@ class _$UploadImpl implements _Upload {
 
   @override
   String toString() {
-    return 'UploadDocumentEvent.upload(doctorId: $doctorId, clinicId: $clinicId, patientId: $patientId, appointmentId: $appointmentId, testId: $testId, isCompletedStatus: $isCompletedStatus, note: $note, imagePath: $imagePath)';
+    return 'UploadDocumentEvent.upload(doctorId: $doctorId, clinicId: $clinicId, patientId: $patientId, appointmentId: $appointmentId, testIds: $testIds, note: $note, imagePath: $imagePath)';
   }
 
   @override
@@ -237,17 +252,22 @@ class _$UploadImpl implements _Upload {
                 other.patientId == patientId) &&
             (identical(other.appointmentId, appointmentId) ||
                 other.appointmentId == appointmentId) &&
-            (identical(other.testId, testId) || other.testId == testId) &&
-            (identical(other.isCompletedStatus, isCompletedStatus) ||
-                other.isCompletedStatus == isCompletedStatus) &&
+            const DeepCollectionEquality().equals(other._testIds, _testIds) &&
             (identical(other.note, note) || other.note == note) &&
             (identical(other.imagePath, imagePath) ||
                 other.imagePath == imagePath));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, doctorId, clinicId, patientId,
-      appointmentId, testId, isCompletedStatus, note, imagePath);
+  int get hashCode => Object.hash(
+      runtimeType,
+      doctorId,
+      clinicId,
+      patientId,
+      appointmentId,
+      const DeepCollectionEquality().hash(_testIds),
+      note,
+      imagePath);
 
   @JsonKey(ignore: true)
   @override
@@ -263,17 +283,19 @@ class _$UploadImpl implements _Upload {
             String clinicId,
             String patientId,
             String appointmentId,
-            int testId,
-            int isCompletedStatus,
+            List<int> testIds,
             String? note,
             String? imagePath)
         upload,
     required TResult Function(String? imageFromGallery) selectImageFromGallery,
     required TResult Function(String? imageFromCamera) selectImageFromCamera,
     required TResult Function(String? pdfFromFiles) selectPdfFiles,
+    required TResult Function(int index, int id) addToSelectTestIds,
+    required TResult Function(int index, int id) removeFromSelectTestIds,
+    required TResult Function() resetSelectedTestData,
   }) {
-    return upload(doctorId, clinicId, patientId, appointmentId, testId,
-        isCompletedStatus, note, imagePath);
+    return upload(
+        doctorId, clinicId, patientId, appointmentId, testIds, note, imagePath);
   }
 
   @override
@@ -284,17 +306,19 @@ class _$UploadImpl implements _Upload {
             String clinicId,
             String patientId,
             String appointmentId,
-            int testId,
-            int isCompletedStatus,
+            List<int> testIds,
             String? note,
             String? imagePath)?
         upload,
     TResult? Function(String? imageFromGallery)? selectImageFromGallery,
     TResult? Function(String? imageFromCamera)? selectImageFromCamera,
     TResult? Function(String? pdfFromFiles)? selectPdfFiles,
+    TResult? Function(int index, int id)? addToSelectTestIds,
+    TResult? Function(int index, int id)? removeFromSelectTestIds,
+    TResult? Function()? resetSelectedTestData,
   }) {
-    return upload?.call(doctorId, clinicId, patientId, appointmentId, testId,
-        isCompletedStatus, note, imagePath);
+    return upload?.call(
+        doctorId, clinicId, patientId, appointmentId, testIds, note, imagePath);
   }
 
   @override
@@ -305,19 +329,21 @@ class _$UploadImpl implements _Upload {
             String clinicId,
             String patientId,
             String appointmentId,
-            int testId,
-            int isCompletedStatus,
+            List<int> testIds,
             String? note,
             String? imagePath)?
         upload,
     TResult Function(String? imageFromGallery)? selectImageFromGallery,
     TResult Function(String? imageFromCamera)? selectImageFromCamera,
     TResult Function(String? pdfFromFiles)? selectPdfFiles,
+    TResult Function(int index, int id)? addToSelectTestIds,
+    TResult Function(int index, int id)? removeFromSelectTestIds,
+    TResult Function()? resetSelectedTestData,
     required TResult orElse(),
   }) {
     if (upload != null) {
-      return upload(doctorId, clinicId, patientId, appointmentId, testId,
-          isCompletedStatus, note, imagePath);
+      return upload(doctorId, clinicId, patientId, appointmentId, testIds, note,
+          imagePath);
     }
     return orElse();
   }
@@ -331,6 +357,11 @@ class _$UploadImpl implements _Upload {
     required TResult Function(_SelectImageFromCamera value)
         selectImageFromCamera,
     required TResult Function(_SelectPdfFiles value) selectPdfFiles,
+    required TResult Function(_AddToSelectTestIds value) addToSelectTestIds,
+    required TResult Function(_RemoveFromSelectTestIds value)
+        removeFromSelectTestIds,
+    required TResult Function(_ResetSelectedTestData value)
+        resetSelectedTestData,
   }) {
     return upload(this);
   }
@@ -342,6 +373,9 @@ class _$UploadImpl implements _Upload {
     TResult? Function(_SelectImageFromGallery value)? selectImageFromGallery,
     TResult? Function(_SelectImageFromCamera value)? selectImageFromCamera,
     TResult? Function(_SelectPdfFiles value)? selectPdfFiles,
+    TResult? Function(_AddToSelectTestIds value)? addToSelectTestIds,
+    TResult? Function(_RemoveFromSelectTestIds value)? removeFromSelectTestIds,
+    TResult? Function(_ResetSelectedTestData value)? resetSelectedTestData,
   }) {
     return upload?.call(this);
   }
@@ -353,6 +387,9 @@ class _$UploadImpl implements _Upload {
     TResult Function(_SelectImageFromGallery value)? selectImageFromGallery,
     TResult Function(_SelectImageFromCamera value)? selectImageFromCamera,
     TResult Function(_SelectPdfFiles value)? selectPdfFiles,
+    TResult Function(_AddToSelectTestIds value)? addToSelectTestIds,
+    TResult Function(_RemoveFromSelectTestIds value)? removeFromSelectTestIds,
+    TResult Function(_ResetSelectedTestData value)? resetSelectedTestData,
     required TResult orElse(),
   }) {
     if (upload != null) {
@@ -368,8 +405,7 @@ abstract class _Upload implements UploadDocumentEvent {
       required final String clinicId,
       required final String patientId,
       required final String appointmentId,
-      required final int testId,
-      required final int isCompletedStatus,
+      required final List<int> testIds,
       final String? note,
       final String? imagePath}) = _$UploadImpl;
 
@@ -377,8 +413,7 @@ abstract class _Upload implements UploadDocumentEvent {
   String get clinicId;
   String get patientId;
   String get appointmentId;
-  int get testId;
-  int get isCompletedStatus;
+  List<int> get testIds;
   String? get note;
   String? get imagePath;
   @JsonKey(ignore: true)
@@ -460,14 +495,16 @@ class _$SelectImageFromGalleryImpl implements _SelectImageFromGallery {
             String clinicId,
             String patientId,
             String appointmentId,
-            int testId,
-            int isCompletedStatus,
+            List<int> testIds,
             String? note,
             String? imagePath)
         upload,
     required TResult Function(String? imageFromGallery) selectImageFromGallery,
     required TResult Function(String? imageFromCamera) selectImageFromCamera,
     required TResult Function(String? pdfFromFiles) selectPdfFiles,
+    required TResult Function(int index, int id) addToSelectTestIds,
+    required TResult Function(int index, int id) removeFromSelectTestIds,
+    required TResult Function() resetSelectedTestData,
   }) {
     return selectImageFromGallery(imageFromGallery);
   }
@@ -480,14 +517,16 @@ class _$SelectImageFromGalleryImpl implements _SelectImageFromGallery {
             String clinicId,
             String patientId,
             String appointmentId,
-            int testId,
-            int isCompletedStatus,
+            List<int> testIds,
             String? note,
             String? imagePath)?
         upload,
     TResult? Function(String? imageFromGallery)? selectImageFromGallery,
     TResult? Function(String? imageFromCamera)? selectImageFromCamera,
     TResult? Function(String? pdfFromFiles)? selectPdfFiles,
+    TResult? Function(int index, int id)? addToSelectTestIds,
+    TResult? Function(int index, int id)? removeFromSelectTestIds,
+    TResult? Function()? resetSelectedTestData,
   }) {
     return selectImageFromGallery?.call(imageFromGallery);
   }
@@ -500,14 +539,16 @@ class _$SelectImageFromGalleryImpl implements _SelectImageFromGallery {
             String clinicId,
             String patientId,
             String appointmentId,
-            int testId,
-            int isCompletedStatus,
+            List<int> testIds,
             String? note,
             String? imagePath)?
         upload,
     TResult Function(String? imageFromGallery)? selectImageFromGallery,
     TResult Function(String? imageFromCamera)? selectImageFromCamera,
     TResult Function(String? pdfFromFiles)? selectPdfFiles,
+    TResult Function(int index, int id)? addToSelectTestIds,
+    TResult Function(int index, int id)? removeFromSelectTestIds,
+    TResult Function()? resetSelectedTestData,
     required TResult orElse(),
   }) {
     if (selectImageFromGallery != null) {
@@ -525,6 +566,11 @@ class _$SelectImageFromGalleryImpl implements _SelectImageFromGallery {
     required TResult Function(_SelectImageFromCamera value)
         selectImageFromCamera,
     required TResult Function(_SelectPdfFiles value) selectPdfFiles,
+    required TResult Function(_AddToSelectTestIds value) addToSelectTestIds,
+    required TResult Function(_RemoveFromSelectTestIds value)
+        removeFromSelectTestIds,
+    required TResult Function(_ResetSelectedTestData value)
+        resetSelectedTestData,
   }) {
     return selectImageFromGallery(this);
   }
@@ -536,6 +582,9 @@ class _$SelectImageFromGalleryImpl implements _SelectImageFromGallery {
     TResult? Function(_SelectImageFromGallery value)? selectImageFromGallery,
     TResult? Function(_SelectImageFromCamera value)? selectImageFromCamera,
     TResult? Function(_SelectPdfFiles value)? selectPdfFiles,
+    TResult? Function(_AddToSelectTestIds value)? addToSelectTestIds,
+    TResult? Function(_RemoveFromSelectTestIds value)? removeFromSelectTestIds,
+    TResult? Function(_ResetSelectedTestData value)? resetSelectedTestData,
   }) {
     return selectImageFromGallery?.call(this);
   }
@@ -547,6 +596,9 @@ class _$SelectImageFromGalleryImpl implements _SelectImageFromGallery {
     TResult Function(_SelectImageFromGallery value)? selectImageFromGallery,
     TResult Function(_SelectImageFromCamera value)? selectImageFromCamera,
     TResult Function(_SelectPdfFiles value)? selectPdfFiles,
+    TResult Function(_AddToSelectTestIds value)? addToSelectTestIds,
+    TResult Function(_RemoveFromSelectTestIds value)? removeFromSelectTestIds,
+    TResult Function(_ResetSelectedTestData value)? resetSelectedTestData,
     required TResult orElse(),
   }) {
     if (selectImageFromGallery != null) {
@@ -638,14 +690,16 @@ class _$SelectImageFromCameraImpl implements _SelectImageFromCamera {
             String clinicId,
             String patientId,
             String appointmentId,
-            int testId,
-            int isCompletedStatus,
+            List<int> testIds,
             String? note,
             String? imagePath)
         upload,
     required TResult Function(String? imageFromGallery) selectImageFromGallery,
     required TResult Function(String? imageFromCamera) selectImageFromCamera,
     required TResult Function(String? pdfFromFiles) selectPdfFiles,
+    required TResult Function(int index, int id) addToSelectTestIds,
+    required TResult Function(int index, int id) removeFromSelectTestIds,
+    required TResult Function() resetSelectedTestData,
   }) {
     return selectImageFromCamera(imageFromCamera);
   }
@@ -658,14 +712,16 @@ class _$SelectImageFromCameraImpl implements _SelectImageFromCamera {
             String clinicId,
             String patientId,
             String appointmentId,
-            int testId,
-            int isCompletedStatus,
+            List<int> testIds,
             String? note,
             String? imagePath)?
         upload,
     TResult? Function(String? imageFromGallery)? selectImageFromGallery,
     TResult? Function(String? imageFromCamera)? selectImageFromCamera,
     TResult? Function(String? pdfFromFiles)? selectPdfFiles,
+    TResult? Function(int index, int id)? addToSelectTestIds,
+    TResult? Function(int index, int id)? removeFromSelectTestIds,
+    TResult? Function()? resetSelectedTestData,
   }) {
     return selectImageFromCamera?.call(imageFromCamera);
   }
@@ -678,14 +734,16 @@ class _$SelectImageFromCameraImpl implements _SelectImageFromCamera {
             String clinicId,
             String patientId,
             String appointmentId,
-            int testId,
-            int isCompletedStatus,
+            List<int> testIds,
             String? note,
             String? imagePath)?
         upload,
     TResult Function(String? imageFromGallery)? selectImageFromGallery,
     TResult Function(String? imageFromCamera)? selectImageFromCamera,
     TResult Function(String? pdfFromFiles)? selectPdfFiles,
+    TResult Function(int index, int id)? addToSelectTestIds,
+    TResult Function(int index, int id)? removeFromSelectTestIds,
+    TResult Function()? resetSelectedTestData,
     required TResult orElse(),
   }) {
     if (selectImageFromCamera != null) {
@@ -703,6 +761,11 @@ class _$SelectImageFromCameraImpl implements _SelectImageFromCamera {
     required TResult Function(_SelectImageFromCamera value)
         selectImageFromCamera,
     required TResult Function(_SelectPdfFiles value) selectPdfFiles,
+    required TResult Function(_AddToSelectTestIds value) addToSelectTestIds,
+    required TResult Function(_RemoveFromSelectTestIds value)
+        removeFromSelectTestIds,
+    required TResult Function(_ResetSelectedTestData value)
+        resetSelectedTestData,
   }) {
     return selectImageFromCamera(this);
   }
@@ -714,6 +777,9 @@ class _$SelectImageFromCameraImpl implements _SelectImageFromCamera {
     TResult? Function(_SelectImageFromGallery value)? selectImageFromGallery,
     TResult? Function(_SelectImageFromCamera value)? selectImageFromCamera,
     TResult? Function(_SelectPdfFiles value)? selectPdfFiles,
+    TResult? Function(_AddToSelectTestIds value)? addToSelectTestIds,
+    TResult? Function(_RemoveFromSelectTestIds value)? removeFromSelectTestIds,
+    TResult? Function(_ResetSelectedTestData value)? resetSelectedTestData,
   }) {
     return selectImageFromCamera?.call(this);
   }
@@ -725,6 +791,9 @@ class _$SelectImageFromCameraImpl implements _SelectImageFromCamera {
     TResult Function(_SelectImageFromGallery value)? selectImageFromGallery,
     TResult Function(_SelectImageFromCamera value)? selectImageFromCamera,
     TResult Function(_SelectPdfFiles value)? selectPdfFiles,
+    TResult Function(_AddToSelectTestIds value)? addToSelectTestIds,
+    TResult Function(_RemoveFromSelectTestIds value)? removeFromSelectTestIds,
+    TResult Function(_ResetSelectedTestData value)? resetSelectedTestData,
     required TResult orElse(),
   }) {
     if (selectImageFromCamera != null) {
@@ -815,14 +884,16 @@ class _$SelectPdfFilesImpl implements _SelectPdfFiles {
             String clinicId,
             String patientId,
             String appointmentId,
-            int testId,
-            int isCompletedStatus,
+            List<int> testIds,
             String? note,
             String? imagePath)
         upload,
     required TResult Function(String? imageFromGallery) selectImageFromGallery,
     required TResult Function(String? imageFromCamera) selectImageFromCamera,
     required TResult Function(String? pdfFromFiles) selectPdfFiles,
+    required TResult Function(int index, int id) addToSelectTestIds,
+    required TResult Function(int index, int id) removeFromSelectTestIds,
+    required TResult Function() resetSelectedTestData,
   }) {
     return selectPdfFiles(pdfFromFiles);
   }
@@ -835,14 +906,16 @@ class _$SelectPdfFilesImpl implements _SelectPdfFiles {
             String clinicId,
             String patientId,
             String appointmentId,
-            int testId,
-            int isCompletedStatus,
+            List<int> testIds,
             String? note,
             String? imagePath)?
         upload,
     TResult? Function(String? imageFromGallery)? selectImageFromGallery,
     TResult? Function(String? imageFromCamera)? selectImageFromCamera,
     TResult? Function(String? pdfFromFiles)? selectPdfFiles,
+    TResult? Function(int index, int id)? addToSelectTestIds,
+    TResult? Function(int index, int id)? removeFromSelectTestIds,
+    TResult? Function()? resetSelectedTestData,
   }) {
     return selectPdfFiles?.call(pdfFromFiles);
   }
@@ -855,14 +928,16 @@ class _$SelectPdfFilesImpl implements _SelectPdfFiles {
             String clinicId,
             String patientId,
             String appointmentId,
-            int testId,
-            int isCompletedStatus,
+            List<int> testIds,
             String? note,
             String? imagePath)?
         upload,
     TResult Function(String? imageFromGallery)? selectImageFromGallery,
     TResult Function(String? imageFromCamera)? selectImageFromCamera,
     TResult Function(String? pdfFromFiles)? selectPdfFiles,
+    TResult Function(int index, int id)? addToSelectTestIds,
+    TResult Function(int index, int id)? removeFromSelectTestIds,
+    TResult Function()? resetSelectedTestData,
     required TResult orElse(),
   }) {
     if (selectPdfFiles != null) {
@@ -880,6 +955,11 @@ class _$SelectPdfFilesImpl implements _SelectPdfFiles {
     required TResult Function(_SelectImageFromCamera value)
         selectImageFromCamera,
     required TResult Function(_SelectPdfFiles value) selectPdfFiles,
+    required TResult Function(_AddToSelectTestIds value) addToSelectTestIds,
+    required TResult Function(_RemoveFromSelectTestIds value)
+        removeFromSelectTestIds,
+    required TResult Function(_ResetSelectedTestData value)
+        resetSelectedTestData,
   }) {
     return selectPdfFiles(this);
   }
@@ -891,6 +971,9 @@ class _$SelectPdfFilesImpl implements _SelectPdfFiles {
     TResult? Function(_SelectImageFromGallery value)? selectImageFromGallery,
     TResult? Function(_SelectImageFromCamera value)? selectImageFromCamera,
     TResult? Function(_SelectPdfFiles value)? selectPdfFiles,
+    TResult? Function(_AddToSelectTestIds value)? addToSelectTestIds,
+    TResult? Function(_RemoveFromSelectTestIds value)? removeFromSelectTestIds,
+    TResult? Function(_ResetSelectedTestData value)? resetSelectedTestData,
   }) {
     return selectPdfFiles?.call(this);
   }
@@ -902,6 +985,9 @@ class _$SelectPdfFilesImpl implements _SelectPdfFiles {
     TResult Function(_SelectImageFromGallery value)? selectImageFromGallery,
     TResult Function(_SelectImageFromCamera value)? selectImageFromCamera,
     TResult Function(_SelectPdfFiles value)? selectPdfFiles,
+    TResult Function(_AddToSelectTestIds value)? addToSelectTestIds,
+    TResult Function(_RemoveFromSelectTestIds value)? removeFromSelectTestIds,
+    TResult Function(_ResetSelectedTestData value)? resetSelectedTestData,
     required TResult orElse(),
   }) {
     if (selectPdfFiles != null) {
@@ -922,6 +1008,575 @@ abstract class _SelectPdfFiles implements UploadDocumentEvent {
 }
 
 /// @nodoc
+abstract class _$$AddToSelectTestIdsImplCopyWith<$Res> {
+  factory _$$AddToSelectTestIdsImplCopyWith(_$AddToSelectTestIdsImpl value,
+          $Res Function(_$AddToSelectTestIdsImpl) then) =
+      __$$AddToSelectTestIdsImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({int index, int id});
+}
+
+/// @nodoc
+class __$$AddToSelectTestIdsImplCopyWithImpl<$Res>
+    extends _$UploadDocumentEventCopyWithImpl<$Res, _$AddToSelectTestIdsImpl>
+    implements _$$AddToSelectTestIdsImplCopyWith<$Res> {
+  __$$AddToSelectTestIdsImplCopyWithImpl(_$AddToSelectTestIdsImpl _value,
+      $Res Function(_$AddToSelectTestIdsImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? index = null,
+    Object? id = null,
+  }) {
+    return _then(_$AddToSelectTestIdsImpl(
+      null == index
+          ? _value.index
+          : index // ignore: cast_nullable_to_non_nullable
+              as int,
+      null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$AddToSelectTestIdsImpl implements _AddToSelectTestIds {
+  const _$AddToSelectTestIdsImpl(this.index, this.id);
+
+  @override
+  final int index;
+  @override
+  final int id;
+
+  @override
+  String toString() {
+    return 'UploadDocumentEvent.addToSelectTestIds(index: $index, id: $id)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$AddToSelectTestIdsImpl &&
+            (identical(other.index, index) || other.index == index) &&
+            (identical(other.id, id) || other.id == id));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, index, id);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$AddToSelectTestIdsImplCopyWith<_$AddToSelectTestIdsImpl> get copyWith =>
+      __$$AddToSelectTestIdsImplCopyWithImpl<_$AddToSelectTestIdsImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            String doctorId,
+            String clinicId,
+            String patientId,
+            String appointmentId,
+            List<int> testIds,
+            String? note,
+            String? imagePath)
+        upload,
+    required TResult Function(String? imageFromGallery) selectImageFromGallery,
+    required TResult Function(String? imageFromCamera) selectImageFromCamera,
+    required TResult Function(String? pdfFromFiles) selectPdfFiles,
+    required TResult Function(int index, int id) addToSelectTestIds,
+    required TResult Function(int index, int id) removeFromSelectTestIds,
+    required TResult Function() resetSelectedTestData,
+  }) {
+    return addToSelectTestIds(index, id);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            String doctorId,
+            String clinicId,
+            String patientId,
+            String appointmentId,
+            List<int> testIds,
+            String? note,
+            String? imagePath)?
+        upload,
+    TResult? Function(String? imageFromGallery)? selectImageFromGallery,
+    TResult? Function(String? imageFromCamera)? selectImageFromCamera,
+    TResult? Function(String? pdfFromFiles)? selectPdfFiles,
+    TResult? Function(int index, int id)? addToSelectTestIds,
+    TResult? Function(int index, int id)? removeFromSelectTestIds,
+    TResult? Function()? resetSelectedTestData,
+  }) {
+    return addToSelectTestIds?.call(index, id);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            String doctorId,
+            String clinicId,
+            String patientId,
+            String appointmentId,
+            List<int> testIds,
+            String? note,
+            String? imagePath)?
+        upload,
+    TResult Function(String? imageFromGallery)? selectImageFromGallery,
+    TResult Function(String? imageFromCamera)? selectImageFromCamera,
+    TResult Function(String? pdfFromFiles)? selectPdfFiles,
+    TResult Function(int index, int id)? addToSelectTestIds,
+    TResult Function(int index, int id)? removeFromSelectTestIds,
+    TResult Function()? resetSelectedTestData,
+    required TResult orElse(),
+  }) {
+    if (addToSelectTestIds != null) {
+      return addToSelectTestIds(index, id);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Upload value) upload,
+    required TResult Function(_SelectImageFromGallery value)
+        selectImageFromGallery,
+    required TResult Function(_SelectImageFromCamera value)
+        selectImageFromCamera,
+    required TResult Function(_SelectPdfFiles value) selectPdfFiles,
+    required TResult Function(_AddToSelectTestIds value) addToSelectTestIds,
+    required TResult Function(_RemoveFromSelectTestIds value)
+        removeFromSelectTestIds,
+    required TResult Function(_ResetSelectedTestData value)
+        resetSelectedTestData,
+  }) {
+    return addToSelectTestIds(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Upload value)? upload,
+    TResult? Function(_SelectImageFromGallery value)? selectImageFromGallery,
+    TResult? Function(_SelectImageFromCamera value)? selectImageFromCamera,
+    TResult? Function(_SelectPdfFiles value)? selectPdfFiles,
+    TResult? Function(_AddToSelectTestIds value)? addToSelectTestIds,
+    TResult? Function(_RemoveFromSelectTestIds value)? removeFromSelectTestIds,
+    TResult? Function(_ResetSelectedTestData value)? resetSelectedTestData,
+  }) {
+    return addToSelectTestIds?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Upload value)? upload,
+    TResult Function(_SelectImageFromGallery value)? selectImageFromGallery,
+    TResult Function(_SelectImageFromCamera value)? selectImageFromCamera,
+    TResult Function(_SelectPdfFiles value)? selectPdfFiles,
+    TResult Function(_AddToSelectTestIds value)? addToSelectTestIds,
+    TResult Function(_RemoveFromSelectTestIds value)? removeFromSelectTestIds,
+    TResult Function(_ResetSelectedTestData value)? resetSelectedTestData,
+    required TResult orElse(),
+  }) {
+    if (addToSelectTestIds != null) {
+      return addToSelectTestIds(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _AddToSelectTestIds implements UploadDocumentEvent {
+  const factory _AddToSelectTestIds(final int index, final int id) =
+      _$AddToSelectTestIdsImpl;
+
+  int get index;
+  int get id;
+  @JsonKey(ignore: true)
+  _$$AddToSelectTestIdsImplCopyWith<_$AddToSelectTestIdsImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$RemoveFromSelectTestIdsImplCopyWith<$Res> {
+  factory _$$RemoveFromSelectTestIdsImplCopyWith(
+          _$RemoveFromSelectTestIdsImpl value,
+          $Res Function(_$RemoveFromSelectTestIdsImpl) then) =
+      __$$RemoveFromSelectTestIdsImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({int index, int id});
+}
+
+/// @nodoc
+class __$$RemoveFromSelectTestIdsImplCopyWithImpl<$Res>
+    extends _$UploadDocumentEventCopyWithImpl<$Res,
+        _$RemoveFromSelectTestIdsImpl>
+    implements _$$RemoveFromSelectTestIdsImplCopyWith<$Res> {
+  __$$RemoveFromSelectTestIdsImplCopyWithImpl(
+      _$RemoveFromSelectTestIdsImpl _value,
+      $Res Function(_$RemoveFromSelectTestIdsImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? index = null,
+    Object? id = null,
+  }) {
+    return _then(_$RemoveFromSelectTestIdsImpl(
+      null == index
+          ? _value.index
+          : index // ignore: cast_nullable_to_non_nullable
+              as int,
+      null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$RemoveFromSelectTestIdsImpl implements _RemoveFromSelectTestIds {
+  const _$RemoveFromSelectTestIdsImpl(this.index, this.id);
+
+  @override
+  final int index;
+  @override
+  final int id;
+
+  @override
+  String toString() {
+    return 'UploadDocumentEvent.removeFromSelectTestIds(index: $index, id: $id)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$RemoveFromSelectTestIdsImpl &&
+            (identical(other.index, index) || other.index == index) &&
+            (identical(other.id, id) || other.id == id));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, index, id);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$RemoveFromSelectTestIdsImplCopyWith<_$RemoveFromSelectTestIdsImpl>
+      get copyWith => __$$RemoveFromSelectTestIdsImplCopyWithImpl<
+          _$RemoveFromSelectTestIdsImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            String doctorId,
+            String clinicId,
+            String patientId,
+            String appointmentId,
+            List<int> testIds,
+            String? note,
+            String? imagePath)
+        upload,
+    required TResult Function(String? imageFromGallery) selectImageFromGallery,
+    required TResult Function(String? imageFromCamera) selectImageFromCamera,
+    required TResult Function(String? pdfFromFiles) selectPdfFiles,
+    required TResult Function(int index, int id) addToSelectTestIds,
+    required TResult Function(int index, int id) removeFromSelectTestIds,
+    required TResult Function() resetSelectedTestData,
+  }) {
+    return removeFromSelectTestIds(index, id);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            String doctorId,
+            String clinicId,
+            String patientId,
+            String appointmentId,
+            List<int> testIds,
+            String? note,
+            String? imagePath)?
+        upload,
+    TResult? Function(String? imageFromGallery)? selectImageFromGallery,
+    TResult? Function(String? imageFromCamera)? selectImageFromCamera,
+    TResult? Function(String? pdfFromFiles)? selectPdfFiles,
+    TResult? Function(int index, int id)? addToSelectTestIds,
+    TResult? Function(int index, int id)? removeFromSelectTestIds,
+    TResult? Function()? resetSelectedTestData,
+  }) {
+    return removeFromSelectTestIds?.call(index, id);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            String doctorId,
+            String clinicId,
+            String patientId,
+            String appointmentId,
+            List<int> testIds,
+            String? note,
+            String? imagePath)?
+        upload,
+    TResult Function(String? imageFromGallery)? selectImageFromGallery,
+    TResult Function(String? imageFromCamera)? selectImageFromCamera,
+    TResult Function(String? pdfFromFiles)? selectPdfFiles,
+    TResult Function(int index, int id)? addToSelectTestIds,
+    TResult Function(int index, int id)? removeFromSelectTestIds,
+    TResult Function()? resetSelectedTestData,
+    required TResult orElse(),
+  }) {
+    if (removeFromSelectTestIds != null) {
+      return removeFromSelectTestIds(index, id);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Upload value) upload,
+    required TResult Function(_SelectImageFromGallery value)
+        selectImageFromGallery,
+    required TResult Function(_SelectImageFromCamera value)
+        selectImageFromCamera,
+    required TResult Function(_SelectPdfFiles value) selectPdfFiles,
+    required TResult Function(_AddToSelectTestIds value) addToSelectTestIds,
+    required TResult Function(_RemoveFromSelectTestIds value)
+        removeFromSelectTestIds,
+    required TResult Function(_ResetSelectedTestData value)
+        resetSelectedTestData,
+  }) {
+    return removeFromSelectTestIds(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Upload value)? upload,
+    TResult? Function(_SelectImageFromGallery value)? selectImageFromGallery,
+    TResult? Function(_SelectImageFromCamera value)? selectImageFromCamera,
+    TResult? Function(_SelectPdfFiles value)? selectPdfFiles,
+    TResult? Function(_AddToSelectTestIds value)? addToSelectTestIds,
+    TResult? Function(_RemoveFromSelectTestIds value)? removeFromSelectTestIds,
+    TResult? Function(_ResetSelectedTestData value)? resetSelectedTestData,
+  }) {
+    return removeFromSelectTestIds?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Upload value)? upload,
+    TResult Function(_SelectImageFromGallery value)? selectImageFromGallery,
+    TResult Function(_SelectImageFromCamera value)? selectImageFromCamera,
+    TResult Function(_SelectPdfFiles value)? selectPdfFiles,
+    TResult Function(_AddToSelectTestIds value)? addToSelectTestIds,
+    TResult Function(_RemoveFromSelectTestIds value)? removeFromSelectTestIds,
+    TResult Function(_ResetSelectedTestData value)? resetSelectedTestData,
+    required TResult orElse(),
+  }) {
+    if (removeFromSelectTestIds != null) {
+      return removeFromSelectTestIds(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _RemoveFromSelectTestIds implements UploadDocumentEvent {
+  const factory _RemoveFromSelectTestIds(final int index, final int id) =
+      _$RemoveFromSelectTestIdsImpl;
+
+  int get index;
+  int get id;
+  @JsonKey(ignore: true)
+  _$$RemoveFromSelectTestIdsImplCopyWith<_$RemoveFromSelectTestIdsImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$ResetSelectedTestDataImplCopyWith<$Res> {
+  factory _$$ResetSelectedTestDataImplCopyWith(
+          _$ResetSelectedTestDataImpl value,
+          $Res Function(_$ResetSelectedTestDataImpl) then) =
+      __$$ResetSelectedTestDataImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$ResetSelectedTestDataImplCopyWithImpl<$Res>
+    extends _$UploadDocumentEventCopyWithImpl<$Res, _$ResetSelectedTestDataImpl>
+    implements _$$ResetSelectedTestDataImplCopyWith<$Res> {
+  __$$ResetSelectedTestDataImplCopyWithImpl(_$ResetSelectedTestDataImpl _value,
+      $Res Function(_$ResetSelectedTestDataImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$ResetSelectedTestDataImpl implements _ResetSelectedTestData {
+  const _$ResetSelectedTestDataImpl();
+
+  @override
+  String toString() {
+    return 'UploadDocumentEvent.resetSelectedTestData()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ResetSelectedTestDataImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(
+            String doctorId,
+            String clinicId,
+            String patientId,
+            String appointmentId,
+            List<int> testIds,
+            String? note,
+            String? imagePath)
+        upload,
+    required TResult Function(String? imageFromGallery) selectImageFromGallery,
+    required TResult Function(String? imageFromCamera) selectImageFromCamera,
+    required TResult Function(String? pdfFromFiles) selectPdfFiles,
+    required TResult Function(int index, int id) addToSelectTestIds,
+    required TResult Function(int index, int id) removeFromSelectTestIds,
+    required TResult Function() resetSelectedTestData,
+  }) {
+    return resetSelectedTestData();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(
+            String doctorId,
+            String clinicId,
+            String patientId,
+            String appointmentId,
+            List<int> testIds,
+            String? note,
+            String? imagePath)?
+        upload,
+    TResult? Function(String? imageFromGallery)? selectImageFromGallery,
+    TResult? Function(String? imageFromCamera)? selectImageFromCamera,
+    TResult? Function(String? pdfFromFiles)? selectPdfFiles,
+    TResult? Function(int index, int id)? addToSelectTestIds,
+    TResult? Function(int index, int id)? removeFromSelectTestIds,
+    TResult? Function()? resetSelectedTestData,
+  }) {
+    return resetSelectedTestData?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(
+            String doctorId,
+            String clinicId,
+            String patientId,
+            String appointmentId,
+            List<int> testIds,
+            String? note,
+            String? imagePath)?
+        upload,
+    TResult Function(String? imageFromGallery)? selectImageFromGallery,
+    TResult Function(String? imageFromCamera)? selectImageFromCamera,
+    TResult Function(String? pdfFromFiles)? selectPdfFiles,
+    TResult Function(int index, int id)? addToSelectTestIds,
+    TResult Function(int index, int id)? removeFromSelectTestIds,
+    TResult Function()? resetSelectedTestData,
+    required TResult orElse(),
+  }) {
+    if (resetSelectedTestData != null) {
+      return resetSelectedTestData();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Upload value) upload,
+    required TResult Function(_SelectImageFromGallery value)
+        selectImageFromGallery,
+    required TResult Function(_SelectImageFromCamera value)
+        selectImageFromCamera,
+    required TResult Function(_SelectPdfFiles value) selectPdfFiles,
+    required TResult Function(_AddToSelectTestIds value) addToSelectTestIds,
+    required TResult Function(_RemoveFromSelectTestIds value)
+        removeFromSelectTestIds,
+    required TResult Function(_ResetSelectedTestData value)
+        resetSelectedTestData,
+  }) {
+    return resetSelectedTestData(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Upload value)? upload,
+    TResult? Function(_SelectImageFromGallery value)? selectImageFromGallery,
+    TResult? Function(_SelectImageFromCamera value)? selectImageFromCamera,
+    TResult? Function(_SelectPdfFiles value)? selectPdfFiles,
+    TResult? Function(_AddToSelectTestIds value)? addToSelectTestIds,
+    TResult? Function(_RemoveFromSelectTestIds value)? removeFromSelectTestIds,
+    TResult? Function(_ResetSelectedTestData value)? resetSelectedTestData,
+  }) {
+    return resetSelectedTestData?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Upload value)? upload,
+    TResult Function(_SelectImageFromGallery value)? selectImageFromGallery,
+    TResult Function(_SelectImageFromCamera value)? selectImageFromCamera,
+    TResult Function(_SelectPdfFiles value)? selectPdfFiles,
+    TResult Function(_AddToSelectTestIds value)? addToSelectTestIds,
+    TResult Function(_RemoveFromSelectTestIds value)? removeFromSelectTestIds,
+    TResult Function(_ResetSelectedTestData value)? resetSelectedTestData,
+    required TResult orElse(),
+  }) {
+    if (resetSelectedTestData != null) {
+      return resetSelectedTestData(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ResetSelectedTestData implements UploadDocumentEvent {
+  const factory _ResetSelectedTestData() = _$ResetSelectedTestDataImpl;
+}
+
+/// @nodoc
 mixin _$UploadDocumentState {
   bool get isLoading => throw _privateConstructorUsedError;
   bool get isError => throw _privateConstructorUsedError;
@@ -929,6 +1584,8 @@ mixin _$UploadDocumentState {
   bool get status => throw _privateConstructorUsedError;
   String? get selectedDocument => throw _privateConstructorUsedError;
   UploadDocumentModel? get model => throw _privateConstructorUsedError;
+  Set<int> get selectedTestIndicesSet => throw _privateConstructorUsedError;
+  List<int> get selectedTestIdsList => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $UploadDocumentStateCopyWith<UploadDocumentState> get copyWith =>
@@ -947,7 +1604,9 @@ abstract class $UploadDocumentStateCopyWith<$Res> {
       String message,
       bool status,
       String? selectedDocument,
-      UploadDocumentModel? model});
+      UploadDocumentModel? model,
+      Set<int> selectedTestIndicesSet,
+      List<int> selectedTestIdsList});
 }
 
 /// @nodoc
@@ -969,6 +1628,8 @@ class _$UploadDocumentStateCopyWithImpl<$Res, $Val extends UploadDocumentState>
     Object? status = null,
     Object? selectedDocument = freezed,
     Object? model = freezed,
+    Object? selectedTestIndicesSet = null,
+    Object? selectedTestIdsList = null,
   }) {
     return _then(_value.copyWith(
       isLoading: null == isLoading
@@ -995,6 +1656,14 @@ class _$UploadDocumentStateCopyWithImpl<$Res, $Val extends UploadDocumentState>
           ? _value.model
           : model // ignore: cast_nullable_to_non_nullable
               as UploadDocumentModel?,
+      selectedTestIndicesSet: null == selectedTestIndicesSet
+          ? _value.selectedTestIndicesSet
+          : selectedTestIndicesSet // ignore: cast_nullable_to_non_nullable
+              as Set<int>,
+      selectedTestIdsList: null == selectedTestIdsList
+          ? _value.selectedTestIdsList
+          : selectedTestIdsList // ignore: cast_nullable_to_non_nullable
+              as List<int>,
     ) as $Val);
   }
 }
@@ -1013,7 +1682,9 @@ abstract class _$$InitialImplCopyWith<$Res>
       String message,
       bool status,
       String? selectedDocument,
-      UploadDocumentModel? model});
+      UploadDocumentModel? model,
+      Set<int> selectedTestIndicesSet,
+      List<int> selectedTestIdsList});
 }
 
 /// @nodoc
@@ -1033,6 +1704,8 @@ class __$$InitialImplCopyWithImpl<$Res>
     Object? status = null,
     Object? selectedDocument = freezed,
     Object? model = freezed,
+    Object? selectedTestIndicesSet = null,
+    Object? selectedTestIdsList = null,
   }) {
     return _then(_$InitialImpl(
       isLoading: null == isLoading
@@ -1059,6 +1732,14 @@ class __$$InitialImplCopyWithImpl<$Res>
           ? _value.model
           : model // ignore: cast_nullable_to_non_nullable
               as UploadDocumentModel?,
+      selectedTestIndicesSet: null == selectedTestIndicesSet
+          ? _value._selectedTestIndicesSet
+          : selectedTestIndicesSet // ignore: cast_nullable_to_non_nullable
+              as Set<int>,
+      selectedTestIdsList: null == selectedTestIdsList
+          ? _value._selectedTestIdsList
+          : selectedTestIdsList // ignore: cast_nullable_to_non_nullable
+              as List<int>,
     ));
   }
 }
@@ -1072,7 +1753,11 @@ class _$InitialImpl implements _Initial {
       required this.message,
       required this.status,
       this.selectedDocument,
-      this.model});
+      this.model,
+      required final Set<int> selectedTestIndicesSet,
+      required final List<int> selectedTestIdsList})
+      : _selectedTestIndicesSet = selectedTestIndicesSet,
+        _selectedTestIdsList = selectedTestIdsList;
 
   @override
   final bool isLoading;
@@ -1086,10 +1771,27 @@ class _$InitialImpl implements _Initial {
   final String? selectedDocument;
   @override
   final UploadDocumentModel? model;
+  final Set<int> _selectedTestIndicesSet;
+  @override
+  Set<int> get selectedTestIndicesSet {
+    if (_selectedTestIndicesSet is EqualUnmodifiableSetView)
+      return _selectedTestIndicesSet;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableSetView(_selectedTestIndicesSet);
+  }
+
+  final List<int> _selectedTestIdsList;
+  @override
+  List<int> get selectedTestIdsList {
+    if (_selectedTestIdsList is EqualUnmodifiableListView)
+      return _selectedTestIdsList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_selectedTestIdsList);
+  }
 
   @override
   String toString() {
-    return 'UploadDocumentState(isLoading: $isLoading, isError: $isError, message: $message, status: $status, selectedDocument: $selectedDocument, model: $model)';
+    return 'UploadDocumentState(isLoading: $isLoading, isError: $isError, message: $message, status: $status, selectedDocument: $selectedDocument, model: $model, selectedTestIndicesSet: $selectedTestIndicesSet, selectedTestIdsList: $selectedTestIdsList)';
   }
 
   @override
@@ -1104,12 +1806,24 @@ class _$InitialImpl implements _Initial {
             (identical(other.status, status) || other.status == status) &&
             (identical(other.selectedDocument, selectedDocument) ||
                 other.selectedDocument == selectedDocument) &&
-            (identical(other.model, model) || other.model == model));
+            (identical(other.model, model) || other.model == model) &&
+            const DeepCollectionEquality().equals(
+                other._selectedTestIndicesSet, _selectedTestIndicesSet) &&
+            const DeepCollectionEquality()
+                .equals(other._selectedTestIdsList, _selectedTestIdsList));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, isLoading, isError, message,
-      status, selectedDocument, model);
+  int get hashCode => Object.hash(
+      runtimeType,
+      isLoading,
+      isError,
+      message,
+      status,
+      selectedDocument,
+      model,
+      const DeepCollectionEquality().hash(_selectedTestIndicesSet),
+      const DeepCollectionEquality().hash(_selectedTestIdsList));
 
   @JsonKey(ignore: true)
   @override
@@ -1125,7 +1839,9 @@ abstract class _Initial implements UploadDocumentState {
       required final String message,
       required final bool status,
       final String? selectedDocument,
-      final UploadDocumentModel? model}) = _$InitialImpl;
+      final UploadDocumentModel? model,
+      required final Set<int> selectedTestIndicesSet,
+      required final List<int> selectedTestIdsList}) = _$InitialImpl;
 
   @override
   bool get isLoading;
@@ -1139,6 +1855,10 @@ abstract class _Initial implements UploadDocumentState {
   String? get selectedDocument;
   @override
   UploadDocumentModel? get model;
+  @override
+  Set<int> get selectedTestIndicesSet;
+  @override
+  List<int> get selectedTestIdsList;
   @override
   @JsonKey(ignore: true)
   _$$InitialImplCopyWith<_$InitialImpl> get copyWith =>

@@ -111,10 +111,9 @@ class _IncompletedPreviousPageState extends State<IncompletedPreviousPage> {
                                         .getPreviousInompleted[index]
                                         .appointmentId
                                         .toString(),
-                                    // testName: state
-                                    //     .getPreviousInompleted[index].labtest
-                                    //     .toString(),
-                                    testName:const [],
+                                    testName: state
+                                        .getPreviousInompleted[index].labtests!
+                                        .toList(),
                                     patientName: state
                                         .getPreviousInompleted[index].firstname
                                         .toString(),
@@ -152,6 +151,7 @@ class _IncompletedPreviousPageState extends State<IncompletedPreviousPage> {
                             child: Column(
                               children: [
                                 UpComingCardWidget(
+                                  pensingShow: true,
                                   mobileNumber: state
                                       .getPreviousInompleted[index].mobileNo
                                       .toString(),
@@ -164,10 +164,9 @@ class _IncompletedPreviousPageState extends State<IncompletedPreviousPage> {
                                   patientName: state
                                       .getPreviousInompleted[index].firstname
                                       .toString(),
-                                  // testNames: state
-                                  //     .getPreviousInompleted[index].labtest
-                                  //     .toString(),
-                                  testNames:const [],
+                                  testNames: state
+                                      .getPreviousInompleted[index].labtests!
+                                      .toList(),
                                 ),
                               ],
                             ),

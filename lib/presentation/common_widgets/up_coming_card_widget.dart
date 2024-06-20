@@ -2,7 +2,7 @@ import 'package:animation_wrappers/animation_wrappers.dart';
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../domain/home/get_upcoming/get_up_coming_model/labtest.dart';
+import '../../domain/home/common_upcoming_test/labtest.dart';
 import '../core/app_colors.dart';
 import '../core/text_style.dart';
 
@@ -13,13 +13,15 @@ class UpComingCardWidget extends StatelessWidget {
       required this.patientName,
       required this.testNames,
       required this.mobileNumber,
-      required this.patientAge});
+      required this.patientAge,
+      required this.pensingShow});
 
   final String patientImage;
   final String patientName;
   final List<Labtest> testNames;
   final String mobileNumber;
   final String patientAge;
+  final bool pensingShow;
 
   @override
   Widget build(BuildContext context) {
@@ -70,10 +72,16 @@ class UpComingCardWidget extends StatelessWidget {
                 ),
               ),
               SizedBox(
-                  width: size.width * .7,
+                  width: size.width * .68,
                   child: Text(
-                    "${testNames.first.labtestName}...",
+                    testNames.length == 2
+                        ? "${testNames.first.labtestName} & ${testNames.last.labtestName}"
+                        : testNames.length > 2
+                            ? ("${testNames.first.labtestName} & ${testNames.last.labtestName}...")
+                            : "${testNames.first.labtestName}",
                     style: grey12B500,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
                   )),
               Row(
                 children: [
@@ -106,6 +114,20 @@ class UpComingCardWidget extends StatelessWidget {
                   ),
                 ],
               ),
+              pensingShow
+                  ? Row(
+                      children: [
+                        Text(
+                          "Pending test : ",
+                          style: grey12B500,
+                        ),
+                        Text(
+                          testNames.length.toString(),
+                          style: black13B500,
+                        ),
+                      ],
+                    )
+                  : const SizedBox()
             ],
           ),
         ],

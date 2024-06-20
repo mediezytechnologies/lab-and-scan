@@ -124,7 +124,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
                         return null;
                       }
                     },
-                    preIcon: Icons.email_outlined),
+                    preIcon:  IconlyLight.message,),
                 SizedBox(height: size.height * .01),
                 CustomeFormFieldWidget(
                     controller: mobileNumberController,

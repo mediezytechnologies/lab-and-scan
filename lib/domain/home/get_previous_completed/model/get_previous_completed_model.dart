@@ -1,20 +1,17 @@
 import 'package:json_annotation/json_annotation.dart';
-
-import 'previous_lab_detail.dart';
-
+import 'previous_completed_lab_detail.dart';
 part 'get_previous_completed_model.g.dart';
 
 @JsonSerializable()
 class GetPreviousCompletedModel {
 	bool? status;
 	String? message;
-	@JsonKey(name: 'PreviousLabDetails') 
-	List<PreviousLabDetail>? previousLabDetails;
+	List<PreviousCompletedLabDetail>? previousCompletedLabDetails;
 
 	GetPreviousCompletedModel({
 		this.status, 
 		this.message, 
-		this.previousLabDetails, 
+		this.previousCompletedLabDetails, 
 	});
 
 	factory GetPreviousCompletedModel.fromJson(Map<String, dynamic> json) {

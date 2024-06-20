@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:mediezy_lab_scan/domain/home/get_upcoming/get_upcoming_repository.dart';
-import '../../../domain/home/get_upcoming/get_up_coming_model/up_coming_lab_detail.dart';
+import '../../../domain/home/get_upcoming/model/up_coming_lab_detail.dart';
 part 'get_up_coming_event.dart';
 part 'get_up_coming_state.dart';
 part 'get_up_coming_bloc.freezed.dart';
@@ -15,11 +15,12 @@ class GetUpComingBloc extends Bloc<GetUpComingEvent, GetUpComingState> {
     on<_GetUpComing>((event, emit) async {
       emit(
         const GetUpComingState(
-            getUpComing: [],
-            isLoading: true,
-            isError: false,
-            message: '',
-            status: false),
+          getUpComing: [],
+          isLoading: true,
+          isError: false,
+          message: '',
+          status: false,
+        ),
       );
       final result = await getUpcomingRepository.getUpComingRepo();
       emit(result.fold(

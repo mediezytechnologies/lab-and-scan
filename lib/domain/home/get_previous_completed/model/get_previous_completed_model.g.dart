@@ -11,8 +11,10 @@ GetPreviousCompletedModel _$GetPreviousCompletedModelFromJson(
     GetPreviousCompletedModel(
       status: json['status'] as bool?,
       message: json['message'] as String?,
-      previousLabDetails: (json['PreviousLabDetails'] as List<dynamic>?)
-          ?.map((e) => PreviousLabDetail.fromJson(e as Map<String, dynamic>))
+      previousCompletedLabDetails: (json['previousCompletedLabDetails']
+              as List<dynamic>?)
+          ?.map((e) =>
+              PreviousCompletedLabDetail.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
@@ -21,5 +23,5 @@ Map<String, dynamic> _$GetPreviousCompletedModelToJson(
     <String, dynamic>{
       'status': instance.status,
       'message': instance.message,
-      'PreviousLabDetails': instance.previousLabDetails,
+      'previousCompletedLabDetails': instance.previousCompletedLabDetails,
     };

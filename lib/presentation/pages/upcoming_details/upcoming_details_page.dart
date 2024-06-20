@@ -10,10 +10,10 @@ import 'package:iconly/iconly.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mediezy_lab_scan/presentation/common_widgets/user_section_widget.dart';
 import 'package:mediezy_lab_scan/presentation/core/app_colors.dart';
+import 'package:mediezy_lab_scan/presentation/pages/home/home_page.dart';
 import 'package:mediezy_lab_scan/presentation/pages/upcoming_details/widget/view_document_bottom_card_widget.dart';
-import '../../../application/home/get_up_coming/get_up_coming_bloc.dart';
 import '../../../application/home/upload_document/upload_document_bloc.dart';
-import '../../../domain/home/get_upcoming/get_up_coming_model/labtest.dart';
+import '../../../domain/home/common_upcoming_test/labtest.dart';
 import '../../common_widgets/custome_formfield_widget.dart';
 import '../../common_widgets/submit_button_widget.dart';
 import '../../core/general_services.dart';
@@ -59,11 +59,13 @@ class _UpComingDetailsPageState extends State<UpComingDetailsPage> {
   final TextEditingController noteController = TextEditingController();
   final ImagePicker imagePicker = ImagePicker();
   String? imageTemporary;
-  int? selectedTestId;
+  Set<int> selectedTestIndices = {};
+  List<int> selectedTestIds = [];
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Upcoming details"),
@@ -77,7 +79,7 @@ class _UpComingDetailsPageState extends State<UpComingDetailsPage> {
         ),
       ),
       body: Container(
-        padding: const EdgeInsets.all(8),
+        padding: EdgeInsets.symmetric(horizontal: 8.w),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -89,182 +91,177 @@ class _UpComingDetailsPageState extends State<UpComingDetailsPage> {
                 patientName: widget.patientName,
               ),
               SizedBox(height: size.height * .011),
-              Container(
-                padding: const EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  color: kCardColor,
-                  borderRadius: BorderRadius.circular(10.r),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text("Test names :", style: grey13B500),
-                    SizedBox(height: size.height * .005),
-                    ListView.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: widget.testName.length,
-                      itemBuilder: (context, index) {
-                        return GestureDetector(
-                          onTap: widget.testName[index].isCompleted == 1
-                              ? () {
-                                  GeneralServices.instance.showToastMessage(
-                                      "This test is already completed");
-                                }
-                              : () {
-                                  showUploadBottomSheet(context);
-                                  selectedTestId =
-                                      widget.testName[index].labtestId;
-                                },
-                          child: TestCardWidget(
-                              index: index,
-                              isCompleted: widget.testName[index].isCompleted!,
-                              testName: widget.testName[index].labtestName
-                                  .toString()),
-                        );
-                      },
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(height: size.height * .011),
               DataCardWidget(title: "Doctor name", value: widget.doctorName),
               SizedBox(height: size.height * .011),
               DataCardWidget(title: "Clinic name", value: widget.clinicName),
+              SizedBox(height: size.height * .011),
+              BlocBuilder<UploadDocumentBloc, UploadDocumentState>(
+                builder: (context, state) {
+                  return Container(
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      color: kCardColor,
+                      borderRadius: BorderRadius.circular(10.r),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text("Test names :", style: grey13B500),
+                        SizedBox(height: size.height * .005),
+                        ListView.builder(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemCount: widget.testName.length,
+                          itemBuilder: (context, index) {
+                            return GestureDetector(
+                              onTap: () {
+                                if (state.selectedTestIndicesSet
+                                    .contains(index)) {
+                                  context.read<UploadDocumentBloc>().add(
+                                        UploadDocumentEvent
+                                            .removeFromSelectTestIds(
+                                                index,
+                                                widget.testName[index]
+                                                    .labtestId!),
+                                      );
+                                } else {
+                                  context.read<UploadDocumentBloc>().add(
+                                        UploadDocumentEvent.addToSelectTestIds(
+                                            index,
+                                            widget.testName[index].labtestId!),
+                                      );
+                                }
+                              },
+                              child: TestCardWidget(
+                                icon:
+                                    state.selectedTestIndicesSet.contains(index)
+                                        ? IconlyBold.tick_square
+                                        : IconlyLight.tick_square,
+                                index: index,
+                                testName: widget.testName[index].labtestName
+                                    .toString(),
+                              ),
+                            );
+                          },
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              ),
+              SizedBox(height: size.height * .011),
+              Text("Upload :", style: grey13B500),
+              SizedBox(height: size.height * .005),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      selectImageFromGallery();
+                    },
+                    child: UploadCardWidget(
+                      width: size.width * .45,
+                      title: "Gallery",
+                      icon: const Icon(IconlyLight.image),
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      selectImageFromCamera();
+                    },
+                    child: UploadCardWidget(
+                      width: size.width * .45,
+                      title: "Camera",
+                      icon: const Icon(IconlyLight.camera),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: size.height * .011),
+              GestureDetector(
+                onTap: () {
+                  selectPdfFromFiles();
+                },
+                child: const UploadCardWidget(
+                  width: double.infinity,
+                  title: "Pdf",
+                  icon: Icon(IconlyLight.paper),
+                ),
+              ),
+              SizedBox(height: size.height * .011),
+              BlocBuilder<UploadDocumentBloc, UploadDocumentState>(
+                builder: (context, state) {
+                  return state.selectedDocument != null
+                      ? Column(
+                          children: [
+                            ViewDocumentBottomCardWidget(
+                              uploadedDocument:
+                                  state.selectedDocument.toString(),
+                              closeFunction: () async {
+                                await resetUploadedDocumetToNull();
+                              },
+                            ),
+                            SizedBox(height: size.height * .011),
+                          ],
+                        )
+                      : const SizedBox();
+                },
+              ),
+              Text("Note :", style: grey13B500),
+              SizedBox(height: size.height * .005),
+              CustomeFormFieldWidget(
+                controller: noteController,
+                hintText: "Enter note",
+                textInputAction: TextInputAction.done,
+                textInputType: TextInputType.text,
+                maxLine: 4,
+              ),
+              SizedBox(height: size.height * .020),
+              BlocConsumer<UploadDocumentBloc, UploadDocumentState>(
+                listener: (context, state) {
+                  if (state.isError) {
+                    GeneralServices.instance.showToastMessage(state.message);
+                  }
+                  if (state.status) {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const HomePage(),
+                      ),
+                    );
+                  }
+                },
+                builder: (context, state) {
+                  return SubmitButtonWidget(
+                    buttonText: "Upload report",
+                    loading: state.isLoading,
+                    onTap: () async {
+                      if (state.selectedTestIdsList.isEmpty) {
+                        GeneralServices.instance
+                            .showToastMessage("Please select the test");
+                      } else {
+                        BlocProvider.of<UploadDocumentBloc>(context).add(
+                          UploadDocumentEvent.upload(
+                            appointmentId: widget.appointmentId,
+                            clinicId: widget.clinicId,
+                            doctorId: widget.doctorId,
+                            patientId: widget.patientId,
+                            imagePath: state.selectedDocument,
+                            note: noteController.text,
+                            testIds: state.selectedTestIdsList,
+                          ),
+                        );
+                      }
+                      await resetUploadedDocumetToNull();
+                    },
+                  );
+                },
+              ),
               SizedBox(height: size.height * .011),
             ],
           ),
         ),
       ),
-    );
-  }
-
-  void showUploadBottomSheet(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      builder: (BuildContext context) {
-        return SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.only(
-              bottom: MediaQuery.of(context).viewInsets.bottom,
-            ),
-            child: Container(
-              padding: const EdgeInsets.all(16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text("Upload :", style: grey13B500),
-                  SizedBox(height: size.height * .005),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      GestureDetector(
-                        onTap: () {
-                          selectImageFromGallery();
-                        },
-                        child: UploadCardWidget(
-                          width: size.width * .45,
-                          title: "Gallery",
-                          icon: const Icon(IconlyLight.image),
-                        ),
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          selectImageFromCamera();
-                        },
-                        child: UploadCardWidget(
-                          width: size.width * .45,
-                          title: "Camera",
-                          icon: const Icon(IconlyLight.camera),
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: size.height * .011),
-                  GestureDetector(
-                    onTap: () {
-                      selectPdfFromFiles();
-                    },
-                    child: const UploadCardWidget(
-                      width: double.infinity,
-                      title: "Pdf",
-                      icon: Icon(IconlyLight.paper),
-                    ),
-                  ),
-                  SizedBox(height: size.height * .011),
-                  BlocBuilder<UploadDocumentBloc, UploadDocumentState>(
-                    builder: (context, state) {
-                      return state.selectedDocument != null
-                          ? Column(
-                              children: [
-                                ViewDocumentBottomCardWidget(
-                                  uploadedDocument:
-                                      state.selectedDocument.toString(),
-                                  closeFunction: () async {
-                                    await resetUploadedDocumetToNull();
-                                  },
-                                ),
-                                SizedBox(height: size.height * .011),
-                              ],
-                            )
-                          : const SizedBox();
-                    },
-                  ),
-                  Text("Note :", style: grey13B500),
-                  SizedBox(height: size.height * .005),
-                  CustomeFormFieldWidget(
-                    controller: noteController,
-                    hintText: "Enter note",
-                    textInputAction: TextInputAction.done,
-                    textInputType: TextInputType.text,
-                    maxLine: 4,
-                  ),
-                  SizedBox(height: size.height * .020),
-                  BlocConsumer<UploadDocumentBloc, UploadDocumentState>(
-                    listener: (context, state) {
-                      if (state.isError) {
-                        GeneralServices.instance
-                            .showToastMessage(state.message);
-                      }
-                      if (state.status) {
-                        GeneralServices.instance
-                            .showToastMessage(state.message);
-                        BlocProvider.of<GetUpComingBloc>(context)
-                            .add(const GetUpComingEvent.getUpComing());
-
-                        Navigator.pop(context);
-                      }
-                    },
-                    builder: (context, state) {
-                      return SubmitButtonWidget(
-                        buttonText: "Upload report",
-                        loading: state.isLoading,
-                        onTap: () async {
-                          BlocProvider.of<UploadDocumentBloc>(context).add(
-                            UploadDocumentEvent.upload(
-                              appointmentId: widget.appointmentId,
-                              clinicId: widget.clinicId,
-                              doctorId: widget.doctorId,
-                              patientId: widget.patientId,
-                              imagePath: state.selectedDocument,
-                              note: noteController.text,
-                              isCompletedStatus: 1,
-                              testId: selectedTestId!,
-                            ),
-                          );
-                          await resetUploadedDocumetToNull();
-                        },
-                      );
-                    },
-                  ),
-                ],
-              ),
-            ),
-          ),
-        );
-      },
     );
   }
 
@@ -289,7 +286,7 @@ class _UpComingDetailsPageState extends State<UpComingDetailsPage> {
     imageTemporary = image.path;
     BlocProvider.of<UploadDocumentBloc>(context)
         .add(UploadDocumentEvent.selectImageFromCamera(imageTemporary));
-    log("gallery image >>>$imageTemporary");
+    log("camera image >>>$imageTemporary");
   }
 
   Future selectPdfFromFiles() async {
@@ -309,11 +306,7 @@ class _UpComingDetailsPageState extends State<UpComingDetailsPage> {
 
   Future<void> resetUploadedDocumetToNull() async {
     BlocProvider.of<UploadDocumentBloc>(context)
-        .add(const UploadDocumentEvent.selectImageFromGallery(null));
-    BlocProvider.of<UploadDocumentBloc>(context)
-        .add(const UploadDocumentEvent.selectImageFromCamera(null));
-    BlocProvider.of<UploadDocumentBloc>(context)
-        .add(const UploadDocumentEvent.selectPdfFiles(null));
+        .add(const UploadDocumentEvent.resetSelectedTestData());
   }
 
   @override

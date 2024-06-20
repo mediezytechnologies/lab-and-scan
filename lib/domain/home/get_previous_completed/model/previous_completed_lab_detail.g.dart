@@ -1,17 +1,16 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'previous_un_completed_lab_detail.dart';
+part of 'previous_completed_lab_detail.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-PreviousUnCompletedLabDetail _$PreviousUnCompletedLabDetailFromJson(
+PreviousCompletedLabDetail _$PreviousCompletedLabDetailFromJson(
         Map<String, dynamic> json) =>
-    PreviousUnCompletedLabDetail(
+    PreviousCompletedLabDetail(
       appointmentId: (json['appointment_id'] as num?)?.toInt(),
       labId: (json['lab_id'] as num?)?.toInt(),
-      labtest: json['labtest'] as String?,
       clinicId: (json['clinic_id'] as num?)?.toInt(),
       clinicName: json['clinic_name'] as String?,
       doctorId: (json['doctor_id'] as num?)?.toInt(),
@@ -20,15 +19,18 @@ PreviousUnCompletedLabDetail _$PreviousUnCompletedLabDetailFromJson(
       firstname: json['firstname'] as String?,
       mobileNo: json['mobileNo'] as String?,
       userImage: json['user_image'] as String?,
+      dateofbirth: json['dateofbirth'] as String?,
       age: json['age'] as String?,
+      documents: (json['documents'] as List<dynamic>?)
+          ?.map((e) => Document.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
-Map<String, dynamic> _$PreviousUnCompletedLabDetailToJson(
-        PreviousUnCompletedLabDetail instance) =>
+Map<String, dynamic> _$PreviousCompletedLabDetailToJson(
+        PreviousCompletedLabDetail instance) =>
     <String, dynamic>{
       'appointment_id': instance.appointmentId,
       'lab_id': instance.labId,
-      'labtest': instance.labtest,
       'clinic_id': instance.clinicId,
       'clinic_name': instance.clinicName,
       'doctor_id': instance.doctorId,
@@ -37,5 +39,7 @@ Map<String, dynamic> _$PreviousUnCompletedLabDetailToJson(
       'firstname': instance.firstname,
       'mobileNo': instance.mobileNo,
       'user_image': instance.userImage,
+      'dateofbirth': instance.dateofbirth,
       'age': instance.age,
+      'documents': instance.documents,
     };

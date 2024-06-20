@@ -4,8 +4,8 @@ import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:mediezy_lab_scan/domain/core/error/error_model.dart';
 import 'package:mediezy_lab_scan/domain/home/get_previous_completed/get_previous_completed_repository.dart';
-import 'package:mediezy_lab_scan/domain/home/get_previous_completed/model/previous_lab_detail.dart';
 import '../../../domain/home/get_previous_completed/model/get_previous_completed_model.dart';
+import '../../../domain/home/get_previous_completed/model/previous_completed_lab_detail.dart';
 import '../../core/api_end_points.dart';
 import '../../core/token/token.dart';
 
@@ -13,7 +13,7 @@ import '../../core/token/token.dart';
 @LazySingleton(as: GetPreviousCompletedRepository)
 class GetPreviousCompletedRepoImpl implements GetPreviousCompletedRepository {
   @override
-  Future<Either<ErrorModel, List<PreviousLabDetail>>> getPreviousCompletedRepo(
+  Future<Either<ErrorModel, List<PreviousCompletedLabDetail>>> getPreviousCompletedRepo(
       {required String selectedDate}) async {
     String? id = GetLocalStorage.getUserIdAndToken("id");
     String? token = GetLocalStorage.getUserIdAndToken('token');
@@ -32,7 +32,7 @@ class GetPreviousCompletedRepoImpl implements GetPreviousCompletedRepository {
       if (response.statusCode == 200 || response.statusCode == 201) {
         final result = GetPreviousCompletedModel.fromJson(response.data);
 
-        return Right(result.previousLabDetails!);
+        return Right(result.previousCompletedLabDetails!);
       } else {
         return Left(ErrorModel());
       }

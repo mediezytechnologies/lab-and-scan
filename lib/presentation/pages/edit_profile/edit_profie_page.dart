@@ -207,20 +207,20 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       GeneralServices.instance.showToastMessage(state.message);
                     }
                     if (state.status) {
-                      log("message    ${state.status}");
+                      final storage = GetStorage();
                       GeneralServices.instance.showToastMessage(state.message);
                       Navigator.push(
                         context,
                         CustomPageRoute(
-                                    route: const HomePage(),
+                          route: const HomePage(),
                         ),
                       );
+                      storage.write('firstname', nameController.text);
                     }
                   },
                   builder: (context, state) {
                     return SubmitButtonWidget(
                         onTap: () {
-                          final storage = GetStorage();
                           BlocProvider.of<UserUpdateBloc>(context).add(
                             UserUpdateEvent.update(
                               nameController.text,
@@ -230,7 +230,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
                               state.image,
                             ),
                           );
-                          storage.write('firstname', nameController.text);
                         },
                         loading: state.isLoading,
                         buttonText: "Update");

@@ -1,14 +1,13 @@
 import 'package:json_annotation/json_annotation.dart';
-
-part 'previous_lab_detail.g.dart';
+import '../../common_completed_test/document.dart';
+part 'completed_lab_detail.g.dart';
 
 @JsonSerializable()
-class PreviousLabDetail {
+class CompletedLabDetail {
 	@JsonKey(name: 'appointment_id') 
 	int? appointmentId;
 	@JsonKey(name: 'lab_id') 
 	int? labId;
-	String? labtest;
 	@JsonKey(name: 'clinic_id') 
 	int? clinicId;
 	@JsonKey(name: 'clinic_name') 
@@ -22,18 +21,14 @@ class PreviousLabDetail {
 	String? firstname;
 	String? mobileNo;
 	@JsonKey(name: 'user_image') 
-	dynamic userImage;
-	@JsonKey(name: 'lab_document_id') 
-	int? labDocumentId;
-	@JsonKey(name: 'document_upload') 
-	String? documentUpload;
-	String? notes;
+	String? userImage;
+	String? dateofbirth;
 	String? age;
+	List<Document>? documents;
 
-	PreviousLabDetail({
+	CompletedLabDetail({
 		this.appointmentId, 
 		this.labId, 
-		this.labtest, 
 		this.clinicId, 
 		this.clinicName, 
 		this.doctorId, 
@@ -42,15 +37,14 @@ class PreviousLabDetail {
 		this.firstname, 
 		this.mobileNo, 
 		this.userImage, 
-		this.labDocumentId, 
-		this.documentUpload, 
-		this.notes, 
+		this.dateofbirth, 
 		this.age, 
+		this.documents, 
 	});
 
-	factory PreviousLabDetail.fromJson(Map<String, dynamic> json) {
-		return _$PreviousLabDetailFromJson(json);
+	factory CompletedLabDetail.fromJson(Map<String, dynamic> json) {
+		return _$CompletedLabDetailFromJson(json);
 	}
 
-	Map<String, dynamic> toJson() => _$PreviousLabDetailToJson(this);
+	Map<String, dynamic> toJson() => _$CompletedLabDetailToJson(this);
 }

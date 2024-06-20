@@ -1,15 +1,16 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'completed_labdetail.dart';
+part of 'previous_un_completed_lab_detail.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-CompletedLabdetail _$CompletedLabdetailFromJson(Map<String, dynamic> json) =>
-    CompletedLabdetail(
+PreviousUnCompletedLabDetail _$PreviousUnCompletedLabDetailFromJson(
+        Map<String, dynamic> json) =>
+    PreviousUnCompletedLabDetail(
+      appointmentId: (json['appointment_id'] as num?)?.toInt(),
       labId: (json['lab_id'] as num?)?.toInt(),
-      labtest: json['labtest'] as String?,
       clinicId: (json['clinic_id'] as num?)?.toInt(),
       clinicName: json['clinic_name'] as String?,
       doctorId: (json['doctor_id'] as num?)?.toInt(),
@@ -18,16 +19,17 @@ CompletedLabdetail _$CompletedLabdetailFromJson(Map<String, dynamic> json) =>
       firstname: json['firstname'] as String?,
       mobileNo: json['mobileNo'] as String?,
       userImage: json['user_image'] as String?,
-      labDocumentId: (json['lab_document_id'] as num?)?.toInt(),
-      documentUpload: json['document_upload'] as String?,
-      notes: json['notes'] as String?,
       age: json['age'] as String?,
+      labtests: (json['labtests'] as List<dynamic>?)
+          ?.map((e) => Labtest.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
-Map<String, dynamic> _$CompletedLabdetailToJson(CompletedLabdetail instance) =>
+Map<String, dynamic> _$PreviousUnCompletedLabDetailToJson(
+        PreviousUnCompletedLabDetail instance) =>
     <String, dynamic>{
+      'appointment_id': instance.appointmentId,
       'lab_id': instance.labId,
-      'labtest': instance.labtest,
       'clinic_id': instance.clinicId,
       'clinic_name': instance.clinicName,
       'doctor_id': instance.doctorId,
@@ -36,8 +38,6 @@ Map<String, dynamic> _$CompletedLabdetailToJson(CompletedLabdetail instance) =>
       'firstname': instance.firstname,
       'mobileNo': instance.mobileNo,
       'user_image': instance.userImage,
-      'lab_document_id': instance.labDocumentId,
-      'document_upload': instance.documentUpload,
-      'notes': instance.notes,
       'age': instance.age,
+      'labtests': instance.labtests,
     };

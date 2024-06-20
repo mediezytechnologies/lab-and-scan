@@ -47,9 +47,7 @@ class UploadDocumentBloc
           appointmentId: event.appointmentId,
           imagePath: event.imagePath,
           note: event.note,
-          isCompleteStatus: event.isCompletedStatus,
-          testId: event.testId
-          );
+          testIds: event.testIds);
 
       final _state = _result.fold(
         (ErrorModel error) {
@@ -70,5 +68,34 @@ class UploadDocumentBloc
       );
       emit(_state);
     });
+
+    on<_AddToSelectTestIds>((event, emit) async {
+      emit(state.copyWith(selectedTestIdsList: [
+        ...state.selectedTestIdsList,
+        event.id
+      ], selectedTestIndicesSet: {
+        ...state.selectedTestIndicesSet,
+        event.index
+      }, status: false));
+    });
+
+    on<_RemoveFromSelectTestIds>((event, emit) async {
+      emit(state.copyWith(
+          selectedTestIdsList:
+              state.selectedTestIdsList.where((id) => id != event.id).toList(),
+          selectedTestIndicesSet: state.selectedTestIndicesSet
+              .where((index) => index != event.index)
+              .toSet(),
+          status: false));
+    });
+
+    on<_ResetSelectedTestData>((event, emit) async {
+      emit(state.copyWith(
+        selectedTestIdsList: [],
+        selectedTestIndicesSet: {},
+        selectedDocument: null,
+      ));
+    });
+    
   }
 }

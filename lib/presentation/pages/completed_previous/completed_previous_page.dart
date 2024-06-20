@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -69,6 +68,7 @@ class _CompletedPreviousPageState extends State<CompletedPreviousPage> {
           BlocBuilder<GetPreviousCompletedBloc, GetPreviousCompletedState>(
             builder: (context, state) {
               if (state.isLoading) {
+                log("loading...........");
                 return SizedBox(
                   height: size.height * .55,
                   child: Center(
@@ -79,11 +79,12 @@ class _CompletedPreviousPageState extends State<CompletedPreviousPage> {
                 );
               }
               if (state.isError) {
+                log("errorrooroororo xbshsdghfghdsf hgbbhcbvbvvbvcbv");
                 return Center(
                   child: Text(state.message),
                 );
               }
-              return state.getPreviousCompleted.isEmpty
+              return state.getPreviousCompleted.isEmpty || state.getPreviousCompleted==[]
                   ? SizedBox(
                       height: size.height * .55,
                       child: Center(
@@ -108,6 +109,9 @@ class _CompletedPreviousPageState extends State<CompletedPreviousPage> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => CompletedDetailsPage(
+                                    tests: state
+                                        .getPreviousCompleted[index].documents!
+                                        .toList(),
                                     patientAge: state
                                         .getPreviousCompleted[index].age
                                         .toString(),
@@ -126,21 +130,14 @@ class _CompletedPreviousPageState extends State<CompletedPreviousPage> {
                                     doctorName: state
                                         .getPreviousCompleted[index].doctorName
                                         .toString(),
-                                    note: state
-                                        .getPreviousCompleted[index].notes
-                                        .toString(),
-                                    uploadedDocument: state
-                                        .getPreviousCompleted[index]
-                                        .documentUpload
-                                        .toString(),
-                                    testName: state
-                                        .getPreviousCompleted[index].labtest
-                                        .toString(),
                                   ),
                                 ),
                               );
                             },
                             child: CompletedCardWidget(
+                              tests: state
+                                  .getPreviousCompleted[index].documents!
+                                  .toList(),
                               mobileNumber: state
                                   .getPreviousCompleted[index].mobileNo
                                   .toString(),
@@ -152,13 +149,8 @@ class _CompletedPreviousPageState extends State<CompletedPreviousPage> {
                               patientName: state
                                   .getPreviousCompleted[index].firstname
                                   .toString(),
-                              testName: state
-                                  .getPreviousCompleted[index].labtest
-                                  .toString(),
                               doctorName: state
                                   .getPreviousCompleted[index].doctorName
-                                  .toString(),
-                              note: state.getPreviousCompleted[index].notes
                                   .toString(),
                             ),
                           );

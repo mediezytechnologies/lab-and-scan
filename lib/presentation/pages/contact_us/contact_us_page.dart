@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iconly/iconly.dart';
-
+import '../../../application/home/contact_us/contact_us_bloc.dart';
 import '../../common_widgets/custome_formfield_widget.dart';
 import '../../common_widgets/submit_button_widget.dart';
+import '../../core/general_services.dart';
 import '../../core/text_style.dart';
+import '../home/home_page.dart';
 
 class ContactUsPage extends StatefulWidget {
   const ContactUsPage({super.key});
@@ -72,8 +75,41 @@ class _ContactUsPageState extends State<ContactUsPage> {
                     preIcon: IconlyLight.edit,
                   ),
                   SizedBox(height: size.height * .04),
-                  SubmitButtonWidget(
-                      buttonText: "Submit", loading: false, onTap: () {})
+                  BlocConsumer<ContactUsBloc, ContactUsState>(
+                    listener: (context, state) {
+                      if (state.isError) {
+                        GeneralServices.instance
+                            .showToastMessage(state.message);
+                      }
+                      if (state.status) {
+                        GeneralServices.instance
+                            .showToastMessage(state.message);
+                        Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const HomePage(),
+                            ),
+                            (route) => false);
+                      }
+                    },
+                    builder: (context, state) {
+                      return SubmitButtonWidget(
+                          buttonText: "Submit",
+                          loading: state.isLoading,
+                          onTap: () {
+                            if (_formKey.currentState!.validate()) {
+                              BlocProvider.of<ContactUsBloc>(context).add(
+                                ContactUsEvent.contactUs(
+                                  email: emailController.text.trim(),
+                                  message: messageController.text.trim(),
+                                ),
+                              );
+                              emailController.clear();
+                              messageController.clear();
+                            }
+                          });
+                    },
+                  )
                 ],
               ),
             )

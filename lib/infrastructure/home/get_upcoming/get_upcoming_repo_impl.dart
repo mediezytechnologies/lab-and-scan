@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
@@ -18,12 +20,13 @@ class GetUpcomingRepoImpl implements GetUpcomingRepository {
     try {
       var response = await Dio(BaseOptions(
         headers: {'Authorization': 'Bearer $token'},
-         contentType: 'application/json',
+        contentType: 'application/json',
       )).get(
         "${ApiEndPoints.getUpComing}$id",
       );
       if (response.statusCode == 200 || response.statusCode == 201) {
         final result = GetUpComingModel.fromJson(response.data);
+        log("get upcoming result :  ${result.upComingLabDetails}");
         return right(result.upComingLabDetails!);
       } else {
         return Left(
@@ -32,6 +35,7 @@ class GetUpcomingRepoImpl implements GetUpcomingRepository {
       }
     } on DioException catch (e) {
       final err = ErrorModel.fromJson(e.response!.data);
+       log("get upcoming error: $err");
       return Left(err);
     }
   }

@@ -30,16 +30,14 @@ class IncompletedPreviousRepoImpl implements IncompletedPreviousRepository {
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         final result = InCompletedPreviousModel.fromJson(response.data);
-
+        log("get incompleted previous result :  ${result.previousUnCompletedLabDetails}");
         return Right(result.previousUnCompletedLabDetails!);
       } else {
         return Left(ErrorModel());
       }
     } on DioException catch (e) {
-      log(e.message!);
-      log(e.error.toString());
       final err = ErrorModel.fromJson(e.response!.data);
-      log("err: $err");
+      log("get incompleted previous error :  $err");
       return Left(err);
     }
   }

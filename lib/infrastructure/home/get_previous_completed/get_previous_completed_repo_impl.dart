@@ -9,12 +9,11 @@ import '../../../domain/home/get_previous_completed/model/previous_completed_lab
 import '../../core/api_end_points.dart';
 import '../../core/token/token.dart';
 
-
 @LazySingleton(as: GetPreviousCompletedRepository)
 class GetPreviousCompletedRepoImpl implements GetPreviousCompletedRepository {
   @override
-  Future<Either<ErrorModel, List<PreviousCompletedLabDetail>>> getPreviousCompletedRepo(
-      {required String selectedDate}) async {
+  Future<Either<ErrorModel, List<PreviousCompletedLabDetail>>>
+      getPreviousCompletedRepo({required String selectedDate}) async {
     String? id = GetLocalStorage.getUserIdAndToken("id");
     String? token = GetLocalStorage.getUserIdAndToken('token');
     try {
@@ -28,19 +27,16 @@ class GetPreviousCompletedRepoImpl implements GetPreviousCompletedRepository {
           "date": selectedDate,
         },
       );
-
       if (response.statusCode == 200 || response.statusCode == 201) {
         final result = GetPreviousCompletedModel.fromJson(response.data);
-
+        log("get previous completed result :  ${result.previousCompletedLabDetails}");
         return Right(result.previousCompletedLabDetails!);
       } else {
         return Left(ErrorModel());
       }
     } on DioException catch (e) {
-      log(e.message!);
-      log(e.error.toString());
       final err = ErrorModel.fromJson(e.response!.data);
-      log("err: $err");
+      log("get previous completed error : $err");
       return Left(err);
     }
   }

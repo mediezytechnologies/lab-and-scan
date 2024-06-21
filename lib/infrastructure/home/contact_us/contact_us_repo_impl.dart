@@ -23,32 +23,16 @@ class ContactUsRepoImpl implements ContactUsRepository {
         ApiEndPoints.contactUs,
         data: {"email": email, "description": message, "UserId": id},
       );
-
       if (response.statusCode == 200 || response.statusCode == 201) {
         final result = ContactUsModel.fromJson(response.data);
-        Map<String, dynamic> user = {
-          'token': response.data['token'],
-          'id': response.data["lab"]["id"].toString(),
-          'firstname': response.data["lab"]['firstname'].toString()
-        };
-
-        GetLocalStorage.saveToken(user);
-        String? token = GetLocalStorage.getUserIdAndToken('token');
-        String? id = GetLocalStorage.getUserIdAndToken('id');
-        String? userName = GetLocalStorage.getUserIdAndToken('firstname');
-        log("Token >> ${token.toString()}");
-        log("login data ${response.toString()}");
-        log("Id >>>> ${id.toString()}");
-        log("username >>>>>>>${userName.toString()}");
+        log("contact us result : ${result.message}");
         return Right(result);
       } else {
         return Left(ErrorModel());
       }
     } on DioException catch (e) {
-      log(e.message!);
-      log(e.error.toString());
       final err = ErrorModel.fromJson(e.response!.data);
-      log("err: $err");
+      log("contact us error: $err");
       return Left(err);
     }
   }

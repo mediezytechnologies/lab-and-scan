@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
@@ -24,7 +26,7 @@ class GetUserRepoImpl implements GetUserDetailsRepository {
       );
       if (response.statusCode == 200 || response.statusCode == 201) {
         final result = GetUserDetailsModel.fromJson(response.data);
-
+        log("get user details result :  ${result.testdetails}");
         return right(result.testdetails!);
       } else {
         return Left(
@@ -33,6 +35,7 @@ class GetUserRepoImpl implements GetUserDetailsRepository {
       }
     } on DioException catch (e) {
       final err = ErrorModel.fromJson(e.response!.data);
+      log("get user details error :  $err");
       return Left(err);
     }
   }

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
@@ -24,6 +26,7 @@ class GetCompletedRepoImpl implements GetCompletedRepository {
       );
       if (response.statusCode == 200 || response.statusCode == 201) {
         final result = GetCompletedModel.fromJson(response.data);
+        log("get completed result :  ${result.completedLabDetails}");
         return right(result.completedLabDetails!);
       } else {
         return Left(
@@ -32,6 +35,7 @@ class GetCompletedRepoImpl implements GetCompletedRepository {
       }
     } on DioException catch (e) {
       final err = ErrorModel.fromJson(e.response!.data);
+      log("get completed result : $err");
       return Left(err);
     }
   }

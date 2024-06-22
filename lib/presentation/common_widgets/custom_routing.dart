@@ -17,5 +17,7 @@ class CustomPageRoute extends PageRouteBuilder {
       FadeTransition(
         opacity: animation,
         child: route,
+ 
       );
 }
+/////

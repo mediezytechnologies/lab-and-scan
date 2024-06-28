@@ -62,7 +62,7 @@ class _CompletedDetailsPageState extends State<CompletedDetailsPage> {
     final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Completed details"),
+        title: const Text("Completed details",),
         centerTitle: true,
       ),
       body: Container(

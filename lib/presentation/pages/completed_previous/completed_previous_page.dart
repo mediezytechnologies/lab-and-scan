@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 import '../../../application/home/get_previous_completed/get_previous_completed_bloc.dart';
 import '../../common_widgets/calender_widget.dart';
 import '../../core/app_colors.dart';
+import '../../core/text_style.dart';
 import '../completed_details/completed_details_page.dart';
 import '../../common_widgets/completed_card_widget.dart';
 
@@ -34,7 +35,7 @@ class _CompletedPreviousPageState extends State<CompletedPreviousPage> {
     final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Completed appointments"),
+        title:  Text("Completed appointments", style: white16B500),
         centerTitle: true,
       ),
       body: Column(

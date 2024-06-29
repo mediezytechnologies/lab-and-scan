@@ -25,7 +25,7 @@ class _ContactUsPageState extends State<ContactUsPage> {
     final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Contact us"),
+        title:  Text("Contact us", style: white16B500,),
         centerTitle: true,
       ),
       body: Padding(

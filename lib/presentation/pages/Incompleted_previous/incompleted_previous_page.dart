@@ -7,6 +7,7 @@ import '../../../application/home/incompleted_previous/incompleted_previous_bloc
 import '../../common_widgets/calender_widget.dart';
 import '../../common_widgets/up_coming_card_widget.dart';
 import '../../core/app_colors.dart';
+import '../../core/text_style.dart';
 import '../upcoming_details/upcoming_details_page.dart';
 
 class IncompletedPreviousPage extends StatefulWidget {
@@ -35,7 +36,7 @@ class _IncompletedPreviousPageState extends State<IncompletedPreviousPage> {
     final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Incompleted appointments"),
+        title:  Text("Incompleted appointments", style: white16B500),
         centerTitle: true,
       ),
       body: Column(

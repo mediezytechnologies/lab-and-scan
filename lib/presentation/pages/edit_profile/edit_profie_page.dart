@@ -17,6 +17,7 @@ import 'package:mediezy_lab_scan/presentation/pages/home/home_page.dart';
 import '../../common_widgets/custom_routing.dart';
 import '../../core/app_colors.dart';
 import '../../core/general_services.dart';
+import '../../core/text_style.dart';
 
 class EditProfilePage extends StatefulWidget {
   const EditProfilePage(
@@ -60,7 +61,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
     final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Edit profile"),
+        title:  Text("Edit profile", style: white16B500),
         centerTitle: true,
         leading: GestureDetector(
           onTap: () {

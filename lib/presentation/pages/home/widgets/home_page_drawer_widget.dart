@@ -59,13 +59,15 @@ class HomePageDrawerWidget extends StatelessWidget {
                               child: state.userdetails.first.labImage == null
                                   ? Image.asset(
                                       "assets/icons/profile pic.png",
-                                      color: kMainColor,
+                                      color: kCardColor,
                                     )
                                   : FancyShimmerImage(
                                       boxFit: BoxFit.cover,
-                                      errorWidget: const Image(
-                                        image: AssetImage(
-                                            "assets/icons/profile pic.png"),
+                                      errorWidget: Image(
+                                        image: const AssetImage(
+                                          "assets/icons/profile pic.png",
+                                        ),
+                                        color: kCardColor,
                                       ),
                                       imageUrl: state.userdetails.first.labImage
                                           .toString(),

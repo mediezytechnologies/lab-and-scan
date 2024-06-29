@@ -5,6 +5,7 @@ import 'package:mediezy_lab_scan/presentation/pages/home/widgets/home_page_drawe
 import '../../../application/home/get_completed/get_completed_bloc.dart';
 import '../../../application/home/get_up_coming/get_up_coming_bloc.dart';
 import '../../../infrastructure/core/token/token.dart';
+import '../../core/text_style.dart';
 import 'widgets/completed_widget.dart';
 import 'widgets/tab_bar_widget.dart';
 import 'widgets/up_coming_widget.dart';
@@ -40,6 +41,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       appBar: AppBar(
         title: Text(
           userName.toString(),
+          style: white16B500,
         ),
         centerTitle: true,
       ),

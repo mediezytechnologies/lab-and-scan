@@ -8,6 +8,8 @@ import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:path_provider/path_provider.dart';
 
+import '../../../core/text_style.dart';
+
 class ViewDocumentShowWidget extends StatefulWidget {
   const ViewDocumentShowWidget({super.key, required this.uploadedDocument});
 
@@ -36,7 +38,7 @@ class _ViewDocumentShowWidgetState extends State<ViewDocumentShowWidget> {
     final isPdf = widget.uploadedDocument.toLowerCase().endsWith('.pdf');
     return Scaffold(
       appBar: AppBar(
-        title: const Text("View uploaded document"),
+        title:  Text("View uploaded document",style: white16B500),
         centerTitle: true,
       ),
       body: Center(

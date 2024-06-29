@@ -68,7 +68,7 @@ class _UpComingDetailsPageState extends State<UpComingDetailsPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Upcoming details"),
+        title: Text("Upcoming details", style: white16B500),
         centerTitle: true,
         leading: GestureDetector(
           onTap: () {

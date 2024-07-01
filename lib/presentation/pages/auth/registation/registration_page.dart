@@ -110,21 +110,22 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 ),
                 SizedBox(height: size.height * .01),
                 CustomeFormFieldWidget(
-                    controller: emailController,
-                    hintText: "Email address",
-                    textInputType: TextInputType.emailAddress,
-                    textInputAction: TextInputAction.next,
-                    obscureText: false,
-                    validator: (value) {
-                      if (value!.isEmpty ||
-                          !value.contains("@") ||
-                          !value.contains(".")) {
-                        return "Please enter the valid email address";
-                      } else {
-                        return null;
-                      }
-                    },
-                    preIcon:  IconlyLight.message,),
+                  controller: emailController,
+                  hintText: "Email address",
+                  textInputType: TextInputType.emailAddress,
+                  textInputAction: TextInputAction.next,
+                  obscureText: false,
+                  validator: (value) {
+                    if (value!.isEmpty ||
+                        !value.contains("@") ||
+                        !value.contains(".")) {
+                      return "Please enter the valid email address";
+                    } else {
+                      return null;
+                    }
+                  },
+                  preIcon: IconlyLight.message,
+                ),
                 SizedBox(height: size.height * .01),
                 CustomeFormFieldWidget(
                     controller: mobileNumberController,
@@ -134,7 +135,11 @@ class _RegistrationPageState extends State<RegistrationPage> {
                     obscureText: false,
                     maxLength: 10,
                     validator: (value) {
-                      if (value!.isEmpty || value.length < 10) {
+                      if (value!.isEmpty || value == null) {
+                        return "Please enter the valid phone number";
+                      } else if (value.length < 10) {
+                        return "Phone number must have 10 digits";
+                      } else if (int.tryParse(value) == null) {
                         return "Please enter the valid phone number";
                       } else {
                         return null;

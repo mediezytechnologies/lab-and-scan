@@ -170,7 +170,7 @@ mixin _$GetUpComingState {
   bool get isError => throw _privateConstructorUsedError;
   String get message => throw _privateConstructorUsedError;
   bool get status => throw _privateConstructorUsedError;
-  List<UpComingLabDetail> get getUpComing => throw _privateConstructorUsedError;
+  List<UpComingDetail> get getUpComing => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $GetUpComingStateCopyWith<GetUpComingState> get copyWith =>
@@ -188,7 +188,7 @@ abstract class $GetUpComingStateCopyWith<$Res> {
       bool isError,
       String message,
       bool status,
-      List<UpComingLabDetail> getUpComing});
+      List<UpComingDetail> getUpComing});
 }
 
 /// @nodoc
@@ -230,7 +230,7 @@ class _$GetUpComingStateCopyWithImpl<$Res, $Val extends GetUpComingState>
       getUpComing: null == getUpComing
           ? _value.getUpComing
           : getUpComing // ignore: cast_nullable_to_non_nullable
-              as List<UpComingLabDetail>,
+              as List<UpComingDetail>,
     ) as $Val);
   }
 }
@@ -248,7 +248,7 @@ abstract class _$$InitialImplCopyWith<$Res>
       bool isError,
       String message,
       bool status,
-      List<UpComingLabDetail> getUpComing});
+      List<UpComingDetail> getUpComing});
 }
 
 /// @nodoc
@@ -288,7 +288,7 @@ class __$$InitialImplCopyWithImpl<$Res>
       getUpComing: null == getUpComing
           ? _value._getUpComing
           : getUpComing // ignore: cast_nullable_to_non_nullable
-              as List<UpComingLabDetail>,
+              as List<UpComingDetail>,
     ));
   }
 }
@@ -301,7 +301,7 @@ class _$InitialImpl implements _Initial {
       required this.isError,
       required this.message,
       required this.status,
-      required final List<UpComingLabDetail> getUpComing})
+      required final List<UpComingDetail> getUpComing})
       : _getUpComing = getUpComing;
 
   @override
@@ -312,9 +312,9 @@ class _$InitialImpl implements _Initial {
   final String message;
   @override
   final bool status;
-  final List<UpComingLabDetail> _getUpComing;
+  final List<UpComingDetail> _getUpComing;
   @override
-  List<UpComingLabDetail> get getUpComing {
+  List<UpComingDetail> get getUpComing {
     if (_getUpComing is EqualUnmodifiableListView) return _getUpComing;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_getUpComing);
@@ -356,7 +356,7 @@ abstract class _Initial implements GetUpComingState {
       required final bool isError,
       required final String message,
       required final bool status,
-      required final List<UpComingLabDetail> getUpComing}) = _$InitialImpl;
+      required final List<UpComingDetail> getUpComing}) = _$InitialImpl;
 
   @override
   bool get isLoading;
@@ -367,7 +367,7 @@ abstract class _Initial implements GetUpComingState {
   @override
   bool get status;
   @override
-  List<UpComingLabDetail> get getUpComing;
+  List<UpComingDetail> get getUpComing;
   @override
   @JsonKey(ignore: true)
   _$$InitialImplCopyWith<_$InitialImpl> get copyWith =>

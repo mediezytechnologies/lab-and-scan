@@ -3,9 +3,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../domain/home/common_completed_test/document.dart';
+import '../../../domain/home/common_completed/document.dart';
 import '../../common_widgets/custom_routing.dart';
 import '../../common_widgets/data_card_widget.dart';
+import '../../common_widgets/doctor_section_widget.dart';
 import '../../common_widgets/user_section_widget.dart';
 import '../../core/app_colors.dart';
 import '../../core/text_style.dart';
@@ -26,6 +27,7 @@ class CompletedDetailsPage extends StatefulWidget {
     required this.doctorName,
     required this.clinicName,
     required this.tests,
+    required this.doctorImage,
   });
 
   final String patientAge;
@@ -35,6 +37,7 @@ class CompletedDetailsPage extends StatefulWidget {
   final String doctorName;
   final String clinicName;
   final List<Document> tests;
+  final String doctorImage;
 
   @override
   State<CompletedDetailsPage> createState() => _CompletedDetailsPageState();
@@ -62,7 +65,7 @@ class _CompletedDetailsPageState extends State<CompletedDetailsPage> {
     final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        title:  Text("Completed details", style: white16B500),
+        title: Text("Completed details", style: white16B500),
         centerTitle: true,
       ),
       body: Container(
@@ -78,9 +81,11 @@ class _CompletedDetailsPageState extends State<CompletedDetailsPage> {
                 patientName: widget.patientName,
               ),
               SizedBox(height: size.height * .011),
-              DataCardWidget(title: "Doctor name", value: widget.doctorName),
-              SizedBox(height: size.height * .011),
-              DataCardWidget(title: "Clinic name", value: widget.clinicName),
+              DoctorSectionWidget(
+                  size: size,
+                  clinicName: widget.clinicName,
+                  doctorImage: widget.doctorImage,
+                  doctorName: widget.doctorName),
               SizedBox(height: size.height * .011),
               Container(
                 padding: const EdgeInsets.all(8),
@@ -110,45 +115,112 @@ class _CompletedDetailsPageState extends State<CompletedDetailsPage> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text('Test section : ${index + 1}',
-                                  style: grey13B500),
+                                  style: black13B500),
                               SizedBox(height: size.height * 0.005),
-                              ListView.builder(
-                                shrinkWrap: true,
-                                physics: const NeverScrollableScrollPhysics(),
-                                itemCount: document.labtests!.length,
-                                itemBuilder: (context, labTestIndex) {
-                                  final labTest =
-                                      document.labtests![labTestIndex];
-                                  return Container(
-                                    margin: EdgeInsets.only(
-                                        bottom: size.height * 0.005),
-                                    padding: const EdgeInsets.all(8),
-                                    decoration: BoxDecoration(
-                                      color: kCardColor,
-                                      borderRadius: BorderRadius.circular(10.r),
-                                    ),
-                                    child: Row(
+                              //! lab
+                              document.labtests!.isEmpty
+                                  ? const SizedBox()
+                                  : Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
                                       children: [
-                                        Text(
-                                          '${labTestIndex + 1}. ',
-                                          style: grey12B500,
-                                        ),
-                                        SizedBox(
-                                          width: size.width * 0.75,
-                                          child: Text(
-                                            labTest.labtestName.toString(),
-                                            style: black12B500,
-                                          ),
+                                        Text('Lab tests : ', style: grey13B500),
+                                        SizedBox(height: size.height * 0.002),
+                                        ListView.builder(
+                                          shrinkWrap: true,
+                                          physics:
+                                              const NeverScrollableScrollPhysics(),
+                                          itemCount: document.labtests!.length,
+                                          itemBuilder: (context, labTestIndex) {
+                                            final labTest = document
+                                                .labtests![labTestIndex];
+                                            return Container(
+                                              margin: EdgeInsets.only(
+                                                  bottom: size.height * 0.005),
+                                              padding: const EdgeInsets.all(8),
+                                              decoration: BoxDecoration(
+                                                color: kCardColor,
+                                                borderRadius:
+                                                    BorderRadius.circular(10.r),
+                                              ),
+                                              child: Row(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Text(
+                                                    '${labTestIndex + 1}. ',
+                                                    style: grey12B500,
+                                                  ),
+                                                  SizedBox(
+                                                    width: size.width * 0.75,
+                                                    child: Text(
+                                                      labTest.labtestName
+                                                          .toString(),
+                                                      style: black12B500,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            );
+                                          },
                                         ),
                                       ],
                                     ),
-                                  );
-                                },
-                              ),
+                              //! scan
+                              document.labtests!.isEmpty
+                                  ? const SizedBox()
+                                  : Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text('Scan tests : ',
+                                            style: grey13B500),
+                                        SizedBox(height: size.height * 0.002),
+                                        ListView.builder(
+                                          shrinkWrap: true,
+                                          physics:
+                                              const NeverScrollableScrollPhysics(),
+                                          itemCount: document.scantests!.length,
+                                          itemBuilder:
+                                              (context, scanTestIndex) {
+                                            final scanTest = document
+                                                .scantests![scanTestIndex];
+                                            return Container(
+                                              margin: EdgeInsets.only(
+                                                  bottom: size.height * 0.005),
+                                              padding: const EdgeInsets.all(8),
+                                              decoration: BoxDecoration(
+                                                color: kCardColor,
+                                                borderRadius:
+                                                    BorderRadius.circular(10.r),
+                                              ),
+                                              child: Row(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Text(
+                                                    '${scanTestIndex + 1}. ',
+                                                    style: grey12B500,
+                                                  ),
+                                                  SizedBox(
+                                                    width: size.width * 0.75,
+                                                    child: Text(
+                                                      scanTest.scantestName
+                                                          .toString(),
+                                                      style: black12B500,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            );
+                                          },
+                                        ),
+                                      ],
+                                    ),
                               document.documentUpload == null
                                   ? const SizedBox()
                                   : Column(

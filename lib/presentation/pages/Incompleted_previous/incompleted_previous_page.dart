@@ -36,7 +36,7 @@ class _IncompletedPreviousPageState extends State<IncompletedPreviousPage> {
     final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        title:  Text("Incompleted appointments", style: white16B500),
+        title: Text("Incompleted appointments", style: white16B500),
         centerTitle: true,
       ),
       body: Column(
@@ -108,12 +108,19 @@ class _IncompletedPreviousPageState extends State<IncompletedPreviousPage> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => UpComingDetailsPage(
+                                    doctorImage: state
+                                        .getPreviousInompleted[index]
+                                        .docterImage
+                                        .toString(),
                                     appointmentId: state
                                         .getPreviousInompleted[index]
                                         .appointmentId
                                         .toString(),
-                                    testName: state
+                                    labTestNames: state
                                         .getPreviousInompleted[index].labtests!
+                                        .toList(),
+                                    scanTestName: state
+                                        .getPreviousInompleted[index].scantests!
                                         .toList(),
                                     patientName: state
                                         .getPreviousInompleted[index].firstname
@@ -152,6 +159,12 @@ class _IncompletedPreviousPageState extends State<IncompletedPreviousPage> {
                             child: Column(
                               children: [
                                 UpComingCardWidget(
+                                  labTestNames: state
+                                      .getPreviousInompleted[index].labtests!
+                                      .toList(),
+                                  scanTestNames: state
+                                      .getPreviousInompleted[index].scantests!
+                                      .toList(),
                                   pensingShow: true,
                                   mobileNumber: state
                                       .getPreviousInompleted[index].mobileNo
@@ -165,9 +178,6 @@ class _IncompletedPreviousPageState extends State<IncompletedPreviousPage> {
                                   patientName: state
                                       .getPreviousInompleted[index].firstname
                                       .toString(),
-                                  testNames: state
-                                      .getPreviousInompleted[index].labtests!
-                                      .toList(),
                                 ),
                               ],
                             ),

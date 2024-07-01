@@ -1,19 +1,18 @@
 import 'dart:developer';
-
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:mediezy_lab_scan/domain/core/error/error_model.dart';
 import 'package:mediezy_lab_scan/domain/home/get_upcoming/get_upcoming_repository.dart';
-import '../../../domain/home/get_upcoming/model/get_up_coming_model.dart';
-import '../../../domain/home/get_upcoming/model/up_coming_lab_detail.dart';
+import '../../../domain/home/common_upcoming/get_up_coming_model.dart';
+import '../../../domain/home/common_upcoming/up_coming_detail.dart';
 import '../../core/api_end_points.dart';
 import '../../core/token/token.dart';
 
 @LazySingleton(as: GetUpcomingRepository)
 class GetUpcomingRepoImpl implements GetUpcomingRepository {
   @override
-  Future<Either<ErrorModel, List<UpComingLabDetail>>> getUpComingRepo() async {
+  Future<Either<ErrorModel, List<UpComingDetail>>> getUpComingRepo() async {
     String? id = GetLocalStorage.getUserIdAndToken("id");
     String? token = GetLocalStorage.getUserIdAndToken('token');
 
@@ -26,8 +25,8 @@ class GetUpcomingRepoImpl implements GetUpcomingRepository {
       );
       if (response.statusCode == 200 || response.statusCode == 201) {
         final result = GetUpComingModel.fromJson(response.data);
-        log("get upcoming result :  ${result.upComingLabDetails}");
-        return right(result.upComingLabDetails!);
+        log("get upcoming result :  ${result.upComingDetails}");
+        return right(result.upComingDetails!);
       } else {
         return Left(
           ErrorModel(),

@@ -35,7 +35,7 @@ class _CompletedPreviousPageState extends State<CompletedPreviousPage> {
     final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        title:  Text("Completed appointments", style: white16B500),
+        title: Text("Completed appointments", style: white16B500),
         centerTitle: true,
       ),
       body: Column(
@@ -85,7 +85,8 @@ class _CompletedPreviousPageState extends State<CompletedPreviousPage> {
                   child: Text(state.message),
                 );
               }
-              return state.getPreviousCompleted.isEmpty || state.getPreviousCompleted==[]
+              return state.getPreviousCompleted.isEmpty ||
+                      state.getPreviousCompleted == []
                   ? SizedBox(
                       height: size.height * .55,
                       child: Center(
@@ -110,6 +111,9 @@ class _CompletedPreviousPageState extends State<CompletedPreviousPage> {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => CompletedDetailsPage(
+                                    doctorImage: state
+                                        .getPreviousCompleted[index].docterImage
+                                        .toString(),
                                     tests: state
                                         .getPreviousCompleted[index].documents!
                                         .toList(),

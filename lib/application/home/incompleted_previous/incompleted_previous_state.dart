@@ -7,14 +7,13 @@ class IncompletedPreviousState with _$IncompletedPreviousState {
     required bool isError,
     required String message,
     required bool status,
-    required List<PreviousUnCompletedLabDetail> getPreviousInompleted,
+    required List<UpComingDetail> getPreviousInompleted,
   }) = _Initial;
 
-  factory IncompletedPreviousState.initial() =>
-      const IncompletedPreviousState(
-          getPreviousInompleted: [],
-          isError: false,
-          isLoading: false,
-          message: '',
-          status: false);
+  factory IncompletedPreviousState.initial() => const IncompletedPreviousState(
+      getPreviousInompleted: [],
+      isError: false,
+      isLoading: false,
+      message: '',
+      status: false);
 }

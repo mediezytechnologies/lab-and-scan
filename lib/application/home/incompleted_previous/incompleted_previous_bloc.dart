@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import '../../../domain/home/common_upcoming/up_coming_detail.dart';
 import '../../../domain/home/incompleted_previous/incompleted_previous_repository.dart';
-import '../../../domain/home/incompleted_previous/model/in_completed_previous_model/previous_un_completed_lab_detail.dart';
 part 'incompleted_previous_event.dart';
 part 'incompleted_previous_state.dart';
 part 'incompleted_previous_bloc.freezed.dart';

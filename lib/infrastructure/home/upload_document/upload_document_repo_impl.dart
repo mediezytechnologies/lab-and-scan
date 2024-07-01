@@ -19,7 +19,8 @@ class UploadDocumentRepoImpl implements UploadDocumentRepository {
     required String clinicId,
     required String patientId,
     required String appointmentId,
-    required List<int> testIds,
+    required List<int> labTestIds,
+    required List<int> scanTestIds,
   }) async {
     String? id = GetLocalStorage.getUserIdAndToken("id");
     String? token = GetLocalStorage.getUserIdAndToken('token');
@@ -42,7 +43,8 @@ class UploadDocumentRepoImpl implements UploadDocumentRepository {
         'patient_id': patientId,
         'appointment_id': appointmentId,
         'notes': note,
-        'labtest_id[]': testIds,
+        'labtest_id[]': labTestIds,
+        'scantest_id[]': scanTestIds,
         if (multipartFile != null) 'document_upload': multipartFile,
       });
       for (var field in formData.fields) {

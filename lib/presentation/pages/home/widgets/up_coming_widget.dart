@@ -85,10 +85,17 @@ class _UpComingWidgetState extends State<UpComingWidget> {
                                 context,
                                 CustomPageRoute(
                                   route: UpComingDetailsPage(
+                                    doctorImage: state
+                                        .getUpComing[index].docterImage
+                                        .toString(),
                                     appointmentId: state
                                         .getUpComing[index].appointmentId
                                         .toString(),
-                                    testName: state.getUpComing[index].labtests!
+                                    labTestNames: state
+                                        .getUpComing[index].labtests!
+                                        .toList(),
+                                    scanTestName: state
+                                        .getUpComing[index].scantests!
                                         .toList(),
                                     patientName: state
                                         .getUpComing[index].firstname
@@ -135,7 +142,11 @@ class _UpComingWidgetState extends State<UpComingWidget> {
                                   patientName: state
                                       .getUpComing[index].firstname
                                       .toString(),
-                                  testNames: state.getUpComing[index].labtests!
+                                  labTestNames: state
+                                      .getUpComing[index].labtests!
+                                      .toList(),
+                                  scanTestNames: state
+                                      .getUpComing[index].scantests!
                                       .toList(),
                                 ),
                               ],

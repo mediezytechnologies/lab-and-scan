@@ -7,7 +7,7 @@ class GetPreviousCompletedState with _$GetPreviousCompletedState {
     required bool isError,
     required String message,
     required bool status,
-    required List<PreviousCompletedLabDetail> getPreviousCompleted,
+    required List<CompletedLabDetail> getPreviousCompleted,
   }) = _Initial;
 
   factory GetPreviousCompletedState.initial() =>

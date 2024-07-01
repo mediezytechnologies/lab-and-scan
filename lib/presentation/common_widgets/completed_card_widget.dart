@@ -2,7 +2,7 @@ import 'package:animation_wrappers/animation_wrappers.dart';
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../domain/home/common_completed_test/document.dart';
+import '../../domain/home/common_completed/document.dart';
 import '../core/app_colors.dart';
 import '../core/text_style.dart';
 
@@ -27,6 +27,8 @@ class CompletedCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    List<String> labTestNames = extractLabTestNames(tests);
+    List<String> scanTestNames = extractScanTestNames(tests);
     return Container(
       padding: const EdgeInsets.all(8),
       margin: EdgeInsets.only(bottom: 5.h),
@@ -76,47 +78,30 @@ class CompletedCardWidget extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
+                  Row(
+                    children: [
+                      Text(
+                        "Ph : ",
+                        style: grey12B500,
+                      ),
+                      Text(
+                        mobileNumber,
+                        style: black13B500,
+                      ),
+                    ],
+                  ),
                   SizedBox(
-                    width: size.width * .7,
-                    child: Text(
-                      tests[0].labtests!.length == 2
-                          ? "${tests[0].labtests![0].labtestName.toString()} & ${tests[0].labtests!.last.labtestName.toString()}"
-                          : (tests[0].labtests!.length > 2)
-                              ? "${tests[0].labtests![0].labtestName.toString()} & ${tests[0].labtests!.last.labtestName.toString()}..."
-                              : tests[0].labtests![0].labtestName.toString(),
-                      style: grey13B500,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
+                    width: size.width * .03,
                   ),
                   Row(
                     children: [
-                      Row(
-                        children: [
-                          Text(
-                            "Ph : ",
-                            style: grey12B500,
-                          ),
-                          Text(
-                            mobileNumber,
-                            style: black13B500,
-                          ),
-                        ],
+                      Text(
+                        "Age : ",
+                        style: grey12B500,
                       ),
-                      SizedBox(
-                        width: size.width * .03,
-                      ),
-                      Row(
-                        children: [
-                          Text(
-                            "Age : ",
-                            style: grey12B500,
-                          ),
-                          Text(
-                            patientAge,
-                            style: black13B500,
-                          ),
-                        ],
+                      Text(
+                        patientAge,
+                        style: black13B500,
                       ),
                     ],
                   )
@@ -124,7 +109,49 @@ class CompletedCardWidget extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(height: size.height * .0015),
+          SizedBox(height: size.height * .002),
+          labTestNames.isEmpty
+              ? const SizedBox()
+              : Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text("Lab test : ", style: grey12B500),
+                    SizedBox(
+                      width: size.width * .7,
+                      child: Text(
+                        labTestNames.length == 1
+                            ? labTestNames.first
+                            : labTestNames.length == 2
+                                ? "${labTestNames.first} & ${labTestNames.last}"
+                                : "${labTestNames.first} & ${labTestNames[1]}...",
+                        style: black13B500,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                  ],
+                ),
+          scanTestNames.isEmpty
+              ? const SizedBox()
+              : Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text("Scan test : ", style: grey12B500),
+                  SizedBox(
+                    width: size.width * .7,
+                    child: Text(
+                      scanTestNames.length == 1
+                          ? scanTestNames.first
+                          : scanTestNames.length == 2
+                              ? "${scanTestNames.first} & ${scanTestNames.last}"
+                              : "${scanTestNames.first} & ${scanTestNames[1]}...",
+                      style: black13B500,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                ],
+              ),
           Row(
             children: [
               Text(
@@ -169,5 +196,29 @@ class CompletedCardWidget extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  List<String> extractLabTestNames(List<Document> tests) {
+    Set<String> uniqueLabTests = {};
+    for (var doc in tests) {
+      for (var test in doc.labtests ?? []) {
+        if (test.labtestName != null && test.labtestName!.isNotEmpty) {
+          uniqueLabTests.add(test.labtestName!);
+        }
+      }
+    }
+    return uniqueLabTests.toList();
+  }
+
+  List<String> extractScanTestNames(List<Document> tests) {
+    Set<String> uniqueScanTests = {};
+    for (var doc in tests) {
+      for (var test in doc.scantests ?? []) {
+        if (test.scantestName != null && test.scantestName!.isNotEmpty) {
+          uniqueScanTests.add(test.scantestName!);
+        }
+      }
+    }
+    return uniqueScanTests.toList();
   }
 }

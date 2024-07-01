@@ -5,8 +5,8 @@ import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:mediezy_lab_scan/domain/core/error/error_model.dart';
 import 'package:mediezy_lab_scan/domain/home/get_completed/get_completed_repository.dart';
-import '../../../domain/home/get_completed/model/completed_lab_detail.dart';
-import '../../../domain/home/get_completed/model/get_completed_model.dart';
+import '../../../domain/home/common_completed/completed_lab_detail.dart';
+import '../../../domain/home/common_completed/get_completed_model.dart';
 import '../../core/api_end_points.dart';
 import '../../core/token/token.dart';
 

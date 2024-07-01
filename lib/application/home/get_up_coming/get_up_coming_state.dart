@@ -7,7 +7,7 @@ class GetUpComingState with _$GetUpComingState {
     required bool isError,
     required String message,
     required bool status,
-    required List<UpComingLabDetail> getUpComing,
+    required List<UpComingDetail> getUpComing,
   }) = _Initial;
 
   factory GetUpComingState.initial() => const GetUpComingState(

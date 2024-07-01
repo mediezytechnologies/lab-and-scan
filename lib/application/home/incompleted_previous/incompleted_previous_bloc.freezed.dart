@@ -230,7 +230,7 @@ mixin _$IncompletedPreviousState {
   bool get isError => throw _privateConstructorUsedError;
   String get message => throw _privateConstructorUsedError;
   bool get status => throw _privateConstructorUsedError;
-  List<PreviousUnCompletedLabDetail> get getPreviousInompleted =>
+  List<UpComingDetail> get getPreviousInompleted =>
       throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -249,7 +249,7 @@ abstract class $IncompletedPreviousStateCopyWith<$Res> {
       bool isError,
       String message,
       bool status,
-      List<PreviousUnCompletedLabDetail> getPreviousInompleted});
+      List<UpComingDetail> getPreviousInompleted});
 }
 
 /// @nodoc
@@ -292,7 +292,7 @@ class _$IncompletedPreviousStateCopyWithImpl<$Res,
       getPreviousInompleted: null == getPreviousInompleted
           ? _value.getPreviousInompleted
           : getPreviousInompleted // ignore: cast_nullable_to_non_nullable
-              as List<PreviousUnCompletedLabDetail>,
+              as List<UpComingDetail>,
     ) as $Val);
   }
 }
@@ -310,7 +310,7 @@ abstract class _$$InitialImplCopyWith<$Res>
       bool isError,
       String message,
       bool status,
-      List<PreviousUnCompletedLabDetail> getPreviousInompleted});
+      List<UpComingDetail> getPreviousInompleted});
 }
 
 /// @nodoc
@@ -350,7 +350,7 @@ class __$$InitialImplCopyWithImpl<$Res>
       getPreviousInompleted: null == getPreviousInompleted
           ? _value._getPreviousInompleted
           : getPreviousInompleted // ignore: cast_nullable_to_non_nullable
-              as List<PreviousUnCompletedLabDetail>,
+              as List<UpComingDetail>,
     ));
   }
 }
@@ -363,7 +363,7 @@ class _$InitialImpl implements _Initial {
       required this.isError,
       required this.message,
       required this.status,
-      required final List<PreviousUnCompletedLabDetail> getPreviousInompleted})
+      required final List<UpComingDetail> getPreviousInompleted})
       : _getPreviousInompleted = getPreviousInompleted;
 
   @override
@@ -374,9 +374,9 @@ class _$InitialImpl implements _Initial {
   final String message;
   @override
   final bool status;
-  final List<PreviousUnCompletedLabDetail> _getPreviousInompleted;
+  final List<UpComingDetail> _getPreviousInompleted;
   @override
-  List<PreviousUnCompletedLabDetail> get getPreviousInompleted {
+  List<UpComingDetail> get getPreviousInompleted {
     if (_getPreviousInompleted is EqualUnmodifiableListView)
       return _getPreviousInompleted;
     // ignore: implicit_dynamic_type
@@ -415,12 +415,12 @@ class _$InitialImpl implements _Initial {
 
 abstract class _Initial implements IncompletedPreviousState {
   const factory _Initial(
-      {required final bool isLoading,
-      required final bool isError,
-      required final String message,
-      required final bool status,
-      required final List<PreviousUnCompletedLabDetail>
-          getPreviousInompleted}) = _$InitialImpl;
+          {required final bool isLoading,
+          required final bool isError,
+          required final String message,
+          required final bool status,
+          required final List<UpComingDetail> getPreviousInompleted}) =
+      _$InitialImpl;
 
   @override
   bool get isLoading;
@@ -431,7 +431,7 @@ abstract class _Initial implements IncompletedPreviousState {
   @override
   bool get status;
   @override
-  List<PreviousUnCompletedLabDetail> get getPreviousInompleted;
+  List<UpComingDetail> get getPreviousInompleted;
   @override
   @JsonKey(ignore: true)
   _$$InitialImplCopyWith<_$InitialImpl> get copyWith =>

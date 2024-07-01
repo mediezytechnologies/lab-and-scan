@@ -9,13 +9,17 @@ class UploadDocumentState with _$UploadDocumentState {
     required bool status,
     String? selectedDocument,
     UploadDocumentModel? model,
-    required Set<int> selectedTestIndicesSet,
-    required List<int> selectedTestIdsList,
+    required Set<int> selectedLabTestIndicesSet,
+    required List<int> selectedLabTestIdsList,
+    required Set<int> selectedScanTestIndicesSet,
+    required List<int> selectedScanTestIdsList,
   }) = _Initial;
 
   factory UploadDocumentState.initial() => const UploadDocumentState(
-        selectedTestIdsList: [],
-        selectedTestIndicesSet: {},
+        selectedLabTestIdsList: [],
+        selectedLabTestIndicesSet: {},
+        selectedScanTestIdsList: [],
+        selectedScanTestIndicesSet: {},
         isError: false,
         isLoading: false,
         message: '',

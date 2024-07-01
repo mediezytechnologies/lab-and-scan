@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:mediezy_lab_scan/domain/home/get_upcoming/get_upcoming_repository.dart';
-import '../../../domain/home/get_upcoming/model/up_coming_lab_detail.dart';
+import '../../../domain/home/common_upcoming/up_coming_detail.dart';
 part 'get_up_coming_event.dart';
 part 'get_up_coming_state.dart';
 part 'get_up_coming_bloc.freezed.dart';

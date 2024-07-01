@@ -227,7 +227,7 @@ mixin _$GetPreviousCompletedState {
   bool get isError => throw _privateConstructorUsedError;
   String get message => throw _privateConstructorUsedError;
   bool get status => throw _privateConstructorUsedError;
-  List<PreviousCompletedLabDetail> get getPreviousCompleted =>
+  List<CompletedLabDetail> get getPreviousCompleted =>
       throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -246,7 +246,7 @@ abstract class $GetPreviousCompletedStateCopyWith<$Res> {
       bool isError,
       String message,
       bool status,
-      List<PreviousCompletedLabDetail> getPreviousCompleted});
+      List<CompletedLabDetail> getPreviousCompleted});
 }
 
 /// @nodoc
@@ -289,7 +289,7 @@ class _$GetPreviousCompletedStateCopyWithImpl<$Res,
       getPreviousCompleted: null == getPreviousCompleted
           ? _value.getPreviousCompleted
           : getPreviousCompleted // ignore: cast_nullable_to_non_nullable
-              as List<PreviousCompletedLabDetail>,
+              as List<CompletedLabDetail>,
     ) as $Val);
   }
 }
@@ -307,7 +307,7 @@ abstract class _$$InitialImplCopyWith<$Res>
       bool isError,
       String message,
       bool status,
-      List<PreviousCompletedLabDetail> getPreviousCompleted});
+      List<CompletedLabDetail> getPreviousCompleted});
 }
 
 /// @nodoc
@@ -347,7 +347,7 @@ class __$$InitialImplCopyWithImpl<$Res>
       getPreviousCompleted: null == getPreviousCompleted
           ? _value._getPreviousCompleted
           : getPreviousCompleted // ignore: cast_nullable_to_non_nullable
-              as List<PreviousCompletedLabDetail>,
+              as List<CompletedLabDetail>,
     ));
   }
 }
@@ -360,7 +360,7 @@ class _$InitialImpl implements _Initial {
       required this.isError,
       required this.message,
       required this.status,
-      required final List<PreviousCompletedLabDetail> getPreviousCompleted})
+      required final List<CompletedLabDetail> getPreviousCompleted})
       : _getPreviousCompleted = getPreviousCompleted;
 
   @override
@@ -371,9 +371,9 @@ class _$InitialImpl implements _Initial {
   final String message;
   @override
   final bool status;
-  final List<PreviousCompletedLabDetail> _getPreviousCompleted;
+  final List<CompletedLabDetail> _getPreviousCompleted;
   @override
-  List<PreviousCompletedLabDetail> get getPreviousCompleted {
+  List<CompletedLabDetail> get getPreviousCompleted {
     if (_getPreviousCompleted is EqualUnmodifiableListView)
       return _getPreviousCompleted;
     // ignore: implicit_dynamic_type
@@ -412,12 +412,12 @@ class _$InitialImpl implements _Initial {
 
 abstract class _Initial implements GetPreviousCompletedState {
   const factory _Initial(
-      {required final bool isLoading,
-      required final bool isError,
-      required final String message,
-      required final bool status,
-      required final List<PreviousCompletedLabDetail>
-          getPreviousCompleted}) = _$InitialImpl;
+          {required final bool isLoading,
+          required final bool isError,
+          required final String message,
+          required final bool status,
+          required final List<CompletedLabDetail> getPreviousCompleted}) =
+      _$InitialImpl;
 
   @override
   bool get isLoading;
@@ -428,7 +428,7 @@ abstract class _Initial implements GetPreviousCompletedState {
   @override
   bool get status;
   @override
-  List<PreviousCompletedLabDetail> get getPreviousCompleted;
+  List<CompletedLabDetail> get getPreviousCompleted;
   @override
   @JsonKey(ignore: true)
   _$$InitialImplCopyWith<_$InitialImpl> get copyWith =>

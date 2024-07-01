@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import '../../../domain/home/common_completed/completed_lab_detail.dart';
 import '../../../domain/home/get_previous_completed/get_previous_completed_repository.dart';
-import '../../../domain/home/get_previous_completed/model/previous_completed_lab_detail.dart';
 part 'get_previous_completed_event.dart';
 part 'get_previous_completed_state.dart';
 part 'get_previous_completed_bloc.freezed.dart';

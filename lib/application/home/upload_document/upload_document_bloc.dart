@@ -47,7 +47,8 @@ class UploadDocumentBloc
           appointmentId: event.appointmentId,
           imagePath: event.imagePath,
           note: event.note,
-          testIds: event.testIds);
+          labTestIds: event.labTestIds,
+          scanTestIds: event.scanTestIds);
 
       final _state = _result.fold(
         (ErrorModel error) {
@@ -69,21 +70,44 @@ class UploadDocumentBloc
       emit(_state);
     });
 
-    on<_AddToSelectTestIds>((event, emit) async {
-      emit(state.copyWith(selectedTestIdsList: [
-        ...state.selectedTestIdsList,
+    on<_AddToLabSelectTestIds>((event, emit) async {
+      emit(state.copyWith(selectedLabTestIdsList: [
+        ...state.selectedLabTestIdsList,
         event.id
-      ], selectedTestIndicesSet: {
-        ...state.selectedTestIndicesSet,
+      ], selectedLabTestIndicesSet: {
+        ...state.selectedLabTestIndicesSet,
         event.index
       }, status: false));
     });
 
-    on<_RemoveFromSelectTestIds>((event, emit) async {
+    on<_RemoveFromSelectLabTestIds>((event, emit) async {
       emit(state.copyWith(
-          selectedTestIdsList:
-              state.selectedTestIdsList.where((id) => id != event.id).toList(),
-          selectedTestIndicesSet: state.selectedTestIndicesSet
+          selectedLabTestIdsList: state.selectedLabTestIdsList
+              .where((id) => id != event.id)
+              .toList(),
+          selectedLabTestIndicesSet: state.selectedLabTestIndicesSet
+              .where((index) => index != event.index)
+              .toSet(),
+          status: false));
+    });
+
+
+    on<_AddToScanSelectTestIds>((event, emit) async {
+      emit(state.copyWith(selectedScanTestIdsList: [
+        ...state.selectedScanTestIdsList,
+        event.id
+      ], selectedScanTestIndicesSet: {
+        ...state.selectedScanTestIndicesSet,
+        event.index
+      }, status: false));
+    });
+
+    on<_RemoveFromSelectScanTestIds>((event, emit) async {
+      emit(state.copyWith(
+          selectedLabTestIdsList: state.selectedScanTestIdsList
+              .where((id) => id != event.id)
+              .toList(),
+          selectedScanTestIndicesSet: state.selectedScanTestIndicesSet
               .where((index) => index != event.index)
               .toSet(),
           status: false));
@@ -91,11 +115,12 @@ class UploadDocumentBloc
 
     on<_ResetSelectedTestData>((event, emit) async {
       emit(state.copyWith(
-        selectedTestIdsList: [],
-        selectedTestIndicesSet: {},
+        selectedLabTestIdsList: [],
+        selectedLabTestIndicesSet: {},
+         selectedScanTestIdsList: [],
+        selectedScanTestIndicesSet: {},
         selectedDocument: null,
       ));
     });
-    
   }
 }

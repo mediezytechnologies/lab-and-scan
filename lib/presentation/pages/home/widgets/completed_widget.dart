@@ -86,6 +86,9 @@ class _CompletedWidgetState extends State<CompletedWidget> {
                                 context,
                                 CustomPageRoute(
                                   route: CompletedDetailsPage(
+                                    doctorImage: state
+                                        .getCompleted[index].docterImage
+                                        .toString(),
                                     tests: state.getCompleted[index].documents!
                                         .toList(),
                                     patientAge: state.getCompleted[index].age

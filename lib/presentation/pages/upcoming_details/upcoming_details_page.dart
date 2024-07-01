@@ -13,12 +13,13 @@ import 'package:mediezy_lab_scan/presentation/core/app_colors.dart';
 import 'package:mediezy_lab_scan/presentation/pages/home/home_page.dart';
 import 'package:mediezy_lab_scan/presentation/pages/upcoming_details/widget/view_document_bottom_card_widget.dart';
 import '../../../application/home/upload_document/upload_document_bloc.dart';
-import '../../../domain/home/common_upcoming_test/labtest.dart';
+import '../../../domain/home/common_upcoming/labtest.dart';
+import '../../../domain/home/common_upcoming/scantest.dart';
 import '../../common_widgets/custome_formfield_widget.dart';
 import '../../common_widgets/submit_button_widget.dart';
 import '../../core/general_services.dart';
 import '../../core/text_style.dart';
-import '../../common_widgets/data_card_widget.dart';
+import '../../common_widgets/doctor_section_widget.dart';
 import 'widget/test_card_widget.dart';
 import 'widget/upload_card_widget.dart';
 
@@ -35,11 +36,14 @@ class UpComingDetailsPage extends StatefulWidget {
       required this.doctorId,
       required this.clinicId,
       required this.patientId,
-      required this.testName,
-      required this.appointmentId});
+      required this.labTestNames,
+      required this.appointmentId,
+      required this.scanTestName,
+      required this.doctorImage});
 
   final String patientName;
   final String patientImage;
+  final String doctorImage;
   final String patientMobileNo;
   final String patientAge;
   final String doctorName;
@@ -48,7 +52,8 @@ class UpComingDetailsPage extends StatefulWidget {
   final String doctorId;
   final String clinicId;
   final String patientId;
-  final List<Labtest> testName;
+  final List<Labtest> labTestNames;
+  final List<Scantest> scanTestName;
   final String appointmentId;
 
   @override
@@ -59,8 +64,6 @@ class _UpComingDetailsPageState extends State<UpComingDetailsPage> {
   final TextEditingController noteController = TextEditingController();
   final ImagePicker imagePicker = ImagePicker();
   String? imageTemporary;
-  Set<int> selectedTestIndices = {};
-  List<int> selectedTestIds = [];
 
   @override
   Widget build(BuildContext context) {
@@ -84,6 +87,7 @@ class _UpComingDetailsPageState extends State<UpComingDetailsPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              SizedBox(height: size.height * .011),
               UserSectionWidget(
                 patientAge: widget.patientAge,
                 patientImage: widget.patientImage,
@@ -91,61 +95,156 @@ class _UpComingDetailsPageState extends State<UpComingDetailsPage> {
                 patientName: widget.patientName,
               ),
               SizedBox(height: size.height * .011),
-              DataCardWidget(title: "Doctor name", value: widget.doctorName),
-              SizedBox(height: size.height * .011),
-              DataCardWidget(title: "Clinic name", value: widget.clinicName),
+              DoctorSectionWidget(
+                  size: size,
+                  clinicName: widget.clinicName,
+                  doctorImage: widget.doctorImage,
+                  doctorName: widget.doctorName),
               SizedBox(height: size.height * .011),
               BlocBuilder<UploadDocumentBloc, UploadDocumentState>(
                 builder: (context, state) {
-                  return Container(
-                    padding: const EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      color: kCardColor,
-                      borderRadius: BorderRadius.circular(10.r),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text("Test names :", style: grey13B500),
-                        SizedBox(height: size.height * .005),
-                        ListView.builder(
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          itemCount: widget.testName.length,
-                          itemBuilder: (context, index) {
-                            return GestureDetector(
-                              onTap: () {
-                                if (state.selectedTestIndicesSet
-                                    .contains(index)) {
-                                  context.read<UploadDocumentBloc>().add(
-                                        UploadDocumentEvent
-                                            .removeFromSelectTestIds(
-                                                index,
-                                                widget.testName[index]
-                                                    .labtestId!),
-                                      );
-                                } else {
-                                  context.read<UploadDocumentBloc>().add(
-                                        UploadDocumentEvent.addToSelectTestIds(
-                                            index,
-                                            widget.testName[index].labtestId!),
-                                      );
-                                }
-                              },
-                              child: TestCardWidget(
-                                icon:
-                                    state.selectedTestIndicesSet.contains(index)
-                                        ? IconlyBold.tick_square
-                                        : IconlyLight.tick_square,
-                                index: index,
-                                testName: widget.testName[index].labtestName
-                                    .toString(),
+                  return Column(
+                    children: [
+                      //! LAB
+                      widget.labTestNames.isEmpty
+                          ? const SizedBox()
+                          : Container(
+                              padding: const EdgeInsets.all(8),
+                              decoration: BoxDecoration(
+                                color: kCardColor,
+                                borderRadius: BorderRadius.circular(10.r),
                               ),
-                            );
-                          },
-                        ),
-                      ],
-                    ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text("Lab tests :", style: grey13B500),
+                                  SizedBox(height: size.height * .005),
+                                  ListView.builder(
+                                    shrinkWrap: true,
+                                    physics:
+                                        const NeverScrollableScrollPhysics(),
+                                    itemCount: widget.labTestNames.length,
+                                    itemBuilder: (context, index) {
+                                      return GestureDetector(
+                                        onTap: () {
+                                          if (state.selectedLabTestIndicesSet
+                                              .contains(index)) {
+                                            context
+                                                .read<UploadDocumentBloc>()
+                                                .add(
+                                                  UploadDocumentEvent
+                                                      .removeFromSelectLabTestIds(
+                                                          index,
+                                                          widget
+                                                              .labTestNames[
+                                                                  index]
+                                                              .labtestId!),
+                                                );
+                                          } else {
+                                            context
+                                                .read<UploadDocumentBloc>()
+                                                .add(
+                                                  UploadDocumentEvent
+                                                      .addToSelectLabTestIds(
+                                                          index,
+                                                          widget
+                                                              .labTestNames[
+                                                                  index]
+                                                              .labtestId!),
+                                                );
+                                          }
+                                        },
+                                        child: TestCardWidget(
+                                          icon: state.selectedLabTestIndicesSet
+                                                  .contains(index)
+                                              ? IconlyBold.tick_square
+                                              : IconlyLight.tick_square,
+                                          index: index,
+                                          testName: widget
+                                              .labTestNames[index].labtestName
+                                              .toString(),
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                ],
+                              ),
+                            ),
+                      //! Scan
+                      widget.scanTestName.isEmpty
+                          ? const SizedBox()
+                          : Column(
+                              children: [
+                                SizedBox(height: size.height * .011),
+                                Container(
+                                  padding: const EdgeInsets.all(8),
+                                  decoration: BoxDecoration(
+                                    color: kCardColor,
+                                    borderRadius: BorderRadius.circular(10.r),
+                                  ),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text("Scan tests :", style: grey13B500),
+                                      SizedBox(height: size.height * .005),
+                                      ListView.builder(
+                                        shrinkWrap: true,
+                                        physics:
+                                            const NeverScrollableScrollPhysics(),
+                                        itemCount: widget.scanTestName.length,
+                                        itemBuilder: (context, index) {
+                                          return GestureDetector(
+                                            onTap: () {
+                                              if (state
+                                                  .selectedScanTestIndicesSet
+                                                  .contains(index)) {
+                                                context
+                                                    .read<UploadDocumentBloc>()
+                                                    .add(
+                                                      UploadDocumentEvent
+                                                          .removeFromSelectScanTestIds(
+                                                              index,
+                                                              widget
+                                                                  .scanTestName[
+                                                                      index]
+                                                                  .scantestId!),
+                                                    );
+                                              } else {
+                                                context
+                                                    .read<UploadDocumentBloc>()
+                                                    .add(
+                                                      UploadDocumentEvent
+                                                          .addToSelectScanTestIds(
+                                                              index,
+                                                              widget
+                                                                  .scanTestName[
+                                                                      index]
+                                                                  .scantestId!),
+                                                    );
+                                              }
+                                            },
+                                            child: TestCardWidget(
+                                              icon: state
+                                                      .selectedScanTestIndicesSet
+                                                      .contains(index)
+                                                  ? IconlyBold.tick_square
+                                                  : IconlyLight.tick_square,
+                                              index: index,
+                                              testName: widget
+                                                  .scanTestName[index]
+                                                  .scantestName
+                                                  .toString(),
+                                            ),
+                                          );
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                    ],
                   );
                 },
               ),
@@ -236,20 +335,23 @@ class _UpComingDetailsPageState extends State<UpComingDetailsPage> {
                     buttonText: "Upload report",
                     loading: state.isLoading,
                     onTap: () async {
-                      if (state.selectedTestIdsList.isEmpty) {
+                      if (state.selectedLabTestIdsList.isEmpty) {
                         GeneralServices.instance
-                            .showToastMessage("Please select the test");
+                            .showToastMessage("Please select the lab test");
+                      } else if (state.selectedScanTestIdsList.isEmpty) {
+                        GeneralServices.instance
+                            .showToastMessage("Please select the scan test");
                       } else {
                         BlocProvider.of<UploadDocumentBloc>(context).add(
                           UploadDocumentEvent.upload(
-                            appointmentId: widget.appointmentId,
-                            clinicId: widget.clinicId,
-                            doctorId: widget.doctorId,
-                            patientId: widget.patientId,
-                            imagePath: state.selectedDocument,
-                            note: noteController.text,
-                            testIds: state.selectedTestIdsList,
-                          ),
+                              appointmentId: widget.appointmentId,
+                              clinicId: widget.clinicId,
+                              doctorId: widget.doctorId,
+                              patientId: widget.patientId,
+                              imagePath: state.selectedDocument,
+                              note: noteController.text,
+                              labTestIds: state.selectedLabTestIdsList,
+                              scanTestIds: state.selectedScanTestIdsList),
                         );
                       }
                       await resetUploadedDocumetToNull();
